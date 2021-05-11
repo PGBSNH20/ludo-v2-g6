@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+bf05hucTC8TrmQGD/aSugSTcAzBrd5MbFtUK7ECqqR6m1Wemu8ajBDokDmaWRbASO4Wfr4Z+9bCAoyckKm2cw==",
+  "dgSpecHash": "kCE8yF3wA/CSoSFdiCXgy8g5MxEFVAVeI75Ph/e9mMQ8lnx7W3TKLyj9w6nLoNXCsdfVDCpCrveekDCV8mHRFA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\LudoGame\\LudoGame.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,7 @@
     "C:\\Users\\Joaki\\.nuget\\packages\\microsoft.identitymodel.protocols\\6.7.1\\microsoft.identitymodel.protocols.6.7.1.nupkg.sha512",
     "C:\\Users\\Joaki\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.7.1\\microsoft.identitymodel.protocols.openidconnect.6.7.1.nupkg.sha512",
     "C:\\Users\\Joaki\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.7.1\\microsoft.identitymodel.tokens.6.7.1.nupkg.sha512",
+    "C:\\Users\\Joaki\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.13\\microsoft.visualstudio.azure.containers.tools.targets.1.10.13.nupkg.sha512",
     "C:\\Users\\Joaki\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\Joaki\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.6.0\\system.diagnostics.diagnosticsource.4.6.0.nupkg.sha512",
     "C:\\Users\\Joaki\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.7.1\\system.identitymodel.tokens.jwt.6.7.1.nupkg.sha512",
