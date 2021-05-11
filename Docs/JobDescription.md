@@ -1,7 +1,7 @@
 # Fia webbapplikation
 
 
-![Överblik över delar projekt](ludo2.png)
+![Överblik över delar projekt](Images/ludo2.png)
 
 Målet i detta projekt är att bygga ett grafisk web version av Ludo et spel och att denna webbapplikation ska använda REST API till styra al logik och data.
 
