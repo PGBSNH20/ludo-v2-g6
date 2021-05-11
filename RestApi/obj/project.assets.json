@@ -280,19 +280,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Joaki\\.nuget\\packages\\": {}
+    "C:\\Users\\Sofie skola\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\RestApi\\RestApi.csproj",
+      "projectUniqueName": "C:\\Users\\Sofie skola\\source\\repos\\Ludo2\\RestApi\\RestApi.csproj",
       "projectName": "RestApi",
-      "projectPath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\RestApi\\RestApi.csproj",
-      "packagesPath": "C:\\Users\\Joaki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\RestApi\\obj\\",
+      "projectPath": "C:\\Users\\Sofie skola\\source\\repos\\Ludo2\\RestApi\\RestApi.csproj",
+      "packagesPath": "C:\\Users\\Sofie skola\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Sofie skola\\source\\repos\\Ludo2\\RestApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Joaki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Sofie skola\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
