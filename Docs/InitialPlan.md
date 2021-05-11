@@ -2,10 +2,13 @@
 
 '
 	* User stories
-	* Structure our git repository
-	* Entity framework db/DOCKER!
-	* Decide on and build the models required
-	* Repository pattern
-	* Sketch DB -> Api -> FrontEnd
+	* Structure our git repository [x]
+	* Entity framework db/DOCKER! [x]
+	* Decide on and build the models required []
+	* Generic repository and methods (add, delete, update, get) []
+	* Repository pattern []
+	* Sketch DB -> Api -> FrontEnd []
+	* Controllers, in RestApi or .cshtml.cs file? []
 	* 
+
 '
