@@ -255,7 +255,6 @@ ServiceFabricBackup/
 *.mdf
 *.ldf
 *.ndf
-*.sqlite
 
 # Business Intelligence projects
 *.rdl.data
@@ -349,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Manually added random stuff
+*VSWorkspaceState.json
+*slnx.sqlite
