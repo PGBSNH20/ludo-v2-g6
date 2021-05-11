@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  spacepark2:
+  restapi:
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,10 +11,10 @@ services:
       - "41433:1433"
     environment:
      ACCEPT_EULA: "Y"
-     SA_PASSWORD: "SpaceParkL0ver!"
+     SA_PASSWORD: "LudoGameL0ver!"
     volumes:
-     - SpaceParkData2:/var/opt/mssql
-    container_name: LudoGame2
+     - restapi:/var/opt/mssql
+    container_name: ludo2
 volumes:
-  SpaceParkData2:
+  restapi:
     driver: local
