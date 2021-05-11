@@ -3,4 +3,4 @@
 ## Project structure
 
 * [Initial plan](Docs/InitialPlan.md)
-* [User stories][Docs/UserStories.md]
+* [User stories](Docs/UserStories.md)
