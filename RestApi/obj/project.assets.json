@@ -285,11 +285,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joaki\\source\\repos\\Source\\RestApi\\RestApi.csproj",
+      "projectUniqueName": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\RestApi\\RestApi.csproj",
       "projectName": "RestApi",
-      "projectPath": "C:\\Users\\Joaki\\source\\repos\\Source\\RestApi\\RestApi.csproj",
+      "projectPath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\RestApi\\RestApi.csproj",
       "packagesPath": "C:\\Users\\Joaki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Joaki\\source\\repos\\Source\\RestApi\\obj\\",
+      "outputPath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\RestApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Joaki\\AppData\\Roaming\\NuGet\\NuGet.Config",

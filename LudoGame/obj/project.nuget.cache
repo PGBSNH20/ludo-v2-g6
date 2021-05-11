@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TjkgAKdUXyRmg3bGx9l5fDL7+gK8EAtZA5cb+XWmkgTpGZzRslaAezTvS+JfGNkReEBYcaG0DtQnjG0N6rXotw==",
+  "dgSpecHash": "+bf05hucTC8TrmQGD/aSugSTcAzBrd5MbFtUK7ECqqR6m1Wemu8ajBDokDmaWRbASO4Wfr4Z+9bCAoyckKm2cw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Joaki\\source\\repos\\Source\\LudoGame\\LudoGame.csproj",
+  "projectFilePath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\LudoGame\\LudoGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Joaki\\.nuget\\packages\\azure.core\\1.4.1\\azure.core.1.4.1.nupkg.sha512",
     "C:\\Users\\Joaki\\.nuget\\packages\\azure.identity\\1.2.3\\azure.identity.1.2.3.nupkg.sha512",

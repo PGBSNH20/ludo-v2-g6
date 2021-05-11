@@ -1017,11 +1017,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joaki\\source\\repos\\Source\\LudoGame\\LudoGame.csproj",
+      "projectUniqueName": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\LudoGame\\LudoGame.csproj",
       "projectName": "LudoGame",
-      "projectPath": "C:\\Users\\Joaki\\source\\repos\\Source\\LudoGame\\LudoGame.csproj",
+      "projectPath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\LudoGame\\LudoGame.csproj",
       "packagesPath": "C:\\Users\\Joaki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Joaki\\source\\repos\\Source\\LudoGame\\obj\\",
+      "outputPath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\LudoGame\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Joaki\\AppData\\Roaming\\NuGet\\NuGet.Config",
