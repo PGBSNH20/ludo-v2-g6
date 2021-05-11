@@ -6,6 +6,7 @@
 * AS a user I want to be able to see my progress during the course of the game
 * AS a user I want to be able to join a game just by clicking a link
 * AS a user I want to be able to enter a username and choose my prefered color
+* AS a user I want to be able to roll a dice to determine who starts
 
 * AS a advanced user I can use web Api to create, monitor and resume a game
 * AS a advanced user I can monitor every game (ongoing/historical) provided I have access to the database
