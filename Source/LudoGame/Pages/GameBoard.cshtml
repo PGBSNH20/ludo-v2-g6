@@ -1,0 +1,13 @@
+﻿@page
+@model LudoGame.Pages.GameBoardModel
+@{
+    ViewData["Title"] = "GameBoard";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <input type="text" asp-for="gameBoard.Id" placeholder="Id" />
+    <input type="text" asp-for="gameBoard.StartTime" placeholder="Starttime" />
+    <button type="submit"> submit </button>
+</form>
