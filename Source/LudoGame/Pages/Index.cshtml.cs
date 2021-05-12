@@ -11,18 +11,21 @@ namespace LudoGame.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public GameBoard gameBoard;
-
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+        [BindProperty]
+        public int AmountOfPlayers { get; set; }
 
         public void OnGet()
         {
 
+        }
+        public IActionResult OnPost()
+        {
+            if (ModelState.IsValid == false)
+            {
+                return Page();
+            }
+
+            return RedirectToPage("/Forms/Player");
         }
     }
 }
