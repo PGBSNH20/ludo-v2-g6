@@ -11,4 +11,5 @@
 	* Controllers, in RestApi or .cshtml.cs file? []
 	* Validate input List<GamePlayer> i GameBoard till 1-4 [x]
 
-'
+### 13/5 
+- Sandra, Randa och Joakim börjar med controllers i API
