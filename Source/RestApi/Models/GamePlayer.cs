@@ -10,6 +10,6 @@ namespace RestApi.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public List<GamePiece> GamePieces { get; set; }
-        public bool IsPlayersTurn { get; set; }
+        public bool IsPlayersTurn { get; set; } = false;
     }
 }
