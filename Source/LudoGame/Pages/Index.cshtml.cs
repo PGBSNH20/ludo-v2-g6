@@ -21,7 +21,7 @@ namespace LudoGame.Pages
 
         public IActionResult OnPost()
         {
-            if (ModelState.IsValid == false)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
