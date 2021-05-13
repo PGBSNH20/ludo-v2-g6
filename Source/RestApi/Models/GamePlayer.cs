@@ -7,6 +7,7 @@ namespace RestApi.Models
 {
     public class GamePlayer
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public List<GamePiece> GamePieces { get; set; }
         public bool IsPlayersTurn { get; set; }
