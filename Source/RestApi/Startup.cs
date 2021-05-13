@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RestApi.Repositories;
 using RestApi.Repositories.Contracts;
+using RestApi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +36,8 @@ namespace RestApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestApi", Version = "v1" });
             });
+            services.AddDbContext<LudoContext>(
+                x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddScoped<IGameBoardRepository, GameBoardRepository>();
         }
 

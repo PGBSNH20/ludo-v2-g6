@@ -11,9 +11,8 @@ namespace RestApi.Models
         public Guid Id { get; set; }
         public DateTime StartTime { get; set; } = DateTime.Now;
 
-        [Range(1,4)]
         public List<GamePlayer> GamePlayer { get; set; }
-        public List<BoardSquare> BoardSquares { get; set; }
+        //public List<BoardSquare> BoardSquares { get; set; }
 
     }
 }
