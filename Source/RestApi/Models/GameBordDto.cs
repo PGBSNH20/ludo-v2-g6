@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RestApi.Models
 {
-    public class GameBordDto
+    public class GameBoardDto
     {
         public DateTime StartTime { get; set; }
         public List<string> Players { get; set; }

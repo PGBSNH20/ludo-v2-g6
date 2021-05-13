@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestApi.Models;
 using RestApi.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,14 @@ namespace RestApi.Controllers
         public IActionResult Get()
         {
              _gameBoardRepository.GetAsync();
+
+            return Ok();
+        }
+      
+        [HttpPost]
+        public IActionResult Post(List<GamePlayer> gamePlayers)
+        {
+            _gameBoardRepository.Post(gamePlayers);
 
             return Ok();
         }

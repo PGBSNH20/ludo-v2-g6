@@ -8,7 +8,9 @@ namespace RestApi.Repositories.Contracts
 {
     public interface IGameBoardRepository
     {
-        Task<List<GameBordDto>> GetAsync();
+        Task<List<GameBoardDto>> GetAsync();
         Task PostAsync(List<GameBoard> gameBoard);
+
+        Task Post(List<GamePlayer> gamePlayers);
     }
 }
