@@ -2,7 +2,7 @@
 
 - Gameboard
 	- GET (history) för att starta ett påbörjat spel och visa avslutade spel
-	- POST - (GameBoard) för att starta nytt spel
+	- POST - (GameBoard) för att starta nytt spel [*]
 
 
 - GamePlayer
