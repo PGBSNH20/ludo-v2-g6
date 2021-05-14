@@ -13,15 +13,30 @@ namespace RestApi.Repositories
     {
         public GameBoardRepository(LudoContext context) : base(context) { }
 
-        public async Task<List<GameBoardDto>> GetAsync()
+        public async Task<List<GameBoardDto>> OngoingGamesAsync()
         {
-            var gameboards = await _context.GameBoards.Include(x => x.GamePlayer).ToListAsync();
-
             var gameBoardDto = new List<GameBoardDto>();
             var tempNames = new List<string>();
 
+            //var test = await _context.GameBoards
+            //    .Include(x => x.GamePlayer)
+            //    .Select(x => x.GamePlayer
+            //    .Where(x => x.GamePieces
+            //    .Where(x => x.IsInGoal == true).Count() < 4))
+            //    .ToListAsync();
+          
+
+
+            var gameboards = await _context.GameBoards.Include(x => x.GamePlayer).ThenInclude(x=>x.GamePieces).ToListAsync();
+
+            //var hej = gameboards.Select(x=>x.StartTime.Date).Where(x => x.GamePlayer
+            //    .Where(x => x.GamePieces
+            //    .Where(x => x.IsInGoal == true).Count() < 4)).ToList();
+
+          
             foreach (var gameBoard in gameboards)
             {
+                //Gets the names of all the players in the list
                 foreach (var player in gameBoard.GamePlayer)
                 {
                     tempNames.Add(player.Name);
@@ -29,8 +44,9 @@ namespace RestApi.Repositories
                 gameBoardDto.Add(new GameBoardDto()
                 {
                     StartTime = gameBoard.StartTime,
-                    Players = tempNames
+                    Players = tempNames.ToList()
                 });
+
                 tempNames.Clear();
             }
             return gameBoardDto;
@@ -40,34 +56,25 @@ namespace RestApi.Repositories
         {
             var gameboards = await _context.GameBoards.Include(x => x.GamePlayer).ToListAsync();
 
-            //var gameBoardDto = new List<GameBoardDto>();
-            //var tempNames = new List<string>();
-
-            //foreach (var gameBoard in gameboards)
-            //{
-            //    foreach (var player in gameBoard.GamePlayer)
-            //    {
-            //        tempNames.Add(player.Name);
-            //    }
-            //    gameBoardDto.Add(new GameBoardDto()
-            //    {
-            //        StartTime = gameBoard.StartTime,
-            //        Players = tempNames
-            //    });
-            //    tempNames.Clear();
-            //}
-            //return gameBoardDto;
             return gameboards;
         }
 
-
         public async Task Post(List<GamePlayer> gamePlayers)
         {
+            //var temp = new List<GamePiece>();
+
             //for (int i = 0; i < gamePlayers.Count; i++)
             //{
-            //    gamePlayers[i].GamePieces = new List<GamePiece>() {gp[i], gp[i], gp[i], gp[i]};
+            //    temp.Add(gamePlayers[i].GamePieces[0]);
+            //    temp.Add(gamePlayers[i].GamePieces[0]);
+            //    temp.Add(gamePlayers[i].GamePieces[0]);
+            //    temp.Add(gamePlayers[i].GamePieces[0]);
 
+            //    gamePlayers[i].GamePieces = temp.ToList();
+
+            //    temp.Clear();
             //}
+
             await Add(new GameBoard { GamePlayer = gamePlayers});
         }
 
