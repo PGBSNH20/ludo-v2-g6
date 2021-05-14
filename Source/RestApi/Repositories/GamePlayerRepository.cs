@@ -18,7 +18,7 @@ namespace RestApi.Repositories
             return await _context.GamePlayers.FirstOrDefaultAsync(x => x.Id == guid);
         }
 
-        public async Task<List<GamePiece>> GetGamePieces(Guid id, int diceRoll)
+        public async Task<List<GamePiece>> GetGamePiecesAsync(Guid id, int diceRoll)
         {
             var query = await _context.GamePlayers
                 .Include(x => x.GamePieces)
@@ -37,6 +37,10 @@ namespace RestApi.Repositories
                     continue;
             }
             return pieceList;
+        }
+        public int GetDiceRoll()
+        {
+            return Dice.Roll();
         }
     }
 }
