@@ -28,14 +28,14 @@ namespace RestApi.Services
 
 
 
-            modelBuilder.Entity<GamePiece>().HasData(
+            //modelBuilder.Entity<GamePiece>().HasData(
 
-                new GamePiece { Id = Guid.NewGuid(), Color = Color.Red },
-                new GamePiece { Id = Guid.NewGuid(), Color = Color.Red },
-                new GamePiece { Id = Guid.NewGuid(), Color = Color.Red },
-                new GamePiece { Id = Guid.NewGuid(), Color = Color.Red }
+            //    new GamePiece { Id = Guid.NewGuid(), Color = Color.Red },
+            //    new GamePiece { Id = Guid.NewGuid(), Color = Color.Red },
+            //    new GamePiece { Id = Guid.NewGuid(), Color = Color.Red },
+            //    new GamePiece { Id = Guid.NewGuid(), Color = Color.Red }
 
-            );
+            //);
 
             //_ = modelBuilder.Entity<GameBoard>().HasData(
             //    new GameBoard

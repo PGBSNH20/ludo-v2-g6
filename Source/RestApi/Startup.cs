@@ -37,8 +37,8 @@ namespace RestApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestApi", Version = "v1" });
             });
 
-            var connstring = Configuration["Skolarbete:Ludo2"];
-            services.AddCors();
+            //var connstring = Configuration["Skolarbete:Ludo2"];
+            //services.AddCors();
             services.AddDbContext<LudoContext>(
                 x => x.UseSqlServer(Configuration["Skolarbete:Ludo2"]));
             services.AddScoped<IGameBoardRepository, GameBoardRepository>();

@@ -1,10 +1,6 @@
 version: '3'
 
 services:
-  #restapi:
-  #  build:
-  #    context: .
-  #    dockerfile: Dockerfile
   log-server:
     image: mcr.microsoft.com/mssql/server:2017-latest
     ports: 
@@ -14,7 +10,7 @@ services:
      SA_PASSWORD: "LudoGameL0ver!"
     volumes:
      - restapi:/var/opt/mssql
-    container_name: ludo2
+    container_name: ludo22
 volumes:
   restapi:
     driver: local

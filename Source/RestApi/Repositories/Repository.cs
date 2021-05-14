@@ -12,7 +12,9 @@ namespace RestApi.Repositories
         public Repository(LudoContext context) { _context = context; }
         public async Task<T> Add<T>(T entity) where T : class
         {
-            await _context.Set<T>().AddAsync(entity);
+            var added = await _context.Set<T>().AddAsync(entity);
+            
+
             await Save();
             return entity;
         }
@@ -24,7 +26,17 @@ namespace RestApi.Repositories
 
         public async Task<bool> Save()
         {
-            return await _context.SaveChangesAsync() > 0;
+            try
+            {
+                var result = await _context.SaveChangesAsync();
+                return result > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
     }
