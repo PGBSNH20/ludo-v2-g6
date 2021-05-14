@@ -10,7 +10,6 @@ namespace RestApi.Repositories.Contracts
     {
         Task<List<GameBoardDto>> GetAsync();
         Task PostAsync(List<GameBoard> gameBoard);
-
         Task Post(List<GamePlayer> gamePlayers);
     }
 }
