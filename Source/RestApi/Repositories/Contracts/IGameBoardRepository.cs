@@ -10,6 +10,8 @@ namespace RestApi.Repositories.Contracts
     {
         Task<List<GameBoardDto>> GetAsync();
         Task PostAsync(List<GameBoard> gameBoard);
-        Task Post(List<GamePlayer> gamePlayers);
+        Task Post(List<GamePlayer> gamePlayers); // Post är ett http-anrop, skall heta typ add eller nåt
+        Task<List<GameBoard>> Get();
+
     }
 }

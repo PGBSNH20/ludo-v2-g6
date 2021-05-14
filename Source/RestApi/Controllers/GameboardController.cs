@@ -14,22 +14,24 @@ namespace RestApi.Controllers
     public class GameboardController : ControllerBase
     {
         private readonly IGameBoardRepository _gameBoardRepository;
+      
         public GameboardController(IGameBoardRepository gameBoardRepository)
         {
             _gameBoardRepository = gameBoardRepository;
         }
-        [HttpGet]
-        public IActionResult Get()
-        {
-             _gameBoardRepository.GetAsync();
 
-            return Ok();
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var result = await _gameBoardRepository.Get();
+
+            return Ok(result);
         }
       
         [HttpPost]
-        public IActionResult Post(List<GamePlayer> gamePlayers)
+        public async Task<IActionResult> Post(List<GamePlayer> gamePlayers)
         {
-            _gameBoardRepository.Post(gamePlayers);
+            await _gameBoardRepository.Post(gamePlayers);
 
             return Ok();
         }
