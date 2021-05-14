@@ -36,6 +36,30 @@ namespace RestApi.Repositories
             return gameBoardDto;
         }
 
+        public async Task<List<GameBoard>> Get()
+        {
+            var gameboards = await _context.GameBoards.Include(x => x.GamePlayer).ToListAsync();
+
+            //var gameBoardDto = new List<GameBoardDto>();
+            //var tempNames = new List<string>();
+
+            //foreach (var gameBoard in gameboards)
+            //{
+            //    foreach (var player in gameBoard.GamePlayer)
+            //    {
+            //        tempNames.Add(player.Name);
+            //    }
+            //    gameBoardDto.Add(new GameBoardDto()
+            //    {
+            //        StartTime = gameBoard.StartTime,
+            //        Players = tempNames
+            //    });
+            //    tempNames.Clear();
+            //}
+            //return gameBoardDto;
+            return gameboards;
+        }
+
 
         public async Task Post(List<GamePlayer> gamePlayers)
         {

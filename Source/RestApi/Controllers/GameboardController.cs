@@ -21,11 +21,11 @@ namespace RestApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-             _gameBoardRepository.GetAsync();
+            var result = await _gameBoardRepository.Get();
 
-            return Ok();
+            return Ok(result);
         }
       
         [HttpPost]
