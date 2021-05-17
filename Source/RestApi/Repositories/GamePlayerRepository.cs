@@ -38,6 +38,10 @@ namespace RestApi.Repositories
             }
             return pieceList;
         }
+        public int GetDiceRoll()
+        {
+            return Dice.Roll();
+        }
     }
 }
 
