@@ -59,13 +59,29 @@ namespace RestApi.Repositories
             return gameboards;
         }
 
+        public async Task<GameBoard> GetCurrentGameBoardAsync(Guid gameBoardId)
+        {
+            var result = await _context.GameBoards
+                .Include(x => x.GamePlayer)
+                    .ThenInclude(x => x.GamePieces)
+                        .ThenInclude(x => x.CurrentPosition)
+                .Where(x => x.Id == gameBoardId)
+                .FirstOrDefaultAsync();
+            return result;
+        }
+
+        public Task PostAsync(List<GameBoard> gameBoard)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task CreatePlayers(List<GamePlayer> gamePlayers)
         {
             foreach (GamePlayer player in gamePlayers)
             {
-                CreateGamePieces(player);
+                player.GamePieces = GamePlayerRepository.CreateGamePieces(player);
             }
-            //var temp = new List<GamePiece>();
+            var temp = new List<GamePiece>();
 
             //for (int i = 0; i < gamePlayers.Count; i++)
             //{
@@ -79,14 +95,23 @@ namespace RestApi.Repositories
             //    temp.Clear();
             //}
 
-            await Add(new GameBoard { GamePlayer = gamePlayers});
+            await Add(new GameBoard { GamePlayer = gamePlayers });
         }
 
-     
+        //public async Task<bool> IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
+        //{
 
-        public Task PostAsync(List<GameBoard> gameBoard)
-        {
-            throw new NotImplementedException();
-        }
+        //    var currentGameBoard = GetCurrentGameBoardAsync(gameBoard.Id);
+        //    var pieceList = currentGameBoard.Result.GamePlayer
+        //    for (int i = 0; i < diceRoll; i++)
+        //    {
+        //        gamePiece.CurrentPosition++;
+        //        foreach (var piece in currentGameBoard.)
+        //        {
+        //            if (gamePiece.CurrentPosition == piece)
+        //        }
+        //    }
+
+        //}
     }
 }

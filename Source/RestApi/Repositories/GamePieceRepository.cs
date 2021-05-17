@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RestApi.Models;
 using RestApi.Repositories.Contracts;
 using RestApi.Services;
@@ -14,41 +15,27 @@ namespace RestApi.Repositories
         {
         }
 
-        public async Task UpdatePlayerPosition(GamePiece gamePiece)
+        public GamePiece UpdatePosition(GamePiece gamePiece, int diceRoll)
         {
-
-            return;
+            gamePiece.CurrentPosition += diceRoll;
+            return gamePiece;
+            
         }
 
-        public List<GamePiece> CreateGamePieces(GamePlayer player)
-        {
-            var startPosition = GetStartPosition(player);
-            var gamePieces = new List<GamePiece>();
 
-            for (int i = 0; i < 4; i++)
-            {
-                gamePieces.Add(new GamePiece(){StartingPosition = startPosition});
-            }
+        //public async Task<bool> IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
+        //{
 
-            return gamePieces;
-        }
-
-        public int GetStartPosition(GamePlayer player)
-        {
-            if (player.Color == Color.Blue)
-                return 1;
-            else if (player.Color == Color.Green)
-                return 11;
-            else if(player.Color == Color.Yellow)
-                return 21;
-            else
-                return 31;
-        }
-
-        public bool IsCoastClear(int diceRoll, GamePlayer gamePlayer)
-        {
-            throw new NotImplementedException();
-        }
+        //    var currentGameBoard = GetCurrentGameBoardAsync(gameBoard.Id);
+        //    for (int i = 0; i < diceRoll; i++)
+        //    {
+        //        gamePiece.CurrentPosition++;
+        //        foreach(var piece in occupiedPositions)
+        //        {
+        //            if(gamePiece.CurrentPosition == piece)
+        //        }
+        //    }
+        //}
 
         public bool IsPieceInGoal(int diceRoll, GamePlayer gamePlayer)
         {

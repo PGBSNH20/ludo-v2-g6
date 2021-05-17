@@ -36,7 +36,13 @@ namespace RestApi.Controllers
 
             await _gameBoardRepository.CreatePlayers(gamePlayers);
 
-            return Ok();
+            return Ok(gamePlayers);
+        }
+        [HttpGet("test")]
+        public async Task<IActionResult> GetTest(Guid id)
+        {
+            var result = await _gameBoardRepository.GetCurrentGameBoardAsync(id);
+            return Ok(result);
         }
     }
 }

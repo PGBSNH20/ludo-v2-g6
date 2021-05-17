@@ -9,10 +9,9 @@ namespace RestApi.Repositories.Contracts
     public interface IGamePieceRepository
     {
 
-        bool IsCoastClear(int diceRoll, GamePlayer gamePlayer);
         bool IsPieceInGoal(int diceRoll, GamePlayer gamePlayer);
-        int GetStartPosition(GamePlayer player);
-        List<GamePiece> CreateGamePieces(GamePlayer player);
+        GamePiece UpdatePosition(GamePiece gamePiece, int diceRoll);
+        //Task<bool> IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece);
         Task Move();
     }
 }
