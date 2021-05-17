@@ -8,8 +8,8 @@ namespace RestApi.Models
         public Color Color { get; set; }
         //public BoardSquare BoardSquare { get; set; } //Får endast vara samma på startposition
         public int StartingPosition { get; set; } = 0;
-        public int Position { get; set; } = 0;
+        public int CurrentPosition { get; set; } = 0;
         public bool IsInGoal { get; set; } = false;
-        //public bool IsInNest { get; set; } = true;  // Behövs inte eftersom position 0 = i nest
+        public bool IsInNest { get; set; } = true;
     }
 }
