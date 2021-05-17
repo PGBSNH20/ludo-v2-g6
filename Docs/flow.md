@@ -15,6 +15,8 @@
 ÄNTLIGEN funkar databasen!
 Några metoder i Controllers kommer till
 
+Starta spelet
+
 En tur i Ludo:
 - RollDice(GamePlayer) - return int
 - GetPlayablePieces(GamePlayer, DiceRoll) - return List<GamePiece>
