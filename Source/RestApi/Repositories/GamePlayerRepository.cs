@@ -31,7 +31,7 @@ namespace RestApi.Repositories
             {
                 if (diceRoll == 6 || diceRoll == 1 && !piece.IsInGoal)
                     pieceList.Add(piece);
-                else if (!piece.IsInGoal && piece.Position > 0)
+                else if (!piece.IsInGoal && piece.CurrentPosition > 0)
                     pieceList.Add(piece);
                 else
                     continue;
