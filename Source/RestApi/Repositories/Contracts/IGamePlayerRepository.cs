@@ -10,5 +10,6 @@ namespace RestApi.Repositories.Contracts
     {
         Task<GamePlayer> GetAsync(Guid guid);
         Task<List<GamePiece>> GetGamePieces(Guid id, int diceRoll);
+        int GetDiceRoll();
     }
 }
