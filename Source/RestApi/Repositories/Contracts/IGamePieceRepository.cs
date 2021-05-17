@@ -11,7 +11,8 @@ namespace RestApi.Repositories.Contracts
 
         bool IsCoastClear(int diceRoll, GamePlayer gamePlayer);
         bool IsPieceInGoal(int diceRoll, GamePlayer gamePlayer);
-        public void PieceStartPosition(GamePiece gamePiece);
+        int GetStartPosition(GamePlayer player);
+        List<GamePiece> CreateGamePieces(GamePlayer player);
         Task Move();
     }
 }

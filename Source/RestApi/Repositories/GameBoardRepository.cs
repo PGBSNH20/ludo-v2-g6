@@ -59,8 +59,12 @@ namespace RestApi.Repositories
             return gameboards;
         }
 
-        public async Task Post(List<GamePlayer> gamePlayers)
+        public async Task CreatePlayers(List<GamePlayer> gamePlayers)
         {
+            foreach (GamePlayer player in gamePlayers)
+            {
+                CreateGamePieces(player);
+            }
             //var temp = new List<GamePiece>();
 
             //for (int i = 0; i < gamePlayers.Count; i++)
@@ -77,6 +81,8 @@ namespace RestApi.Repositories
 
             await Add(new GameBoard { GamePlayer = gamePlayers});
         }
+
+     
 
         public Task PostAsync(List<GameBoard> gameBoard)
         {

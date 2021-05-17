@@ -10,46 +10,55 @@ namespace RestApi.Repositories
 {
     public class GamePieceRepository : Repository, IGamePieceRepository
     {
-        public GamePieceRepository(LudoContext context) : base(context) { }
+        public GamePieceRepository(LudoContext context) : base(context)
+        {
+        }
 
         public async Task UpdatePlayerPosition(GamePiece gamePiece)
         {
 
             return;
         }
-        public void PieceStartPosition(GamePiece gamePiece)
+
+        public List<GamePiece> CreateGamePieces(GamePlayer player)
         {
-            if (gamePiece.Color == Color.Blue)
+            var startPosition = GetStartPosition(player);
+            var gamePieces = new List<GamePiece>();
+
+            for (int i = 0; i < 4; i++)
             {
-                gamePiece.StartingPosition = 10;
+                gamePieces.Add(new GamePiece(){StartingPosition = startPosition});
             }
-            if (gamePiece.Color == Color.Green)
-            {
-                gamePiece.StartingPosition = 20;
-            }
-            if (gamePiece.Color == Color.Yellow)
-            {
-                gamePiece.StartingPosition = 30;
-            }
-            if (gamePiece.Color == Color.Red)
-            {
-                gamePiece.StartingPosition = 40;
-            }
+
+            return gamePieces;
         }
-            public bool IsCoastClear(int diceRoll, GamePlayer gamePlayer)
-            {
-                throw new NotImplementedException();
-            }
 
-            public bool IsPieceInGoal(int diceRoll, GamePlayer gamePlayer)
-            {
-                throw new NotImplementedException();
-            }
+        public int GetStartPosition(GamePlayer player)
+        {
+            if (player.Color == Color.Blue)
+                return 1;
+            else if (player.Color == Color.Green)
+                return 11;
+            else if(player.Color == Color.Yellow)
+                return 21;
+            else
+                return 31;
+        }
 
-            public Task Move()
-            {
-                throw new NotImplementedException();
-            }
+        public bool IsCoastClear(int diceRoll, GamePlayer gamePlayer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsPieceInGoal(int diceRoll, GamePlayer gamePlayer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Move()
+        {
+            throw new NotImplementedException();
         }
     }
+}
 
