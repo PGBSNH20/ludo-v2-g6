@@ -12,7 +12,7 @@ namespace RestApi.Repositories.Contracts
         Task PostAsync(List<GameBoard> gameBoard);
         Task<List<GameBoard>> Get();
         Task<GameBoard> GetCurrentGameBoardAsync(Guid gameBoardId);
-        Task CreatePlayers(List<GamePlayer> gamePlayers);
+        Task CreateGameBoard(List<GamePlayer> gamePlayers);
         //GamePiece UpdatePosition(GamePiece gamePiece, int diceRoll);
     }
 }

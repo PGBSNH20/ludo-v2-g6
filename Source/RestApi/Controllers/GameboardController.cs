@@ -34,7 +34,7 @@ namespace RestApi.Controllers
             if (gamePlayers.Count < 2)
                 return BadRequest("Can't be less then two players");
 
-            await _gameBoardRepository.CreatePlayers(gamePlayers);
+            await _gameBoardRepository.CreateGameBoard(gamePlayers);
 
             return Ok(gamePlayers);
         }

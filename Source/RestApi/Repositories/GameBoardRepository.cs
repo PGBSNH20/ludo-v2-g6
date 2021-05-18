@@ -74,34 +74,14 @@ namespace RestApi.Repositories
             return gameboards;
         }
 
-        public async Task CreatePlayers(List<GamePlayer> gamePlayers)
+        public async Task CreateGameBoard(List<GamePlayer> gamePlayers)
         {
-            //foreach (GamePlayer player in gamePlayers)
-            //{
-            //    CreateGamePieces(player);
-            //}
-            //var temp = new List<GamePiece>();
-
-            //for (int i = 0; i < gamePlayers.Count; i++)
-            //{
-            //    temp.Add(gamePlayers[i].GamePieces[0]);
-            //    temp.Add(gamePlayers[i].GamePieces[0]);
-            //    temp.Add(gamePlayers[i].GamePieces[0]);
-            //    temp.Add(gamePlayers[i].GamePieces[0]);
-
-            //    gamePlayers[i].GamePieces = temp.ToList();
-
-            //    temp.Clear();
-            //}
+            foreach (GamePlayer player in gamePlayers)
+            {
+                player.GamePieces = GamePlayerRepository.CreateGamePieces(player);
+            }
 
             await Add(new GameBoard { GamePlayer = gamePlayers});
-        }
-
-     
-
-        public Task PostAsync(List<GameBoard> gameBoard)
-        {
-            throw new NotImplementedException();
         }
     }
 }
