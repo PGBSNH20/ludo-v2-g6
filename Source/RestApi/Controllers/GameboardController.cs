@@ -40,13 +40,14 @@ namespace RestApi.Controllers
 
             return Ok(gamePlayers);
         }
-        [HttpPost("test")]
+        [HttpPost("Move")]
         public async Task<IActionResult> GetTest(Guid gameBoardId, Guid gamePieceId, int diceRoll)
         {
             var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(gameBoardId);
             var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, gamePieceId);
             
             bool gp = await _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, diceRoll);
+            await _gameBoardRepository.UpdatePlayerTurn(gameBoard.GamePlayer);
             return Ok(gp);
         }
     }
