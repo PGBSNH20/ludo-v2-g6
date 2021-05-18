@@ -95,15 +95,17 @@ namespace RestApi.Repositories
 
         public async Task<List<GamePlayer>> UpdatePlayerTurn(List<GamePlayer> gamePlayers)
         {
+            int count = 0;
             for (int i = 0; i < gamePlayers.Count; i++)
             {
-                if (gamePlayers[i].IsPlayersTurn)
+                if (gamePlayers[i].IsPlayersTurn is true && count == 0)
                 {
                     if (i == gamePlayers.Count - 1)
                         gamePlayers[0].IsPlayersTurn = true;
                     else
-                    gamePlayers[i+1].IsPlayersTurn = true;
+                        gamePlayers[i+1].IsPlayersTurn = true;
                     gamePlayers[i].IsPlayersTurn = false;
+                    count++;
                 }
             }
             await Save();
