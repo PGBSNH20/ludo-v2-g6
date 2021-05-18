@@ -9,7 +9,7 @@ namespace RestApi.Repositories.Contracts
     public interface IGamePieceRepository
     {
         //bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece);
-        Task<GamePiece> UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll);
+        Task<bool> UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll);
         //Task<bool> IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece);
         GamePiece IsPieceInGoal(GamePiece gamePiece);
         GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece);

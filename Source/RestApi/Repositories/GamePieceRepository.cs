@@ -32,16 +32,17 @@ namespace RestApi.Repositories
             }
             return true;
         }
-        public async Task<GamePiece> UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
+        public async Task<bool> UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
         {
-            if (IsCoastClear(diceRoll, gameBoard, gamePiece) && !gamePiece.IsInGoal)
-            {
-                gamePiece.CurrentPosition += diceRoll;
-                gamePiece.StepsTaken += diceRoll;
-                SendToNest(gameBoard, gamePiece);
-            }
+            if (!IsCoastClear(diceRoll, gameBoard, gamePiece) && !gamePiece.IsInGoal)
+                return false;
+            
+            gamePiece.CurrentPosition += diceRoll;
+            gamePiece.StepsTaken += diceRoll;
+            SendToNest(gameBoard, gamePiece);
+            
             await Save();
-            return gamePiece;
+            return true;
         }
 
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
