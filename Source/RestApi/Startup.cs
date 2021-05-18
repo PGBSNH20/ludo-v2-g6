@@ -41,6 +41,7 @@ namespace RestApi
                 x => x.UseSqlServer(Configuration["Skolarbete:Ludo2"]));
             services.AddScoped<IGameBoardRepository, GameBoardRepository>();
             services.AddScoped<IGamePlayerRepository, GamePlayerRepository>();
+            services.AddScoped<IGamePieceRepository, GamePieceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
