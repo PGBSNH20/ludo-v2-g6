@@ -43,6 +43,29 @@ namespace RestApi.Repositories
         {
             return Dice.Roll();
         }
+        public static List<GamePiece> CreateGamePieces(GamePlayer player)
+        {
+            var startPosition = GetStartPosition(player);
+            var gamePieces = new List<GamePiece>();
+
+            for (int i = 0; i < 4; i++)
+            {
+                gamePieces.Add(new GamePiece() { Id = Guid.NewGuid(), StartingPosition = startPosition });
+            }
+
+            return gamePieces;
+        }
+        private static int GetStartPosition(GamePlayer player)
+        {
+            if (player.Color == Color.Blue)
+                return 1;
+            else if (player.Color == Color.Green)
+                return 11;
+            else if (player.Color == Color.Yellow)
+                return 21;
+            else
+                return 31;
+        }
     }
 }
 

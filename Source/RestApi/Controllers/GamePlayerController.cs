@@ -20,6 +20,7 @@ namespace RestApi.Controllers
             var result = await _gamePlayerRepository.GetGamePiecesAsync(id, diceRoll);
             return Ok(result);
         }
+
         [HttpGet("RollDice")]
         public ActionResult<int> Get()
         {
