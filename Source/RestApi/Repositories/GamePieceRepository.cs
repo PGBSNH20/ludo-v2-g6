@@ -9,40 +9,56 @@ using RestApi.Services;
 
 namespace RestApi.Repositories
 {
-    public class GamePieceRepository : Repository, IGamePieceRepository
+    public class GamePieceRepository : Repository, IGamePieceRepository 
     {
         public GamePieceRepository(LudoContext context) : base(context)
         {
         }
 
-        public GamePiece UpdatePosition(GamePiece gamePiece, int diceRoll)
+        public bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
         {
-            gamePiece.CurrentPosition += diceRoll;
+            var player = gameBoard.GamePlayer;
+            for (int i = 0; i < diceRoll; i++)
+            {
+                gamePiece.CurrentPosition++;
+                foreach (var p in player)
+                {
+                    foreach (var piece in p.GamePieces)
+                    {
+                        if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.Id != piece.Id)
+                            return false;
+                    }
+                }
+            }
+            return true;
+        }
+        public GamePiece UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
+        {
+            if (IsCoastClear(diceRoll, gameBoard, gamePiece))
+            {
+                gamePiece.CurrentPosition += diceRoll;
+                gamePiece.StepsTaken += diceRoll;
+            }
             return gamePiece;
-            
+           
         }
 
-
-        //public async Task<bool> IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
-        //{
-
-        //    var currentGameBoard = GetCurrentGameBoardAsync(gameBoard.Id);
-        //    for (int i = 0; i < diceRoll; i++)
-        //    {
-        //        gamePiece.CurrentPosition++;
-        //        foreach(var piece in occupiedPositions)
-        //        {
-        //            if(gamePiece.CurrentPosition == piece)
-        //        }
-        //    }
-        //}
-
-        public bool IsPieceInGoal(int diceRoll, GamePlayer gamePlayer)
+        public bool IsPieceInGoal(int diceRoll, GamePiece gamePiece, GamePlayer gamePlayer)
         {
-            throw new NotImplementedException();
+            if (gamePiece.StepsTaken == 52)
+                if (gamePlayer.Color == Color.Red)
+                    return true;
+                else if (gamePlayer.Color == Color.Yellow)
+                    return true;
+                else if (gamePlayer.Color == Color.Blue)
+                    return true;
+                else
+                    return true;
+
+            return false;
         }
 
-        public Task Move()
+        public GamePiece SendToNest(GamePiece gamePiece)
         {
             throw new NotImplementedException();
         }

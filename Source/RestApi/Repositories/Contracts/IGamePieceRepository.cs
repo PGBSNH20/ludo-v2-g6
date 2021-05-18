@@ -8,10 +8,10 @@ namespace RestApi.Repositories.Contracts
 {
     public interface IGamePieceRepository
     {
-
-        bool IsPieceInGoal(int diceRoll, GamePlayer gamePlayer);
-        GamePiece UpdatePosition(GamePiece gamePiece, int diceRoll);
+        bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece);
+        GamePiece UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll);
         //Task<bool> IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece);
+        bool IsPieceInGoal(int diceRoll, GamePiece gamePiece, GamePlayer gamePlayer);
         Task Move();
     }
 }
