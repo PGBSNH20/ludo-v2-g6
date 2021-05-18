@@ -16,9 +16,10 @@ namespace RestApi.Controllers
         private readonly IGameBoardRepository _gameBoardRepository;
         private readonly IGamePieceRepository _gamePieceRepository;
 
-        public GameboardController(IGameBoardRepository gameBoardRepository)
+        public GameboardController(IGameBoardRepository gameBoardRepository, IGamePieceRepository gamePieceRepository)
         {
             _gameBoardRepository = gameBoardRepository;
+            _gamePieceRepository = gamePieceRepository;
         }
 
         [HttpGet]
@@ -43,16 +44,10 @@ namespace RestApi.Controllers
         public async Task<IActionResult> GetTest(Guid gameBoardId, Guid gamePieceId, int diceRoll)
         {
             var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(gameBoardId);
-            var gamePlayer = gameBoard.GamePlayer;
-            var gamePiece = new GamePiece();
-
-            foreach (var p in gamePlayer.SelectMany(piece => piece.GamePieces.Where(p => piece.Id == gamePieceId)))
-            {
-                gamePiece = p;
-            }
-
-            var result = _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, diceRoll);
-            return Ok(result);
+            var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, gamePieceId);
+            
+            bool gp = await _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, diceRoll);
+            return Ok(gp);
         }
     }
 }

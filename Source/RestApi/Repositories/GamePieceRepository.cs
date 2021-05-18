@@ -15,7 +15,7 @@ namespace RestApi.Repositories
         {
         }
 
-        public bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
+        private static bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
         {
             var player = gameBoard.GamePlayer;
             for (int i = 0; i < diceRoll; i++)
@@ -32,15 +32,17 @@ namespace RestApi.Repositories
             }
             return true;
         }
-        public GamePiece UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
+        public async Task<bool> UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
         {
-            if (IsCoastClear(diceRoll, gameBoard, gamePiece) && !gamePiece.IsInGoal)
-            {
-                gamePiece.CurrentPosition += diceRoll;
-                gamePiece.StepsTaken += diceRoll;
-                SendToNest(gameBoard, gamePiece);
-            }
-            return gamePiece;
+            if (!IsCoastClear(diceRoll, gameBoard, gamePiece) && !gamePiece.IsInGoal)
+                return false;
+            
+            gamePiece.CurrentPosition += diceRoll;
+            gamePiece.StepsTaken += diceRoll;
+            SendToNest(gameBoard, gamePiece);
+            
+            await Save();
+            return true;
         }
 
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
@@ -66,6 +68,12 @@ namespace RestApi.Repositories
                 gamePiece.IsInGoal = true;
 
             return gamePiece;
+        }
+        public GamePiece GetGamePiece(GameBoard gameBoard, Guid id)
+        {
+            var gamePlayers = gameBoard.GamePlayer;
+            return gamePlayers.SelectMany(piece => piece.GamePieces).FirstOrDefault(p => p.Id == id);
+
         }
 
     }
