@@ -44,7 +44,13 @@ namespace RestApi.Controllers
         {
             var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(gameBoardId);
             var gamePlayer = gameBoard.GamePlayer;
-            var gamePiece = gamePlayer.Select(x => x.GamePieces.SingleOrDefault(x => x.Id == gamePieceId));
+            var gamePiece = new GamePiece();
+
+            foreach (var p in gamePlayer.SelectMany(piece => piece.GamePieces.Where(p => piece.Id == gamePieceId)))
+            {
+                gamePiece = p;
+            }
+
             var result = _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, diceRoll);
             return Ok(result);
         }
