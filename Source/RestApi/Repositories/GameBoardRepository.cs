@@ -51,6 +51,21 @@ namespace RestApi.Repositories
             }
             return gameBoardDto;
         }
+        public async Task<GameBoard> GetCurrentGameBoardAsync(Guid gameBoardId)
+        {
+            var result = await _context.GameBoards
+                .Include(x => x.GamePlayer)
+                    .ThenInclude(x => x.GamePieces)
+                        .ThenInclude(x => x.CurrentPosition)
+                .Where(x => x.Id == gameBoardId)
+                .FirstOrDefaultAsync();
+            return result;
+        }
+
+        public Task PostAsync(List<GameBoard> gameBoard)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<List<GameBoard>> Get()
         {
