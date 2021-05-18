@@ -25,7 +25,7 @@ namespace RestApi.Repositories
                 {
                     foreach (var piece in p.GamePieces)
                     {
-                        if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.Id != piece.Id)
+                        if (gamePiece.CurrentPosition == piece.CurrentPosition && p.Color != p.Color)
                             return false;
                     }
                 }
@@ -38,11 +38,28 @@ namespace RestApi.Repositories
             {
                 gamePiece.CurrentPosition += diceRoll;
                 gamePiece.StepsTaken += diceRoll;
+                SendToNest(gameBoard, gamePiece);
             }
             return gamePiece;
-           
         }
-
+           
+        public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
+        {
+            var player = gameBoard.GamePlayer;
+               foreach (var p in player)
+                {
+                    foreach (var piece in p.GamePieces)
+                    {
+                        if (gamePiece.CurrentPosition == piece.CurrentPosition)
+                        { 
+                            piece.CurrentPosition = 0;
+                            piece.StepsTaken = 0;
+                            return piece;
+                        }
+                    }
+                }
+            return gamePiece;
+        }
         public bool IsPieceInGoal(int diceRoll, GamePiece gamePiece, GamePlayer gamePlayer)
         {
             if (gamePiece.StepsTaken == 52)
@@ -58,10 +75,6 @@ namespace RestApi.Repositories
             return false;
         }
 
-        public GamePiece SendToNest(GamePiece gamePiece)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 
