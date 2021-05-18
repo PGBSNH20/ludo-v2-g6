@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\GameBoard.cshtml" />
+    <None Include="Pages\History.cshtml" />
   </ItemGroup>
 
 </Project>

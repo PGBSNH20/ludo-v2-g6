@@ -13,14 +13,26 @@ namespace LudoGame.Pages
 {
     public class IndexModel : PageModel
     {
-        private string responseContent;
+
+
+        [BindProperty, FromBody]
+        public List<GamePlayer> GamePlayer { get; set; }
 
         [BindProperty]
-        public int AmountOfPlayers { get; set; }
+        public string PlayerUrl { get; set; }
 
-        public async Task<IActionResult> OnGet()
+
+        public IActionResult OnGet()
         {
-            var baseURL = new Uri("https://localhost:5001/api/Gameboard/");
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPost(List<GamePlayer> gp)
+        {
+            // ska finnas en get som tar ID som returnerar hela spelat
+            string responseContent = "[]";
+            var baseURL = new Uri("https://localhost/api/Gameboard/new%20game");
             var client = new HttpClient();
 
             HttpResponseMessage response = await client.GetAsync(baseURL.ToString());
@@ -28,21 +40,10 @@ namespace LudoGame.Pages
             if (response.IsSuccessStatusCode)
             {
                 responseContent = await response.Content.ReadAsStringAsync();
+                return RedirectToPage("/Forms/Player");
             }
 
             return Page();
-
-        }
-
-        public IActionResult OnPost()
-        {
-
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            return RedirectToPage("/Forms/Player");
         }
     }
 }

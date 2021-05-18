@@ -22,15 +22,15 @@ namespace RestApi.Controllers
             _gamePieceRepository = gamePieceRepository;
         }
 
-        [HttpGet]
+        [HttpGet("History")]
         public async Task<IActionResult> Get()
         {
             //var result = await _gameBoardRepository.OngoingGamesAsync();
             await Task.Delay(1);
-            return Ok("Hejsan ifrån databasen");
+            return Ok();
         }
       
-        [HttpPost]
+        [HttpPost("New Game")]
         public async Task<IActionResult> Post(List<GamePlayer> gamePlayers)
         {
             if (gamePlayers.Count < 2)
