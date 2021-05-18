@@ -61,10 +61,10 @@ namespace RestApi.Repositories
 
         public async Task CreatePlayers(List<GamePlayer> gamePlayers)
         {
-            foreach (GamePlayer player in gamePlayers)
-            {
-                CreateGamePieces(player);
-            }
+            //foreach (GamePlayer player in gamePlayers)
+            //{
+            //    CreateGamePieces(player);
+            //}
             //var temp = new List<GamePiece>();
 
             //for (int i = 0; i < gamePlayers.Count; i++)
