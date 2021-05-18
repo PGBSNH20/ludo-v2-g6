@@ -24,9 +24,9 @@ namespace RestApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _gameBoardRepository.OngoingGamesAsync();
-
-            return Ok(result);
+            //var result = await _gameBoardRepository.OngoingGamesAsync();
+            await Task.Delay(1);
+            return Ok("Hejsan ifrån databasen");
         }
       
         [HttpPost]

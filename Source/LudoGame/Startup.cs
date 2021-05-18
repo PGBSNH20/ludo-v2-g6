@@ -37,6 +37,18 @@ namespace LudoGame
             //    // By default, all incoming requests will be authorized according to the default policy
             //    options.FallbackPolicy = options.DefaultPolicy;
             //});
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("MyAllowSpecificOrigins",
+            //        builder =>
+            //        {
+            //            builder.WithOrigins("https://localhost:5001/")
+            //                .AllowAnyHeader()
+            //                .AllowAnyMethod()
+            //                .AllowAnyOrigin();
+            //        });
+            //});
             services.AddRazorPages()
                 .AddMvcOptions(options => { })
                 .AddMicrosoftIdentityUI();
