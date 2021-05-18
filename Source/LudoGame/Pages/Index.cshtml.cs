@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,20 @@ namespace LudoGame.Pages
     public class IndexModel : PageModel
     {
 
+        [BindProperty]
+        public GamePlayer RedPlayer { get; set; }
 
-        [BindProperty, FromBody]
-        public List<GamePlayer> GamePlayer { get; set; }
+        [BindProperty]
+        public GamePlayer YellowPlayer { get; set; }
+
+        [BindProperty]
+        public GamePlayer GreenPlayer { get; set; }
+
+        [BindProperty]
+        public GamePlayer BluePlayer { get; set; }
+
+        //[BindProperty, FromBody]
+        //public List<GamePlayer> GamePlayer { get; set; }
 
         [BindProperty]
         public string PlayerUrl { get; set; }
@@ -28,14 +40,19 @@ namespace LudoGame.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(List<GamePlayer> gp)
+        //public async Task<IActionResult> OnPostAsync(List<GamePlayer> gp)
+        public async Task<IActionResult> OnPostAsync()
         {
             // ska finnas en get som tar ID som returnerar hela spelat
             string responseContent = "[]";
-            var baseURL = new Uri("https://localhost/api/Gameboard/new%20game");
+            var baseURL = new Uri("https://localhost:5002/api/Gameboard/new%20game");
             var client = new HttpClient();
 
-            HttpResponseMessage response = await client.GetAsync(baseURL.ToString());
+            // TODO Kolla vilka som är null och skicka resten
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(baseURL.ToString(), new List<GamePlayer> {RedPlayer, BluePlayer});
+
+            //HttpResponseMessage response = await client.GetAsync(baseURL.ToString());
 
             if (response.IsSuccessStatusCode)
             {
