@@ -14,7 +14,8 @@ namespace RestApi.Controllers
     public class GameboardController : ControllerBase
     {
         private readonly IGameBoardRepository _gameBoardRepository;
-      
+        private readonly IGamePieceRepository _gamePieceRepository;
+
         public GameboardController(IGameBoardRepository gameBoardRepository)
         {
             _gameBoardRepository = gameBoardRepository;
@@ -23,9 +24,9 @@ namespace RestApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _gameBoardRepository.OngoingGamesAsync();
-
-            return Ok(result);
+            //var result = await _gameBoardRepository.OngoingGamesAsync();
+            await Task.Delay(1);
+            return Ok("Hejsan ifrån databasen");
         }
       
         [HttpPost]
@@ -38,10 +39,13 @@ namespace RestApi.Controllers
 
             return Ok(gamePlayers);
         }
-        [HttpGet("test")]
-        public async Task<IActionResult> GetTest(Guid id)
+        [HttpPost("test")]
+        public async Task<IActionResult> GetTest(Guid gameBoardId, Guid gamePieceId, int diceRoll)
         {
-            var result = await _gameBoardRepository.GetCurrentGameBoardAsync(id);
+            var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(gameBoardId);
+            var gamePlayer = gameBoard.GamePlayer;
+            var gamePiece = gamePlayer.Select(x => x.GamePieces.SingleOrDefault(x => x.Id == gamePieceId));
+            var result = _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, diceRoll);
             return Ok(result);
         }
     }

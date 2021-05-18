@@ -15,37 +15,59 @@ namespace RestApi.Repositories
         {
         }
 
-        public GamePiece UpdatePosition(GamePiece gamePiece, int diceRoll)
+        public bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
         {
-            gamePiece.CurrentPosition += diceRoll;
+            var player = gameBoard.GamePlayer;
+            for (int i = 0; i < diceRoll; i++)
+            {
+                gamePiece.CurrentPosition++;
+                foreach (var p in player)
+                {
+                    foreach (var piece in p.GamePieces)
+                    {
+                        if (gamePiece.CurrentPosition == piece.CurrentPosition && p.Color != p.Color)
+                            return false;
+                    }
+                }
+            }
+            return true;
+        }
+        public GamePiece UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
+        {
+            if (IsCoastClear(diceRoll, gameBoard, gamePiece) && !gamePiece.IsInGoal)
+            {
+                gamePiece.CurrentPosition += diceRoll;
+                gamePiece.StepsTaken += diceRoll;
+                SendToNest(gameBoard, gamePiece);
+            }
             return gamePiece;
-            
         }
 
-
-        //public async Task<bool> IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
-        //{
-
-        //    var currentGameBoard = GetCurrentGameBoardAsync(gameBoard.Id);
-        //    for (int i = 0; i < diceRoll; i++)
-        //    {
-        //        gamePiece.CurrentPosition++;
-        //        foreach(var piece in occupiedPositions)
-        //        {
-        //            if(gamePiece.CurrentPosition == piece)
-        //        }
-        //    }
-        //}
-
-        public bool IsPieceInGoal(int diceRoll, GamePlayer gamePlayer)
+        public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
         {
-            throw new NotImplementedException();
+            var player = gameBoard.GamePlayer;
+            foreach (var p in player)
+            {
+                foreach (var piece in p.GamePieces)
+                {
+                    if (gamePiece.CurrentPosition == piece.CurrentPosition)
+                    {
+                        piece.CurrentPosition = 0;
+                        piece.StepsTaken = 0;
+                        return piece;
+                    }
+                }
+            }
+            return gamePiece;
+        }
+        public GamePiece IsPieceInGoal(GamePiece gamePiece)
+        {
+            if (gamePiece.StepsTaken == 52)
+                gamePiece.IsInGoal = true;
+
+            return gamePiece;
         }
 
-        public Task Move()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

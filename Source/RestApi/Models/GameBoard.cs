@@ -10,7 +10,7 @@ namespace RestApi.Models
     {
         public Guid Id { get; set; }
         public DateTime StartTime { get; set; } = DateTime.Now;
-
+        public bool IsOnGoing { get; set; } = true;
         public List<GamePlayer> GamePlayer { get; set; }
         //public List<BoardSquare> BoardSquares { get; set; }
 

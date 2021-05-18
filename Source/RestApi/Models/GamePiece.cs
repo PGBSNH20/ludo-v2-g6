@@ -8,6 +8,7 @@ namespace RestApi.Models
         //public BoardSquare BoardSquare { get; set; } //Får endast vara samma på startposition
         public int StartingPosition { get; set; } = 0;
         public int CurrentPosition { get; set; } = 0;
+        public int StepsTaken { get; set; } = 0;
         public bool IsInGoal { get; set; } = false;
         //public bool IsInNest { get; set; } = true; Inte nödvänding längre iom CurrentPosition
     }
