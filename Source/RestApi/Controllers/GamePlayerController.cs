@@ -15,9 +15,9 @@ namespace RestApi.Controllers
         public GamePlayerController(IGamePlayerRepository gamePlayerRepository) { _gamePlayerRepository = gamePlayerRepository; }
 
         [HttpGet]
-        public async Task<IActionResult> Get(Guid id, int diceRoll)
+        public async Task<IActionResult> Get(Guid id)
         {
-            var result = await _gamePlayerRepository.GetGamePiecesAsync(id, diceRoll);
+            var result = await _gamePlayerRepository.GetGamePiecesAsync(id);
             return Ok(result);
         }
 

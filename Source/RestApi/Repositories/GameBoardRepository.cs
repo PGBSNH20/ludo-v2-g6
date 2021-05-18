@@ -80,8 +80,34 @@ namespace RestApi.Repositories
             {
                 player.GamePieces = GamePlayerRepository.CreateGamePieces(player);
             }
-
+            DecideWhoStarts(gamePlayers);
             await Add(new GameBoard { GamePlayer = gamePlayers});
+        }
+
+        //Decides who goes first(random)
+        public GamePlayer DecideWhoStarts(List<GamePlayer> gamePlayers)
+        {
+            var startnumber = new Random();
+            var start = startnumber.Next(0, gamePlayers.Count);
+            gamePlayers[start].IsPlayersTurn = true;
+            return gamePlayers[start];
+        }
+
+        public async Task<List<GamePlayer>> UpdatePlayerTurn(List<GamePlayer> gamePlayers)
+        {
+            for (int i = 0; i < gamePlayers.Count; i++)
+            {
+                if (gamePlayers[i].IsPlayersTurn)
+                {
+                    if (i == gamePlayers.Count - 1)
+                        gamePlayers[0].IsPlayersTurn = true;
+                    else
+                    gamePlayers[i+1].IsPlayersTurn = true;
+                    gamePlayers[i].IsPlayersTurn = false;
+                }
+            }
+            await Save();
+            return gamePlayers;
         }
     }
 }

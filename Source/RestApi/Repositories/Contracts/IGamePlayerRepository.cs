@@ -9,8 +9,8 @@ namespace RestApi.Repositories.Contracts
     public interface IGamePlayerRepository
     {
         Task<GamePlayer> GetAsync(Guid guid);
-        Task<List<GamePiece>> GetGamePiecesAsync(Guid id, int diceRoll);
         int GetDiceRoll();
+        Task<List<GamePiece>> GetGamePiecesAsync(Guid id);
 
     }
 }

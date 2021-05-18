@@ -14,5 +14,6 @@ namespace RestApi.Repositories.Contracts
         Task<GameBoard> GetCurrentGameBoardAsync(Guid gameBoardId);
         Task CreateGameBoard(List<GamePlayer> gamePlayers);
         //GamePiece UpdatePosition(GamePiece gamePiece, int diceRoll);
+        Task<List<GamePlayer>> UpdatePlayerTurn(List<GamePlayer> gamePlayers);
     }
 }
