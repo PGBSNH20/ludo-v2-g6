@@ -11,7 +11,7 @@ namespace RestApi.Repositories.Contracts
         bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece);
         GamePiece UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll);
         //Task<bool> IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece);
-        bool IsPieceInGoal(int diceRoll, GamePiece gamePiece, GamePlayer gamePlayer);
+        GamePiece IsPieceInGoal(GamePiece gamePiece);
         GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece);
     }
 }

@@ -9,7 +9,7 @@ using RestApi.Services;
 
 namespace RestApi.Repositories
 {
-    public class GamePieceRepository : Repository, IGamePieceRepository 
+    public class GamePieceRepository : Repository, IGamePieceRepository
     {
         public GamePieceRepository(LudoContext context) : base(context)
         {
@@ -34,7 +34,7 @@ namespace RestApi.Repositories
         }
         public GamePiece UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
         {
-            if (IsCoastClear(diceRoll, gameBoard, gamePiece))
+            if (IsCoastClear(diceRoll, gameBoard, gamePiece) && !gamePiece.IsInGoal)
             {
                 gamePiece.CurrentPosition += diceRoll;
                 gamePiece.StepsTaken += diceRoll;
@@ -42,37 +42,30 @@ namespace RestApi.Repositories
             }
             return gamePiece;
         }
-           
+
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
         {
             var player = gameBoard.GamePlayer;
-               foreach (var p in player)
+            foreach (var p in player)
+            {
+                foreach (var piece in p.GamePieces)
                 {
-                    foreach (var piece in p.GamePieces)
+                    if (gamePiece.CurrentPosition == piece.CurrentPosition)
                     {
-                        if (gamePiece.CurrentPosition == piece.CurrentPosition)
-                        { 
-                            piece.CurrentPosition = 0;
-                            piece.StepsTaken = 0;
-                            return piece;
-                        }
+                        piece.CurrentPosition = 0;
+                        piece.StepsTaken = 0;
+                        return piece;
                     }
                 }
+            }
             return gamePiece;
         }
-        public bool IsPieceInGoal(int diceRoll, GamePiece gamePiece, GamePlayer gamePlayer)
+        public GamePiece IsPieceInGoal(GamePiece gamePiece)
         {
             if (gamePiece.StepsTaken == 52)
-                if (gamePlayer.Color == Color.Red)
-                    return true;
-                else if (gamePlayer.Color == Color.Yellow)
-                    return true;
-                else if (gamePlayer.Color == Color.Blue)
-                    return true;
-                else
-                    return true;
+                gamePiece.IsInGoal = true;
 
-            return false;
+            return gamePiece;
         }
 
     }
