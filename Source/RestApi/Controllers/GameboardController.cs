@@ -34,7 +34,7 @@ namespace RestApi.Controllers
         {
             var result = await _gameBoardRepository.GetCurrentGameBoardAsync(id);
             if (result != null)
-            return Ok();
+            return Ok(result);
 
             return BadRequest("This game does not exist");
         }

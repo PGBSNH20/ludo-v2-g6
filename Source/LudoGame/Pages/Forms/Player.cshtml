@@ -10,13 +10,17 @@
 <div class="text-center">
     <h1 class="display-4">Welcome to the ludo game</h1>
 </div>
-<form method="get">
-<div>
-    <ul></ul>
-    <ul>@Model.GameBoard.GamePlayer[1].Name</ul>
-</div>
+<p>
 
-</form>
+    <a asp-page="">Välkommen</a>
+</p>
+@foreach (var item in @Model.GamePlayer)
+{
+    <p>
+        @item.Name 
+    </p>
+}
+
 
 <div class="game">
     <div class="house green">

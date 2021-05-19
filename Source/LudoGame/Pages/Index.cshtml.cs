@@ -42,13 +42,13 @@ namespace LudoGame.Pages
             var client = new HttpClient();
             List<GamePlayer> gamePlayers = new();
 
-            if (!(RedPlayer is null))
+            if (!(RedPlayer.Name is null))
                 gamePlayers.Add(RedPlayer); 
-            if (!(YellowPlayer is null))
+            if (!(YellowPlayer.Name is null))
                 gamePlayers.Add(YellowPlayer);
-            if (!(GreenPlayer is null))
+            if (!(GreenPlayer.Name is null))
                 gamePlayers.Add(GreenPlayer);
-            if (!(BluePlayer is null))
+            if (!(BluePlayer.Name is null))
                 gamePlayers.Add(BluePlayer);
 
 
@@ -63,7 +63,8 @@ namespace LudoGame.Pages
                 responseContent = await response.Content.ReadAsStringAsync();
 
                 var gameBoard = JsonConvert.DeserializeObject<GameBoard>(responseContent);
-                return RedirectToPage("/Forms/Player", gameBoard);
+                
+                return RedirectToPage("/Forms/Player", new { id = gameBoard.Id.ToString() });
 
             }
             return Page();

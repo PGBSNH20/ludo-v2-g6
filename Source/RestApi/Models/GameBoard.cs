@@ -14,5 +14,9 @@ namespace RestApi.Models
         public List<GamePlayer> GamePlayer { get; set; }
         //public List<BoardSquare> BoardSquares { get; set; }
 
+        public GameBoard()
+        {
+
+        }
     }
 }

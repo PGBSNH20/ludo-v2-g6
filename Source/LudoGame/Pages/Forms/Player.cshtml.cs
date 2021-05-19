@@ -5,35 +5,43 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using RestApi.Models;
 
 namespace LudoGame.Pages.Forms
 {
     public class PlayerModel : PageModel
     {
-        [BindProperty]
+
         public GameBoard GameBoard { get; set; }
+        public List<GamePlayer> GamePlayer { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(GameBoard gameBoard)
+
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            GameBoard = gameBoard;
+           
+            string responseContent;
+            var baseURL = new Uri($"https://localhost:5002/api/Gameboard/game?id=");
+            var client = new HttpClient();
 
-            await Task.Delay(1);
+            HttpResponseMessage response = await client.GetAsync(baseURL + id);
 
+            if (response.IsSuccessStatusCode)
+            {
+                responseContent = await response.Content.ReadAsStringAsync();
 
-            //string responseContent;
-            //var baseURL = new Uri($"https://localhost:5002/api/Gameboard/game/");
-            //var client = new HttpClient();
-            
-            //HttpResponseMessage response = await client.GetAsync(baseURL + id);
+                var result = JsonConvert.DeserializeObject<GameBoard>(responseContent);
+                GameBoard = result;
 
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    responseContent = await response.Content.ReadAsStringAsync();
-            //    return RedirectToPage("/Forms/Player", responseContent);
-            //}
+                await Task.Delay(1);
+
+                GamePlayer = result.GamePlayer.ToList();
+            }
 
             return Page();
+
+
+
         }
     }
 }
