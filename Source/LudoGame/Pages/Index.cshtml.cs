@@ -34,17 +34,27 @@ namespace LudoGame.Pages
             return Page();
         }
 
-        //public async Task<IActionResult> OnPostAsync(List<GamePlayer> gp)
         public async Task<IActionResult> OnPostAsync()
         {
             // ska finnas en get som tar ID som returnerar hela spelat
             string responseContent;
             var baseURL = new Uri("https://localhost:5002/api/Gameboard/newgame");
             var client = new HttpClient();
+            List<GamePlayer> gamePlayers = new();
+
+            if (!(RedPlayer is null))
+                gamePlayers.Add(RedPlayer); 
+            if (!(YellowPlayer is null))
+                gamePlayers.Add(YellowPlayer);
+            if (!(GreenPlayer is null))
+                gamePlayers.Add(GreenPlayer);
+            if (!(BluePlayer is null))
+                gamePlayers.Add(BluePlayer);
+
 
             // TODO Kolla vilka som är null och skicka resten
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(baseURL.ToString(), new List<GamePlayer> { RedPlayer, BluePlayer });
+            HttpResponseMessage response = await client.PostAsJsonAsync(baseURL.ToString(), gamePlayers);
 
             //HttpResponseMessage response = await client.GetAsync(baseURL.ToString());
 
