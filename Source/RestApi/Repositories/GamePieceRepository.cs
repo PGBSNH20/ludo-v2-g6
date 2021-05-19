@@ -17,15 +17,16 @@ namespace RestApi.Repositories
 
         private static bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
         {
+            int count = gamePiece.CurrentPosition;
             var player = gameBoard.GamePlayer;
             for (int i = 0; i < diceRoll; i++)
             {
-                gamePiece.CurrentPosition++;
+                count++;
                 foreach (var p in player)
                 {
                     foreach (var piece in p.GamePieces)
                     {
-                        if (gamePiece.CurrentPosition == piece.CurrentPosition && p.Color != p.Color)
+                        if (count == piece.CurrentPosition && p.Color != p.Color)
                             return false;
                     }
                 }
@@ -38,34 +39,42 @@ namespace RestApi.Repositories
                 return false;
             if ((gamePiece.StepsTaken + diceRoll) > 58)
             {
-                int stepsBack = gamePiece.StepsTaken - 58;
+                int stepsBack = (gamePiece.StepsTaken + diceRoll) - 58;
                 gamePiece.StepsTaken = 58 - stepsBack;
                 gamePiece.CurrentPosition = gamePiece.StepsTaken;
             }
             else
             {
-                gamePiece.CurrentPosition += diceRoll;
+                for (int i = 0; i < diceRoll; i++)
+                {
+                    gamePiece.CurrentPosition++;
+                    if (gamePiece.CurrentPosition == gamePiece.StartingPosition && gamePiece.StepsTaken == 52)
+                        gamePiece.CurrentPosition = 54;
+                    if (gamePiece.CurrentPosition == 53 && gamePiece.StepsTaken < 52)
+                        gamePiece.CurrentPosition = 1;
+                }
                 gamePiece.StepsTaken += diceRoll;
             }
+
+            IsPieceInGoal(gamePiece);
 
             SendToNest(gameBoard, gamePiece);
             
             await Save();
             return true;
         }
-
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
         {
             var player = gameBoard.GamePlayer;
             foreach (var p in player)
             {
+                if(!p.IsPlayersTurn)
                 foreach (var piece in p.GamePieces)
                 {
-                    if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 53)
+                    if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 52)
                     {
                         piece.CurrentPosition = 0;
                         piece.StepsTaken = 0;
-                        return piece;
                     }
                 }
             }

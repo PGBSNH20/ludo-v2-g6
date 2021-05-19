@@ -46,13 +46,14 @@ namespace RestApi.Controllers
             var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(gameBoardId);
             var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, gamePieceId);
 
+            bool gp = await _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, diceRoll);
+            if (gp == false)
+                return BadRequest("You can't move this piece");
+
             await _gameBoardRepository.EndCurrentGameAsync(gameBoard);
 
             _gameBoardRepository.AnnounceWinner(gameBoard);
 
-            bool gp = await _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, diceRoll);
-            if (gp == false)
-                return BadRequest("You can't move this piece");
             await _gameBoardRepository.UpdatePlayerTurn(gameBoard.GamePlayer);
 
             return Ok(gp);
