@@ -7,13 +7,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LudoGame.Pages.Forms
 {
-    public class ResponseModel : PageModel
+    public class LudoHistoryModel : PageModel
     {
-        public string ResponseBody { get; set; }
-
         public void OnGet()
         {
-           
         }
     }
 }
