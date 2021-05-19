@@ -74,14 +74,14 @@ namespace RestApi.Repositories
             return gameboards;
         }
 
-        public async Task CreateGameBoard(List<GamePlayer> gamePlayers)
+        public async Task<GameBoard> CreateGameBoard(List<GamePlayer> gamePlayers)
         {
             foreach (GamePlayer player in gamePlayers)
             {
                 player.GamePieces = GamePlayerRepository.CreateGamePieces(player);
             }
             DecideWhoStarts(gamePlayers);
-            await Add(new GameBoard { GamePlayer = gamePlayers});
+          return await Add(new GameBoard { GamePlayer = gamePlayers});
         }
 
         //Decides who goes first(random)

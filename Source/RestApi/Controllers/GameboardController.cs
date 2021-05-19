@@ -29,16 +29,25 @@ namespace RestApi.Controllers
             await Task.Delay(1);
             return Ok();
         }
+        [HttpGet("Game")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var result = await _gameBoardRepository.GetCurrentGameBoardAsync(id);
+            if (result != null)
+            return Ok();
+
+            return BadRequest("This game does not exist");
+        }
       
-        [HttpPost("New Game")]
+        [HttpPost("NewGame")]
         public async Task<IActionResult> Post(List<GamePlayer> gamePlayers)
         {
             if (gamePlayers.Count < 2)
                 return BadRequest("Can't be less then two players");
 
-            await _gameBoardRepository.CreateGameBoard(gamePlayers);
+          var gameboard =  await _gameBoardRepository.CreateGameBoard(gamePlayers);
 
-            return Ok(gamePlayers);
+            return Ok(gameboard);
         }
         [HttpPost("Move")]
         public async Task<IActionResult> GetTest(Guid gameBoardId, Guid gamePieceId, int diceRoll)
