@@ -36,9 +36,18 @@ namespace RestApi.Repositories
         {
             if (!IsCoastClear(diceRoll, gameBoard, gamePiece) && !gamePiece.IsInGoal)
                 return false;
-            
-            gamePiece.CurrentPosition += diceRoll;
-            gamePiece.StepsTaken += diceRoll;
+            if ((gamePiece.StepsTaken + diceRoll) > 58)
+            {
+                int stepsBack = gamePiece.StepsTaken - 58;
+                gamePiece.StepsTaken = 58 - stepsBack;
+                gamePiece.CurrentPosition = gamePiece.StepsTaken;
+            }
+            else
+            {
+                gamePiece.CurrentPosition += diceRoll;
+                gamePiece.StepsTaken += diceRoll;
+            }
+
             SendToNest(gameBoard, gamePiece);
             
             await Save();
@@ -52,7 +61,7 @@ namespace RestApi.Repositories
             {
                 foreach (var piece in p.GamePieces)
                 {
-                    if (gamePiece.CurrentPosition == piece.CurrentPosition)
+                    if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 53)
                     {
                         piece.CurrentPosition = 0;
                         piece.StepsTaken = 0;
@@ -64,7 +73,7 @@ namespace RestApi.Repositories
         }
         public GamePiece IsPieceInGoal(GamePiece gamePiece)
         {
-            if (gamePiece.StepsTaken == 52)
+            if (gamePiece.StepsTaken == 58)
                 gamePiece.IsInGoal = true;
 
             return gamePiece;

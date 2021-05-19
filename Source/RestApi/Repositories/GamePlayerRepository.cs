@@ -46,13 +46,13 @@ namespace RestApi.Repositories
         private static int GetStartPosition(GamePlayer player)
         {
             if (player.Color == Color.Blue)
-                return 1;
+                return 52;
+            else if (player.Color == Color.Red)
+                return 13;
             else if (player.Color == Color.Green)
-                return 11;
-            else if (player.Color == Color.Yellow)
-                return 21;
+                return 26;
             else
-                return 31;
+                return 39;
         }
     }
 }

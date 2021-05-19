@@ -111,5 +111,41 @@ namespace RestApi.Repositories
             await Save();
             return gamePlayers;
         }
+
+        public bool FindWinner(GamePlayer gamePlayer)
+        {
+            int winCount = 0;
+            foreach (var p in gamePlayer.GamePieces)
+            {
+                if (p.IsInGoal)
+                    winCount++;
+            }
+            if (winCount == 4)
+                return true;
+            return false;
+        }
+
+        public async Task EndCurrentGameAsync(GameBoard gameBoard)
+        {
+            foreach(var player in gameBoard.GamePlayer)
+            {
+                if (FindWinner(player))
+                {
+                    gameBoard.IsOnGoing = false;
+                    await Save();
+                }
+            }
+        }
+
+        public GamePlayer AnnounceWinner(GameBoard gameBoard)
+        {
+            if(!gameBoard.IsOnGoing)
+                foreach(var player in gameBoard.GamePlayer)
+                {
+                    if (player.GamePieces.Count == 4)
+                        return player;
+                }
+            return null;
+        }
     }
 }
