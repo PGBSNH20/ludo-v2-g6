@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace RestApi.Controllers
 {
 
-    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyPolicy")]
     public class GamePieceController : ControllerBase
     {
         private readonly IGamePieceRepository _gamePieceRepository;

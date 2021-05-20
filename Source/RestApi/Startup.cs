@@ -42,12 +42,13 @@ namespace RestApi
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowAnyOrigin();
-
-
                     }));
             });
 
-
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            //});
 
 
             services.AddControllers();
@@ -80,7 +81,7 @@ namespace RestApi
             //app.UseStaticFiles();
             //app.UseDefaultFiles();
             app.UseCors("MyPolicy");
-            //app.UseCors("CorsPolicy");
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
