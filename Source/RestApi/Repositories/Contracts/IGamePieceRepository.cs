@@ -14,5 +14,6 @@ namespace RestApi.Repositories.Contracts
         GamePiece IsPieceInGoal(GamePiece gamePiece);
         GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece);
         GamePiece GetGamePiece(GameBoard gameBoard, Guid id);
+        Task<List<GamePieceDTO>> GetGamePiecesDto(Guid gameBoardId);
     }
 }
