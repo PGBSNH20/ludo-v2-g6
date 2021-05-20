@@ -7,19 +7,31 @@
     ViewData["Title"] = "Your on going Game";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to the ludo game</h1>
-</div>
-<p>
 
-    <a asp-page="">Välkommen</a>
-</p>
+<div class="text-center">
+    <h1 class="display-4">Ludo game</h1>
+</div>
+
+<h5>Welcome</h5>
 @foreach (var item in @Model.GamePlayer)
 {
     <p>
-        @item.Name 
+        @item.Name
     </p>
 }
+
+<div>
+    <input type="button" value="Try" onclick="CORSRequest()" />
+    <span id='data'>(Result)</span>
+</div>
+
+
+<button type="button" onclick="Dice()">Dice</button>
+<p id="dice"></p>
+<button type="button" onclick="getItems()">GET</button>
+
+<p id="hejsan"></p>
+
 
 
 <div class="game">
@@ -146,3 +158,8 @@
 
 
 </div>
+<button type="button" onclick="setPieces()">COLOR</button>
+
+
+
+

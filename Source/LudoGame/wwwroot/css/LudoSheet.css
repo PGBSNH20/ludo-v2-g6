@@ -35,7 +35,7 @@
 .blue {
     background-color: #29b6f6;
     border: none;
-    border-style: solid; /*need to do this in JS*/
+    /*border-style: solid;*/ /*need to do this in JS*/
 }
 
 

@@ -30,13 +30,32 @@ namespace RestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+                    {
+                        builder.WithOrigins("https://localhost:44380",
+                            "http://localhost:5000",
+                            "https://localhost:5001",
+                            "http://localhost:53720",
+                            "https://localhost:5002")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin();
+
+
+                    }));
+            });
+
+
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestApi", Version = "v1" });
             });
-
+            //services.AddCors();
             services.AddDbContext<LudoContext>(
                 x => x.UseSqlServer(Configuration["Skolarbete:Ludo2"]));
             services.AddScoped<IGameBoardRepository, GameBoardRepository>();
@@ -47,6 +66,7 @@ namespace RestApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -57,7 +77,10 @@ namespace RestApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            //app.UseStaticFiles();
+            //app.UseDefaultFiles();
+            app.UseCors("MyPolicy");
+            //app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
