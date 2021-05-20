@@ -26,30 +26,43 @@ namespace RestApi
         }
 
         public IConfiguration Configuration { get; }
+        
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("MyPolicy", builder =>
+            //        {
+            //            builder.WithOrigins("https://localhost:44380",
+            //                "http://localhost:5000",
+            //                "https://localhost:5001",
+            //                "http://localhost:53720",
+            //                "https://localhost:5002")
+            //                .AllowAnyHeader()
+            //                .AllowAnyMethod()
+            //                .AllowAnyOrigin();
+
+            //        });
+            //});
             services.AddCors(options =>
             {
-                services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
                     {
-                        builder.WithOrigins("https://localhost:44380",
-                            "http://localhost:5000",
-                            "https://localhost:5001",
-                            "http://localhost:53720",
-                            "https://localhost:5002")
+                        builder.WithOrigins("https://localhost:5002",
+                           "https://localhost:5001",
+                           "https://localhost:44380"
+                           )
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowAnyOrigin();
-                    }));
+                    });
             });
 
-            //services.AddCors(c =>
-            //{
-            //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
-            //});
-
+           
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -80,9 +93,9 @@ namespace RestApi
             app.UseRouting();
             //app.UseStaticFiles();
             //app.UseDefaultFiles();
-            app.UseCors("MyPolicy");
             
             app.UseAuthorization();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>
             {

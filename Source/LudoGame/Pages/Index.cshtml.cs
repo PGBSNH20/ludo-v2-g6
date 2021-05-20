@@ -38,7 +38,7 @@ namespace LudoGame.Pages
         {
             // ska finnas en get som tar ID som returnerar hela spelat
             string responseContent;
-            var baseURL = new Uri("https://localhost:5002/api/Gameboard/newgame");
+            var baseURL = new Uri("https://localhost:44369/api/Gameboard/newgame");
             var client = new HttpClient();
             List<GamePlayer> gamePlayers = new();
 

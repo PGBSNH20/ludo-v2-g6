@@ -13,7 +13,6 @@ namespace RestApi.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("MyPolicy")]
     public class GamePieceController : ControllerBase
     {
         private readonly IGamePieceRepository _gamePieceRepository;

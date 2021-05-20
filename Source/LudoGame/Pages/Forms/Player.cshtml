@@ -18,23 +18,12 @@
     <h5>Welcome</h5>
     @foreach (var item in @Model.GamePlayer)
     {
+        @if (item.IsPlayersTurn)
+            item.Name += " It is turn";
         <p>
             @item.Name
         </p>
     }
-
-    <div>
-        <input type="button" value="Try" class="btn" onclick="hello" />
-        <span id='data'>(Result)</span>
-    </div>
-
-
-    <button type="button" onclick="Dice()">Dice</button>
-    <p id="dice"></p>
-    <button type="button" onclick="getItems()">GET</button>
-
-    <p id="hejsan"></p>
-
 
 
     <div class="game">
@@ -158,11 +147,7 @@
         <div class="cells green" style="top: 46.66%;left:13.32%;"></div>
         <div class="cells green" style="top: 46.66%;left:6.66%;"></div>
         <div class="cells" style="top: 46.66%;left:0;" id="25"></div>
-
-
     </div>
-    <button type="button" onclick="setPieces()">COLOR</button>
-
 </body>
 
 

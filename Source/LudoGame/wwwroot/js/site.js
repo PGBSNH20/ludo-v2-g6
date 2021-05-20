@@ -4,29 +4,44 @@
 
 
 
+//function paintBorad(position) {
+//    var cell = document.getElementById(position);
+
+//    cell.style.backgroundColor = `${color}`;
+//    cell.style.border = "6px solid white";
+//}
+
+async function myFunction() {
 
 
-function myFunction() {
-
-
-    const Url = 'https://localhost:5002/api/gamepiece?id=2ef39deb-41cf-422f-c9d3-08d91b59e9f3';
-
-    $.ajax({
-        url: Url,
-        type: "GET",
-        success: function (result) {
-            console.log(result)
+    var requestOptions = {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
         },
-        error: function (error) {
-            console.log(`Error ${error}`)
-        }
+        redirect: "follow",
+    };
 
-    }),
-        console.log("hej")
+    var response1 = await fetch("https://localhost:44369/api/Gameboard/history", requestOptions);
+    var data = await response1.json();
+    console.log(data);
+    console.log("hej")
+    return data;
+    //const Url = 'https://localhost:5002/api/gamepiece?id=2ef39deb-41cf-422f-c9d3-08d91b59e9f3';
+
+    //$.ajax({
+    //    url: Url,
+    //    type: "GET",
+    //    contentType:"application/x-www-form-urlencoded; charset=utf-8",
+    //    success: function (result) {
+    //        console.log(result)
+    //    },
+    //    error: function (error) {
+    //        console.log(`Error ${error}`)
+    //    }
+    //}),
+    //    console.log("hej")
 }
-
-
-
 
 
 async function getItems() {
