@@ -34,7 +34,7 @@ namespace RestApi.Controllers
         {
             var result = await _gameBoardRepository.GetCurrentGameBoardAsync(id);
             if (result != null)
-            return Ok(result);
+                return Ok(result);
 
             return BadRequest("This game does not exist");
         }
@@ -45,7 +45,7 @@ namespace RestApi.Controllers
             if (gamePlayers.Count < 2)
                 return BadRequest("Can't be less then two players");
 
-          var gameboard =  await _gameBoardRepository.CreateGameBoard(gamePlayers);
+            var gameboard =  await _gameBoardRepository.CreateGameBoard(gamePlayers);
 
             return Ok(gameboard);
         }

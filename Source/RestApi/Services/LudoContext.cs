@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace RestApi.Services
 {
@@ -13,6 +15,11 @@ namespace RestApi.Services
         public DbSet<GamePlayer> GamePlayers { get; set; }
         public DbSet<GamePiece> GamePieces { get; set; }
 
+        //static LoggerFactory object
+        public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder.AddConsole();
+        });
 
         public LudoContext()
         {
@@ -75,6 +82,14 @@ namespace RestApi.Services
             //    });
 
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder//.ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))
+                .UseLoggerFactory(loggerFactory)
+                .EnableSensitiveDataLogging();
+        }
+
     }
 }
 

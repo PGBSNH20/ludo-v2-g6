@@ -53,11 +53,13 @@ namespace RestApi.Repositories
         }
         public async Task<GameBoard> GetCurrentGameBoardAsync(Guid gameBoardId)
         {
+            // TODO debuggern varnar för segt anrop
             var result = await _context.GameBoards
                 .Include(x => x.GamePlayer)
-                    .ThenInclude(x => x.GamePieces)
+                .ThenInclude(x => x.GamePieces)
                 .Where(x => x.Id == gameBoardId)
                 .FirstOrDefaultAsync();
+
             return result;
         }
 
