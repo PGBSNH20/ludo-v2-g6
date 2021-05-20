@@ -43,13 +43,25 @@ namespace LudoGame.Pages
             List<GamePlayer> gamePlayers = new();
 
             if (!(RedPlayer.Name is null))
-                gamePlayers.Add(RedPlayer); 
+            {
+                RedPlayer.Color = Color.Red;
+                gamePlayers.Add(RedPlayer);
+            }
             if (!(YellowPlayer.Name is null))
+            {
+                YellowPlayer.Color = Color.Yellow;
                 gamePlayers.Add(YellowPlayer);
+            }
             if (!(GreenPlayer.Name is null))
+            {
+                GreenPlayer.Color = Color.Green;
                 gamePlayers.Add(GreenPlayer);
+            }
             if (!(BluePlayer.Name is null))
+            {
+                BluePlayer.Color = Color.Blue;
                 gamePlayers.Add(BluePlayer);
+            }
 
 
             // TODO Kolla vilka som är null och skicka resten
