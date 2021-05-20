@@ -98,19 +98,8 @@ namespace RestApi.Repositories
         {
             var gameBoardRepository = new GameBoardRepository(_context);
             GameBoard gameBoard = await gameBoardRepository.GetCurrentGameBoardAsync(gameBoardId);
-            var newPieces = new List<GamePieceDTO>();
 
-            foreach (var player in gameBoard.GamePlayer)
-            {
-                foreach (var piece in player.GamePieces)
-                {
-                    var n = new GamePieceDTO()
-                        {Color = player.Color.ToString(), CurrentPosition = piece.CurrentPosition};
-                    newPieces.Add(n);
-                }
-            }
-
-            return newPieces;
+            return (from player in gameBoard.GamePlayer from piece in player.GamePieces select new GamePieceDTO() {Color = player.Color.ToString(), CurrentPosition = piece.CurrentPosition}).ToList();
         }
     }
 }

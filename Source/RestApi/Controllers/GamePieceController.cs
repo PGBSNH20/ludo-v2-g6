@@ -20,18 +20,14 @@ namespace RestApi.Controllers
             _gamePieceRepository = gamePieceRepository;
         }
 
-        //[HttpPut]
-        //public async Task<IActionResult> Put(GamePiece gamePiece)
-        //{
-        //    var positionPlayer = await GamePieceRepository.GetAsync(name);
-        //    if (spaceTraveller is null)
-        //        return BadRequest("You are not parked here!");
+        [HttpGet]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var result = await _gamePieceRepository.GetGamePiecesDto(id);
+            if (result != null)
+                return Ok(result);
 
-        //    var onGoingParking = await _parkingRepository.EndParkingAsync(spaceTraveller);
-        //    if (onGoingParking != null)
-        //        return Ok($"Cost of parking {onGoingParking.Cost}, have a nice day!");
-
-        //    return BadRequest("You don't have an ongoing parking");
-        //}
+            return BadRequest("Invalid Game ID");
+        }
     }
 }
