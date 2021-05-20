@@ -40,8 +40,6 @@ namespace LudoGame.Pages.Forms
 
             return Page();
 
-
-
         }
     }
 }

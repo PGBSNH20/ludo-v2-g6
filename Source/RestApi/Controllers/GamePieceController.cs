@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using RestApi.Models;
 using RestApi.Repositories;
 using RestApi.Repositories.Contracts;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace RestApi.Controllers
 {
+
+    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class GamePieceController : ControllerBase

@@ -38,17 +38,6 @@ namespace LudoGame
             //    options.FallbackPolicy = options.DefaultPolicy;
             //});
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("MyAllowSpecificOrigins",
-            //        builder =>
-            //        {
-            //            builder.WithOrigins("https://localhost:5001/")
-            //                .AllowAnyHeader()
-            //                .AllowAnyMethod()
-            //                .AllowAnyOrigin();
-            //        });
-            //});
             services.AddRazorPages()
                 .AddMvcOptions(options => { })
                 .AddMicrosoftIdentityUI();
@@ -78,6 +67,7 @@ namespace LudoGame
 
             app.UseEndpoints(endpoints =>
             {
+                
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
