@@ -9,5 +9,7 @@ namespace RestApi.Models
     {
         public string CurrentPosition { get; set; }
         public string Color { get; set; }
+        public string PieceId { get; set; }
+        public string GameBoardId { get; set; }
     }
 }

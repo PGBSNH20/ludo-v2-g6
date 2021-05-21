@@ -113,7 +113,13 @@ namespace RestApi.Repositories
             {
                 foreach (var piece in gamePlayer.GamePieces)
                 {
-                    gamePieceDtos.Add(new GamePieceDTO(){Color = gamePlayer.Color.ToString().ToLower(), CurrentPosition = piece.CurrentPosition.ToString()});
+                    gamePieceDtos.Add(new GamePieceDTO()
+                    {
+                        Color = gamePlayer.Color.ToString().ToLower(), 
+                        CurrentPosition = piece.CurrentPosition.ToString(), 
+                        GameBoardId = gameBoard.Id.ToString(), 
+                        PieceId = piece.Id.ToString()
+                    });
                 }
             }
 

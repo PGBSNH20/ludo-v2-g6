@@ -54,7 +54,7 @@ const { Button } = require("bootstrap");
 
 /*const url = 'https://localhost:44369/api/gamepiece?id=2ef39deb-41cf-422f-c9d3-08d91b59e9f3';*/
 async function getItems() {
-    const respons = await fetch('https://localhost:44369/api/gamepiece?id=77bd3c5c-a5c4-4440-9740-08d91c381159');
+    const respons = await fetch('https://localhost:44369/api/gamepiece?id=9922342a-8d75-4fa9-3684-08d91c4e63af');
     const data = await respons.json();
     console.log(data[1].color)
     console.log(data[1].currentPosition)
@@ -97,16 +97,18 @@ async function paintBorad(data) {
     }
 
 }
+
 async function movePiece() {
     const respons = await fetch('https://localhost:44369/api/gameboard/move', {
         method: 'POST',
         headers: {
-            'contentType': 'application/json;charset=utf-8'
+            'Accept' : 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "gameBoardId": "77bd3c5c - a5c4 - 4440 - 9740 - 08d91c381159",
-            "gamePieceId": "078fd3da-8f52-49be-8879-d416857550fc",
-            "diceRoll": "6"
+            'gameBoardId': '9922342a-8d75-4fa9-3684-08d91c4e63af',
+            'gamePieceId': 'bb11e6c6-d374-4f96-9398-ecc9abe2c782',
+            'diceRoll': '6'
         })
     });
     respons.json();
