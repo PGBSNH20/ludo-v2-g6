@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestApi.Models;
+using RestApi.Models.Requests;
 using RestApi.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
@@ -50,12 +51,12 @@ namespace RestApi.Controllers
             return Ok(gameboard);
         }
         [HttpPost("Move")]
-        public async Task<IActionResult> GetTest(Guid gameBoardId, Guid gamePieceId, int diceRoll)
+        public async Task<IActionResult> GetTest(GetMoveRequest gmr)
         {
-            var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(gameBoardId);
-            var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, gamePieceId);
+            var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(Guid.Parse(gmr.GameBoardId));
+            var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, Guid.Parse(gmr.GamePieceId));
 
-            bool gp = await _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, diceRoll);
+            bool gp = await _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, int.Parse(gmr.DiceRoll));
             if (gp == false)
                 return BadRequest("You can't move this piece");
 

@@ -45,7 +45,7 @@ async function myFunction() {
 
 
 async function getItems() {
-    await fetch('https://localhost:5002/api/gamepiece?id=2ef39deb-41cf-422f-c9d3-08d91b59e9f3')
+    await fetch('https://localhost:44369/api/gamepiece?id=7c8930f9-3622-40dd-82cc-08d91c24ddc2')
         .then(response => response.json())
         .then(data => _useItems(data))
         .catch(error => console.error('Unable to get items.', error));
