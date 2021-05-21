@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="~/js/site.js"></script>
 </head>
-<body onload="getItems(@Model.GameBoard.Id)">
+<body >
     <div class="text-center">
         <h1 class="display-4">Ludo game</h1>
     </div>
@@ -25,6 +25,7 @@
         </p>
     }
 
+    <button type="button" onclick="getItems(`@Model.GameBoard.Id.ToString()`)">hej</button>
     <button type="button" onclick="movePiece()">move</button>
 
     <div class="game">

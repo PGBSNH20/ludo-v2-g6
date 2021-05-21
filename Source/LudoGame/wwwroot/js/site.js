@@ -7,15 +7,12 @@
 
 //async function myFunction() {
 
-const { Button } = require("bootstrap");
 
 
 /*const url = 'https://localhost:44369/api/gamepiece?id=2ef39deb-41cf-422f-c9d3-08d91b59e9f3';*/
 async function getItems(id) {
     const respons = await fetch(`https://localhost:44369/api/gamepiece?id=${id}`);
     const data = await respons.json();
-    console.log(data[1].color)
-    console.log(data[1].currentPosition)
     console.log(data)
     paintBorad(data)
 
@@ -41,13 +38,11 @@ async function paintBorad(data) {
         piece.style.height = "80% ";
         piece.style.width = "80% ";
 
-        piece
-            .classList
-            .add('game_piece')
+        console.log(data[i].gameBoardId)
+        console.log(data[i].pieceId)
 
         piece.addEventListener('click', function () {
-            console.log("knapp")
-            //movePiece(Diceroll)
+            movePiece(data[i].gameBoardId, data[i].pieceId)
         });
 
         cell.appendChild(piece)
@@ -56,16 +51,16 @@ async function paintBorad(data) {
 
 }
 
-async function movePiece() {
+async function movePiece(gameBoardId,gamePieceId) {
     const respons = await fetch('https://localhost:44369/api/gameboard/move', {
         method: 'POST',
         headers: {
-            'Accept': 'application/json;charset=utf-8',
-            'Content-Type': 'application/json;charset=utf-8'
+            "Accept": "application/json",
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "gameBoardId": "77bd3c5c-a5c4-4440-9740-08d91c381159",
-            "gamePieceId": "078fd3da-8f52-49be-8879-d416857550fc",
+            "gameBoardId": `"${gameBoardId}"`,
+            "gamePieceId": `"${gamePieceId}"`,
             "diceRoll": "6"
         })
         
