@@ -51,6 +51,7 @@ namespace RestApi.Repositories
             }
             return gameBoardDto;
         }
+
         public async Task<GameBoard> GetCurrentGameBoardAsync(Guid gameBoardId)
         {
             // TODO debuggern varnar för segt anrop

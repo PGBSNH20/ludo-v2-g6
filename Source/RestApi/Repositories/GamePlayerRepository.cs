@@ -31,6 +31,7 @@ namespace RestApi.Repositories
         {
             return Dice.Roll();
         }
+
         public static List<GamePiece> CreateGamePieces(GamePlayer player)
         {
             var startPosition = GetStartPosition(player);
@@ -43,6 +44,7 @@ namespace RestApi.Repositories
 
             return gamePieces;
         }
+
         private static int GetStartPosition(GamePlayer player)
         {
             if (player.Color == Color.Blue)

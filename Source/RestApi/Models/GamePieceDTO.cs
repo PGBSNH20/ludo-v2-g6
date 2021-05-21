@@ -7,7 +7,7 @@ namespace RestApi.Models
 {
     public class GamePieceDTO
     {
-        public int CurrentPosition { get; set; }
+        public string CurrentPosition { get; set; }
         public string Color { get; set; }
     }
 }

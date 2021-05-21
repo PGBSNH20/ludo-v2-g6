@@ -80,6 +80,7 @@ namespace RestApi.Repositories
             }
             return gamePiece;
         }
+
         public GamePiece IsPieceInGoal(GamePiece gamePiece)
         {
             if (gamePiece.StepsTaken == 58)
@@ -87,6 +88,7 @@ namespace RestApi.Repositories
 
             return gamePiece;
         }
+
         public GamePiece GetGamePiece(GameBoard gameBoard, Guid id)
         {
             var gamePlayers = gameBoard.GamePlayer;
@@ -97,9 +99,27 @@ namespace RestApi.Repositories
         public async Task<List<GamePieceDTO>> GetGamePiecesDto(Guid gameBoardId)
         {
             var gameBoardRepository = new GameBoardRepository(_context);
+            var gamePlayerRepository = new GamePlayerRepository(_context);
             GameBoard gameBoard = await gameBoardRepository.GetCurrentGameBoardAsync(gameBoardId);
+            List<GamePieceDTO> gamePieceDtos = new List<GamePieceDTO>();
 
-            return (from player in gameBoard.GamePlayer from piece in player.GamePieces select new GamePieceDTO() {Color = player.Color.ToString(), CurrentPosition = piece.CurrentPosition}).ToList();
+            foreach (var gamePlayer in gameBoard.GamePlayer)
+            {
+                var gamePieces = await gamePlayerRepository.GetGamePiecesAsync(gamePlayer.Id);
+                gamePlayer.GamePieces = gamePieces;
+            }
+
+            foreach (var gamePlayer in gameBoard.GamePlayer)
+            {
+                foreach (var piece in gamePlayer.GamePieces)
+                {
+                    gamePieceDtos.Add(new GamePieceDTO(){Color = gamePlayer.Color.ToString(), CurrentPosition = piece.CurrentPosition.ToString()});
+                }
+            }
+
+            //await Task.Delay(1);
+            return gamePieceDtos;
+            //return (from player in gameBoard.GamePlayer from piece in player.GamePieces select new GamePieceDTO() {Color = player.Color.ToString(), CurrentPosition = piece.CurrentPosition}).ToList();
         }
     }
 }
