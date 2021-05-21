@@ -51,7 +51,7 @@ namespace RestApi.Controllers
             return Ok(gameboard);
         }
         [HttpPost("Move")]
-        public async Task<IActionResult> GetTest(GetMoveRequest gmr)
+        public async Task<IActionResult> GetTest([FromBody]GetMoveRequest gmr)
         {
             var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(Guid.Parse(gmr.GameBoardId));
             var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, Guid.Parse(gmr.GamePieceId));
