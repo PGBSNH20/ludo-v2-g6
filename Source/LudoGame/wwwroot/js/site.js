@@ -23,8 +23,6 @@ async function getItems(id) {
 async function paintBorad(data) {
 
     for (var i = 0; i < data.length; i++) {
-
-        console.log(data[i].currentPosition);
         const id = data[i].currentPosition;
         if (id === "0")
             continue;
@@ -38,11 +36,14 @@ async function paintBorad(data) {
         piece.style.height = "80% ";
         piece.style.width = "80% ";
 
+
         console.log(data[i].gameBoardId)
         console.log(data[i].pieceId)
 
         piece.addEventListener('click', function () {
+            //TODO få dessa parametrar att åka med in i metoden 
             movePiece(data[i].gameBoardId, data[i].pieceId)
+
         });
 
         cell.appendChild(piece)
@@ -51,7 +52,9 @@ async function paintBorad(data) {
 
 }
 
-async function movePiece(gameBoardId,gamePieceId) {
+async function movePiece(gameBoardId, gamePieceId) {
+    console.log(gameBoardId);
+    console.log(gamePieceId);
     const respons = await fetch('https://localhost:44369/api/gameboard/move', {
         method: 'POST',
         headers: {
@@ -59,13 +62,13 @@ async function movePiece(gameBoardId,gamePieceId) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "gameBoardId": `"${gameBoardId}"`,
-            "gamePieceId": `"${gamePieceId}"`,
+            "gameBoardId": "jdj-45s465",
+            "gamePieceId": "52415645",
             "diceRoll": "6"
         })
-        
+
     });
-    console.log(respons.json());
+    await console.log(respons.json());
 
 
 }
