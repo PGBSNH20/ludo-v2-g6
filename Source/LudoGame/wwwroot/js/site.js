@@ -36,14 +36,11 @@ async function paintBorad(data) {
         piece.style.height = "80% ";
         piece.style.width = "80% ";
 
-
-        console.log(data[i].gameBoardId)
-        console.log(data[i].pieceId)
+        const tempGameBoardId = `${data[i].gameBoardId}`
+        const tempGamePieceId = `${data[i].pieceId}`
 
         piece.addEventListener('click', function () {
-            //TODO få dessa parametrar att åka med in i metoden 
-            movePiece(data[i].gameBoardId, data[i].pieceId)
-
+            movePiece(tempGameBoardId, tempGamePieceId)
         });
 
         cell.appendChild(piece)
@@ -62,8 +59,8 @@ async function movePiece(gameBoardId, gamePieceId) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "gameBoardId": "jdj-45s465",
-            "gamePieceId": "52415645",
+            "gameBoardId": gameBoardId,
+            "gamePieceId": gamePieceId,
             "diceRoll": "6"
         })
 
