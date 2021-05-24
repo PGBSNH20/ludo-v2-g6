@@ -10,5 +10,6 @@ namespace RestApi.Models.Requests
         public string GameBoardId { get; set; }
         public string GamePieceId { get; set; }
         public string DiceRoll { get; set; }
+        public string GamePlayerId { get; set; }
     }
 }

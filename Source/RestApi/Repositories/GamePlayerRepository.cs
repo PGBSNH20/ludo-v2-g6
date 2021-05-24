@@ -56,6 +56,13 @@ namespace RestApi.Repositories
             else
                 return 39;
         }
+        public async Task<bool> ValidateGamePlayerAsync(Guid id)
+        {
+            var result = await _context.GamePlayers.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (result.IsPlayersTurn)
+                return true;
+            return false;
+        }
     }
 }
 

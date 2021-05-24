@@ -11,6 +11,7 @@ namespace RestApi.Repositories.Contracts
         Task<GamePlayer> GetAsync(Guid guid);
         int GetDiceRoll();
         Task<List<GamePiece>> GetGamePiecesAsync(Guid id);
+        Task<bool> ValidateGamePlayerAsync(Guid id);
 
     }
 }

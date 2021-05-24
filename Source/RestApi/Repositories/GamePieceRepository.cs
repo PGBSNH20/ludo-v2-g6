@@ -59,24 +59,24 @@ namespace RestApi.Repositories
             IsPieceInGoal(gamePiece);
 
             SendToNest(gameBoard, gamePiece);
-            
+
             await Save();
             return true;
         }
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
         {
             var player = gameBoard.GamePlayer;
+
             foreach (var p in player)
             {
-                if(!p.IsPlayersTurn)
-                foreach (var piece in p.GamePieces)
-                {
-                    if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 52)
+                    foreach (var piece in p.GamePieces)
                     {
-                        piece.CurrentPosition = 0;
-                        piece.StepsTaken = 0;
+                        if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 52)
+                        {
+                            piece.CurrentPosition = 0;
+                            piece.StepsTaken = 0;
+                        }
                     }
-                }
             }
             return gamePiece;
         }
@@ -115,9 +115,9 @@ namespace RestApi.Repositories
                 {
                     gamePieceDtos.Add(new GamePieceDTO()
                     {
-                        Color = gamePlayer.Color.ToString().ToLower(), 
-                        CurrentPosition = piece.CurrentPosition.ToString(), 
-                        GameBoardId = gameBoard.Id.ToString(), 
+                        Color = gamePlayer.Color.ToString().ToLower(),
+                        CurrentPosition = piece.CurrentPosition.ToString(),
+                        GameBoardId = gameBoard.Id.ToString(),
                         PieceId = piece.Id.ToString()
                     });
                 }

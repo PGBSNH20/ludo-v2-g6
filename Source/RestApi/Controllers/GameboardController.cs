@@ -16,11 +16,13 @@ namespace RestApi.Controllers
     {
         private readonly IGameBoardRepository _gameBoardRepository;
         private readonly IGamePieceRepository _gamePieceRepository;
+        private readonly IGamePlayerRepository _gamePlayerRepository;
 
-        public GameboardController(IGameBoardRepository gameBoardRepository, IGamePieceRepository gamePieceRepository)
+        public GameboardController(IGameBoardRepository gameBoardRepository, IGamePieceRepository gamePieceRepository, IGamePlayerRepository gamePlayerRepository)
         {
             _gameBoardRepository = gameBoardRepository;
             _gamePieceRepository = gamePieceRepository;
+            _gamePlayerRepository = gamePlayerRepository;
         }
 
         [HttpGet("History")]
@@ -53,6 +55,8 @@ namespace RestApi.Controllers
         [HttpPost("Move")]
         public async Task<IActionResult> GetTest([FromBody]GetMoveRequest gmr)
         {
+            if (!await _gamePlayerRepository.ValidateGamePlayerAsync(Guid.Parse(gmr.GamePlayerId)))
+                return BadRequest("This is not your gamepiece!");
             var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(Guid.Parse(gmr.GameBoardId));
             var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, Guid.Parse(gmr.GamePieceId));
 
