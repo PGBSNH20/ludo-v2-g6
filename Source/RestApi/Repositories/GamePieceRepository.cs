@@ -115,10 +115,11 @@ namespace RestApi.Repositories
                 {
                     gamePieceDtos.Add(new GamePieceDTO()
                     {
-                        Color = gamePlayer.Color.ToString().ToLower(),
-                        CurrentPosition = piece.CurrentPosition.ToString(),
-                        GameBoardId = gameBoard.Id.ToString(),
-                        PieceId = piece.Id.ToString()
+                        Color = gamePlayer.Color.ToString().ToLower(), 
+                        CurrentPosition = piece.CurrentPosition.ToString(), 
+                        GameBoardId = gameBoard.Id.ToString(), 
+                        PieceId = piece.Id.ToString(),
+                        GamePlayerId = gamePlayer.Id.ToString()
                     });
                 }
             }

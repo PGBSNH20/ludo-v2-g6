@@ -22,11 +22,37 @@ async function getItems(id) {
 
 async function paintBorad(data) {
 
+
     for (var i = 0; i < data.length; i++) {
         const id = data[i].currentPosition;
-        if (id === "0")
-            continue;
-        var cell = document.getElementById(`${id}`);
+        const color = data[i].color;
+        if (id === "0") {
+            let redCount;
+            let greenCount;
+            let blueCount;
+            let yellowCount;
+
+            if (color === "red") {
+                redCount += 1;
+                var cell = document.getElementById(`${color}_${redCount}`);
+            }
+            if (color === "green") {
+                greenCount += 1;
+                var cell = document.getElementById(`${color}_${greenCount}`);
+            }
+            if (color === "blue") {
+                blueCount += 1;
+                var cell = document.getElementById(`${color}_${blueCount}`);
+            }
+            if (color === "yellow") {
+                yellowCount += 1;
+                var cell = document.getElementById(`${color}_${yellowCount}`);
+            }
+        }
+        else {
+
+            var cell = document.getElementById(`${id}`);
+        }
         cell.style.display = "flex";
         cell.style.justifyContent = "center";
         cell.style.alignItems = "center";
@@ -38,9 +64,12 @@ async function paintBorad(data) {
 
         const tempGameBoardId = `${data[i].gameBoardId}`
         const tempGamePieceId = `${data[i].pieceId}`
+        const tempGamePlayerId = `${data[i].gamePlayerId}`
+
+        
 
         piece.addEventListener('click', function () {
-            movePiece(tempGameBoardId, tempGamePieceId)
+            movePiece(tempGameBoardId, tempGamePieceId, gamePlayerId)
         });
 
         cell.appendChild(piece)
@@ -50,7 +79,7 @@ async function paintBorad(data) {
 }
 
 
-async function movePiece(gameBoardId, gamePieceId) {
+async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
     console.log(gameBoardId);
     console.log(gamePieceId);
     const respons = await fetch('https://localhost:44369/api/gameboard/move', {
@@ -62,6 +91,7 @@ async function movePiece(gameBoardId, gamePieceId) {
         body: JSON.stringify({
             "gameBoardId": gameBoardId,
             "gamePieceId": gamePieceId,
+            "gamePlayerId": gamePlayerId,
             "diceRoll": "6"
         })
 
