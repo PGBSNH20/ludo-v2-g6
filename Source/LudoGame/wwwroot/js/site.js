@@ -29,23 +29,28 @@ async function paintBorad(data) {
     for (var i = 0; i < data.length; i++) {
         var cell;
         const id = data[i].currentPosition;
-        const color = `${data[i].color}`;
+        const color = data[i].color;
         if (id === "0") {
-            if (color == "red") {
-                redCount++;
-                cell = document.getElementById(`${color}_${redCount}`)
+            let redCount;
+            let greenCount;
+            let blueCount;
+            let yellowCount;
+
+            if (color === "red") {
+                redCount += 1;
+                var cell = document.getElementById(`${color}_${redCount}`);
             }
-            if (color == "blue") {
-                blueCount++;
-                cell = document.getElementById(`${color}_${blueCount}`)
+            if (color === "green") {
+                greenCount += 1;
+                var cell = document.getElementById(`${color}_${greenCount}`);
             }
-            if (color == "green") {
-                greenCount++;
-                cell = document.getElementById(`${color}_${greenCount}`)
+            if (color === "blue") {
+                blueCount += 1;
+                var cell = document.getElementById(`${color}_${blueCount}`);
             }
-            if (color == "yellow") {
-                yellowCount++;
-                cell = document.getElementById(`${color}_${yellowCount}`)
+            if (color === "yellow") {
+                yellowCount += 1;
+                var cell = document.getElementById(`${color}_${yellowCount}`);
             }
         }
         else {
@@ -67,7 +72,7 @@ async function paintBorad(data) {
         const tempGamePlayerId = `${data[i].gamePlayerId}`
 
         piece.addEventListener('click', function () {
-            movePiece(tempGameBoardId, tempGamePieceId, tempGamePlayerId)
+            movePiece(tempGameBoardId, tempGamePieceId, gamePlayerId)
         });
 
         cell.appendChild(piece)
