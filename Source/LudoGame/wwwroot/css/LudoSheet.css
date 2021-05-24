@@ -9,6 +9,7 @@
     box-sizing: border-box;
 }
 
+
 .game {
     display: flex;
     flex-wrap: wrap;
@@ -100,6 +101,7 @@
     border-collapse: collapse;
     border: 1px solid #e5e5e569;
 }
+
 
 
 .g-start {

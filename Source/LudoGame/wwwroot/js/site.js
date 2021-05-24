@@ -21,16 +21,38 @@ async function getItems(id) {
 
 
 async function paintBorad(data) {
-
+    var redCount = 0;
+    var blueCount = 0;
+    var greenCount = 0;
+    var yellowCount = 0;
 
     for (var i = 0; i < data.length; i++) {
+        var cell;
         const id = data[i].currentPosition;
-        const color = data[i].color;
-        if (id === "0")
-            continue;
+        const color = `${data[i].color}`;
+        if (id === "0") {
+            if (color == "red") {
+                redCount++;
+                cell = document.getElementById(`${color}_${redCount}`)
+            }
+            if (color == "blue") {
+                blueCount++;
+                cell = document.getElementById(`${color}_${blueCount}`)
+            }
+            if (color == "green") {
+                greenCount++;
+                cell = document.getElementById(`${color}_${greenCount}`)
+            }
+            if (color == "yellow") {
+                yellowCount++;
+                cell = document.getElementById(`${color}_${yellowCount}`)
+            }
+        }
+        else {
 
-            var cell = document.getElementById(`${id}`);
-        
+            cell = document.getElementById(`${id}`);
+        }
+
         cell.style.display = "flex";
         cell.style.justifyContent = "center";
         cell.style.alignItems = "center";
@@ -44,16 +66,12 @@ async function paintBorad(data) {
         const tempGamePieceId = `${data[i].pieceId}`
         const tempGamePlayerId = `${data[i].gamePlayerId}`
 
-        
-
         piece.addEventListener('click', function () {
             movePiece(tempGameBoardId, tempGamePieceId, tempGamePlayerId)
         });
 
         cell.appendChild(piece)
-
     }
-
 }
 
 
@@ -74,8 +92,14 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
         })
 
     });
+    if (respons.ok) {
+        console.log("OK")
+    }
+    else {
+        var json = await respons.json()
+        document.getElementById("message").innerText = JSON.stringify(json)
+    }
 
-    await console.log(respons.json());
 
 
 }

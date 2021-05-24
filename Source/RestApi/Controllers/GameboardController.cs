@@ -69,8 +69,8 @@ namespace RestApi.Controllers
             _gameBoardRepository.AnnounceWinner(gameBoard);
 
             await _gameBoardRepository.UpdatePlayerTurn(gameBoard.GamePlayer);
-
-            return Ok(gp);
+            var isTurn = gameBoard.GamePlayer.Where(x => x.IsPlayersTurn == true).FirstOrDefault();
+            return Ok(isTurn);
         }
     }
 }
