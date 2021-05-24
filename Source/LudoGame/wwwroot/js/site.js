@@ -49,6 +49,7 @@ async function paintBorad(data) {
 
 }
 
+
 async function movePiece(gameBoardId, gamePieceId) {
     console.log(gameBoardId);
     console.log(gamePieceId);
@@ -65,6 +66,7 @@ async function movePiece(gameBoardId, gamePieceId) {
         })
 
     });
+
     await console.log(respons.json());
 
 
