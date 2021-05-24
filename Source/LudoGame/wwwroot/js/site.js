@@ -26,33 +26,11 @@ async function paintBorad(data) {
     for (var i = 0; i < data.length; i++) {
         const id = data[i].currentPosition;
         const color = data[i].color;
-        if (id === "0") {
-            let redCount;
-            let greenCount;
-            let blueCount;
-            let yellowCount;
-
-            if (color === "red") {
-                redCount += 1;
-                var cell = document.getElementById(`${color}_${redCount}`);
-            }
-            if (color === "green") {
-                greenCount += 1;
-                var cell = document.getElementById(`${color}_${greenCount}`);
-            }
-            if (color === "blue") {
-                blueCount += 1;
-                var cell = document.getElementById(`${color}_${blueCount}`);
-            }
-            if (color === "yellow") {
-                yellowCount += 1;
-                var cell = document.getElementById(`${color}_${yellowCount}`);
-            }
-        }
-        else {
+        if (id === "0")
+            continue;
 
             var cell = document.getElementById(`${id}`);
-        }
+        
         cell.style.display = "flex";
         cell.style.justifyContent = "center";
         cell.style.alignItems = "center";
@@ -69,7 +47,7 @@ async function paintBorad(data) {
         
 
         piece.addEventListener('click', function () {
-            movePiece(tempGameBoardId, tempGamePieceId, gamePlayerId)
+            movePiece(tempGameBoardId, tempGamePieceId, tempGamePlayerId)
         });
 
         cell.appendChild(piece)

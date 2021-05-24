@@ -69,14 +69,15 @@ namespace RestApi.Repositories
 
             foreach (var p in player)
             {
-                    foreach (var piece in p.GamePieces)
-                    {
+                foreach (var piece in p.GamePieces)
+                {
+                    if (piece.Id != gamePiece.Id)
                         if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 52)
                         {
                             piece.CurrentPosition = 0;
                             piece.StepsTaken = 0;
                         }
-                    }
+                }
             }
             return gamePiece;
         }
@@ -115,9 +116,9 @@ namespace RestApi.Repositories
                 {
                     gamePieceDtos.Add(new GamePieceDTO()
                     {
-                        Color = gamePlayer.Color.ToString().ToLower(), 
-                        CurrentPosition = piece.CurrentPosition.ToString(), 
-                        GameBoardId = gameBoard.Id.ToString(), 
+                        Color = gamePlayer.Color.ToString().ToLower(),
+                        CurrentPosition = piece.CurrentPosition.ToString(),
+                        GameBoardId = gameBoard.Id.ToString(),
                         PieceId = piece.Id.ToString(),
                         GamePlayerId = gamePlayer.Id.ToString()
                     });
