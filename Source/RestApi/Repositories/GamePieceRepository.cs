@@ -87,11 +87,12 @@ namespace RestApi.Repositories
             {
                 foreach (var piece in p.GamePieces)
                 {
-                    if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 52)
-                    {
-                        piece.CurrentPosition = 0;
-                        piece.StepsTaken = 0;
-                    }
+                    if (piece.Id != gamePiece.Id)
+                        if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 52)
+                        {
+                            piece.CurrentPosition = 0;
+                            piece.StepsTaken = 0;
+                        }
                 }
             }
             return gamePiece;
