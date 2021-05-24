@@ -37,6 +37,21 @@ namespace RestApi.Repositories
         {
             if (!IsCoastClear(diceRoll, gameBoard, gamePiece) && !gamePiece.IsInGoal)
                 return false;
+
+            var updatedPiece = CalculateMovement(gamePiece, diceRoll);
+
+            if (updatedPiece == null)
+                return false;
+
+            IsPieceInGoal(updatedPiece);
+
+            SendToNest(gameBoard, updatedPiece);
+
+            await Save();
+            return true;
+        }
+        public GamePiece CalculateMovement(GamePiece gamePiece, int diceRoll)
+        {
             if ((gamePiece.StepsTaken + diceRoll) > 58)
             {
                 int stepsBack = (gamePiece.StepsTaken + diceRoll) - 58;
@@ -45,23 +60,24 @@ namespace RestApi.Repositories
             }
             else
             {
-                for (int i = 0; i < diceRoll; i++)
+                if (gamePiece.CurrentPosition == 0 && (diceRoll == 1 || diceRoll == 6))
+                    gamePiece.CurrentPosition = gamePiece.StartingPosition + (diceRoll - 1);
+                else if (gamePiece.CurrentPosition == 0)
+                    return null;
+                else
                 {
-                    gamePiece.CurrentPosition++;
-                    if (gamePiece.CurrentPosition == gamePiece.StartingPosition && gamePiece.StepsTaken == 52)
-                        gamePiece.CurrentPosition = 54;
-                    if (gamePiece.CurrentPosition == 53 && gamePiece.StepsTaken < 52)
-                        gamePiece.CurrentPosition = 1;
+                    for (int i = 0; i < diceRoll; i++)
+                    {
+                        gamePiece.CurrentPosition++;
+                        if (gamePiece.CurrentPosition == gamePiece.StartingPosition && gamePiece.StepsTaken == 52)
+                            gamePiece.CurrentPosition = 54;
+                        if (gamePiece.CurrentPosition == 53 && gamePiece.StepsTaken < 52)
+                            gamePiece.CurrentPosition = 1;
+                    }
+                    gamePiece.StepsTaken += diceRoll;
                 }
-                gamePiece.StepsTaken += diceRoll;
             }
-
-            IsPieceInGoal(gamePiece);
-
-            SendToNest(gameBoard, gamePiece);
-
-            await Save();
-            return true;
+            return gamePiece;
         }
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
         {
@@ -69,14 +85,14 @@ namespace RestApi.Repositories
 
             foreach (var p in player)
             {
-                    foreach (var piece in p.GamePieces)
+                foreach (var piece in p.GamePieces)
+                {
+                    if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 52)
                     {
-                        if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 52)
-                        {
-                            piece.CurrentPosition = 0;
-                            piece.StepsTaken = 0;
-                        }
+                        piece.CurrentPosition = 0;
+                        piece.StepsTaken = 0;
                     }
+                }
             }
             return gamePiece;
         }
@@ -115,9 +131,9 @@ namespace RestApi.Repositories
                 {
                     gamePieceDtos.Add(new GamePieceDTO()
                     {
-                        Color = gamePlayer.Color.ToString().ToLower(), 
-                        CurrentPosition = piece.CurrentPosition.ToString(), 
-                        GameBoardId = gameBoard.Id.ToString(), 
+                        Color = gamePlayer.Color.ToString().ToLower(),
+                        CurrentPosition = piece.CurrentPosition.ToString(),
+                        GameBoardId = gameBoard.Id.ToString(),
                         PieceId = piece.Id.ToString(),
                         GamePlayerId = gamePlayer.Id.ToString()
                     });
