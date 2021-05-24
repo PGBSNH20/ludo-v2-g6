@@ -25,31 +25,27 @@ async function paintBorad(data) {
     var blueCount = 0;
     var greenCount = 0;
     var yellowCount = 0;
+    var cell;
 
     for (var i = 0; i < data.length; i++) {
-        var cell;
         const id = data[i].currentPosition;
-        const color = data[i].color;
+        const color = `${data[i].color}`;
         if (id === "0") {
-            let redCount;
-            let greenCount;
-            let blueCount;
-            let yellowCount;
 
             if (color === "red") {
-                redCount += 1;
-                var cell = document.getElementById(`${color}_${redCount}`);
+                redCount ++;
+                cell = document.getElementById(`${color}_${redCount}`);
             }
             if (color === "green") {
-                greenCount += 1;
-                var cell = document.getElementById(`${color}_${greenCount}`);
+                greenCount ++;
+                cell = document.getElementById(`${color}_${greenCount}`);
             }
             if (color === "blue") {
-                blueCount += 1;
-                var cell = document.getElementById(`${color}_${blueCount}`);
+                blueCount ++;
+                cell = document.getElementById(`${color}_${blueCount}`);
             }
             if (color === "yellow") {
-                yellowCount += 1;
+                yellowCount ++;
                 var cell = document.getElementById(`${color}_${yellowCount}`);
             }
         }
@@ -81,8 +77,7 @@ async function paintBorad(data) {
 
 
 async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
-    console.log(gameBoardId);
-    console.log(gamePieceId);
+   
     const respons = await fetch('https://localhost:44369/api/gameboard/move', {
         method: 'POST',
         headers: {
@@ -98,7 +93,8 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
 
     });
     if (respons.ok) {
-        console.log("OK")
+        var json = await respons.json()
+        document.getElementById("message").innerText = JSON.stringify(json)
     }
     else {
         var json = await respons.json()

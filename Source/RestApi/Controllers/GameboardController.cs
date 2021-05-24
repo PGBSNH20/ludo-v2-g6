@@ -70,7 +70,7 @@ namespace RestApi.Controllers
 
             await _gameBoardRepository.UpdatePlayerTurn(gameBoard.GamePlayer);
             var isTurn = gameBoard.GamePlayer.Where(x => x.IsPlayersTurn == true).FirstOrDefault();
-            return Ok(isTurn);
+            return Ok(isTurn.Name);
         }
     }
 }
