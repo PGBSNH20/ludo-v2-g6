@@ -8,8 +8,8 @@ namespace RestApi.Models
     public enum Color
     {
         Red,
-        Blue,
+        Green,
         Yellow,
-        Green
+        Blue
     }
 }
