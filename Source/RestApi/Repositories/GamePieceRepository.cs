@@ -118,7 +118,8 @@ namespace RestApi.Repositories
                         Color = gamePlayer.Color.ToString().ToLower(), 
                         CurrentPosition = piece.CurrentPosition.ToString(), 
                         GameBoardId = gameBoard.Id.ToString(), 
-                        PieceId = piece.Id.ToString()
+                        PieceId = piece.Id.ToString(),
+                        GamePlayerId = gamePlayer.Id.ToString()
                     });
                 }
             }
