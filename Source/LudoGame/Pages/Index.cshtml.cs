@@ -18,16 +18,7 @@ namespace LudoGame.Pages
     {
 
         [BindProperty]
-        public GamePlayer RedPlayer { get; set; }
-
-        [BindProperty]
-        public GamePlayer YellowPlayer { get; set; }
-
-        [BindProperty]
-        public GamePlayer GreenPlayer { get; set; }
-
-        [BindProperty]
-        public GamePlayer BluePlayer { get; set; }
+        public List<GamePlayer> Players { get; set; }
 
         public IActionResult OnGet()
         {
@@ -40,46 +31,46 @@ namespace LudoGame.Pages
             string responseContent;
             var baseURL = new Uri("https://localhost:44369/api/Gameboard/newgame");
             var client = new HttpClient();
+
             List<GamePlayer> gamePlayers = new();
-
-            if (!(RedPlayer.Name is null))
-            {
-                RedPlayer.Color = Color.Red;
-                gamePlayers.Add(RedPlayer);
-            }
-            if (!(YellowPlayer.Name is null))
-            {
-                YellowPlayer.Color = Color.Yellow;
-                gamePlayers.Add(YellowPlayer);
-            }
-            if (!(GreenPlayer.Name is null))
-            {
-                GreenPlayer.Color = Color.Green;
-                gamePlayers.Add(GreenPlayer);
-            }
-            if (!(BluePlayer.Name is null))
-            {
-                BluePlayer.Color = Color.Blue;
-                gamePlayers.Add(BluePlayer);
-            }
-
-
-            // TODO Kolla vilka som är null och skicka resten
+            gamePlayers.AddRange(Players.Where(person => person.Name != null));
+            AssignColors(gamePlayers);
 
             HttpResponseMessage response = await client.PostAsJsonAsync(baseURL.ToString(), gamePlayers);
-
-            //HttpResponseMessage response = await client.GetAsync(baseURL.ToString());
 
             if (response.IsSuccessStatusCode)
             {
                 responseContent = await response.Content.ReadAsStringAsync();
-
                 var gameBoard = JsonConvert.DeserializeObject<GameBoard>(responseContent);
-                
                 return RedirectToPage("/Forms/Player", new { id = gameBoard.Id.ToString() });
 
             }
             return Page();
+        }
+
+        private static void AssignColors(List<GamePlayer> gamePlayers)
+        {
+            for (int i = 0; i < gamePlayers.Count; i++)
+            {
+                if (gamePlayers.Count < 3)
+                {
+                    if (i == 0)
+                        gamePlayers[i].Color = Color.Red;
+                    if (i == 1)
+                        gamePlayers[i].Color = Color.Yellow;
+                }
+                else
+                {
+                    if (i == 0)
+                        gamePlayers[i].Color = Color.Red;
+                    if (i == 1)
+                        gamePlayers[i].Color = Color.Green;
+                    if (i == 2)
+                        gamePlayers[i].Color = Color.Yellow;
+                    if (i == 3)
+                        gamePlayers[i].Color = Color.Blue;
+                }
+            }
         }
     }
 }
