@@ -72,7 +72,7 @@ async function paintBorad(data) {
         const tempGamePlayerId = `${data[i].gamePlayerId}`
 
         piece.addEventListener('click', function () {
-            movePiece(tempGameBoardId, tempGamePieceId, gamePlayerId)
+            movePiece(tempGameBoardId, tempGamePieceId, tempGamePlayerId)
         });
 
         cell.appendChild(piece)
