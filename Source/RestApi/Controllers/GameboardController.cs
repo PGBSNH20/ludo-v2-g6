@@ -52,6 +52,7 @@ namespace RestApi.Controllers
 
             return Ok(gameboard);
         }
+
         [HttpPost("Move")]
         public async Task<IActionResult> GetTest([FromBody]GetMoveRequest gmr)
         {
