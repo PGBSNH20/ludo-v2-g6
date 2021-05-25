@@ -52,11 +52,13 @@ namespace RestApi.Controllers
 
             return Ok(gameboard);
         }
+
         [HttpPost("Move")]
         public async Task<IActionResult> GetTest([FromBody]GetMoveRequest gmr)
         {
             if (!await _gamePlayerRepository.ValidateGamePlayerAsync(Guid.Parse(gmr.GamePlayerId)))
                 return BadRequest("This is not your piece!");
+
             var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(Guid.Parse(gmr.GameBoardId));
             var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, Guid.Parse(gmr.GamePieceId));
 
