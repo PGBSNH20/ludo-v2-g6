@@ -18,20 +18,26 @@ namespace RestApi.Repositories
         private static bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
         {
             int count = gamePiece.CurrentPosition;
+
+            if (gamePiece.CurrentPosition == 0)
+                count = gamePiece.StartingPosition;
+
             var players = gameBoard.GamePlayer;
+
             for (int i = 0; i < diceRoll; i++)
             {
-
-                count++;
                 foreach (var p in players)
                 {
-                    foreach (var piece in p.GamePieces)
-                    {
-                        if (piece.Id != gamePiece.Id)
-                            if (count == piece.CurrentPosition && p.GamePieces.Contains(gamePiece))
+                    if (diceRoll == 1 && count == gamePiece.StartingPosition && p.GamePieces.Contains(gamePiece))
+                        return true;
+                    else if (p.GamePieces.Contains(gamePiece))
+                        foreach (var piece in p.GamePieces)
+                        {
+                            if (count == piece.CurrentPosition)
                                 return false;
-                    }
+                        }
                 }
+                count++;
             }
             return true;
         }
