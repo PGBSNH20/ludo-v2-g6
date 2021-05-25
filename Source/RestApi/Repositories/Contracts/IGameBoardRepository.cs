@@ -9,7 +9,6 @@ namespace RestApi.Repositories.Contracts
     public interface IGameBoardRepository
     {
         Task<List<GameBoardDto>> OngoingGamesAsync();
-        Task PostAsync(List<GameBoard> gameBoard);
         Task<List<GameBoard>> Get();
         Task<GameBoard> GetCurrentGameBoardAsync(Guid gameBoardId);
         Task<GameBoard> CreateGameBoard(List<GamePlayer> gamePlayers);

@@ -28,12 +28,10 @@ namespace RestApi.Repositories
             {
                 foreach (var p in players)
                 {
-                    if (diceRoll == 1 && count == gamePiece.StartingPosition && p.GamePieces.Contains(gamePiece))
-                        return true;
-                    else if (p.GamePieces.Contains(gamePiece))
+                    
                         foreach (var piece in p.GamePieces)
                         {
-                            if (count == piece.CurrentPosition)
+                            if (count == piece.CurrentPosition && piece.StartingPosition != gamePiece.StartingPosition)
                                 return false;
                         }
                 }

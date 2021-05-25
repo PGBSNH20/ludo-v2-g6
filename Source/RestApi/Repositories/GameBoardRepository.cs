@@ -18,22 +18,8 @@ namespace RestApi.Repositories
             var gameBoardDto = new List<GameBoardDto>();
             var tempNames = new List<string>();
 
-            //var test = await _context.GameBoards
-            //    .Include(x => x.GamePlayer)
-            //    .Select(x => x.GamePlayer
-            //    .Where(x => x.GamePieces
-            //    .Where(x => x.IsInGoal == true).Count() < 4))
-            //    .ToListAsync();
-
-
-
             var gameboards = await _context.GameBoards.Include(x => x.GamePlayer).ThenInclude(x => x.GamePieces).ToListAsync();
-
-            //var hej = gameboards.Select(x=>x.StartTime.Date).Where(x => x.GamePlayer
-            //    .Where(x => x.GamePieces
-            //    .Where(x => x.IsInGoal == true).Count() < 4)).ToList();
-
-
+         
             foreach (var gameBoard in gameboards)
             {
                 //Gets the names of all the players in the list
@@ -64,22 +50,13 @@ namespace RestApi.Repositories
             return result;
         }
 
-
-        public Task PostAsync(List<GameBoard> gameBoard)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<GameBoard>> Get()
         {
-            var gameboards = await _context.GameBoards.Include(x => x.GamePlayer).ToListAsync();
-
-            return gameboards;
+            return  await _context.GameBoards.Include(x => x.GamePlayer).ToListAsync();
         }
 
         public async Task<GameBoard> CreateGameBoard(List<GamePlayer> gamePlayers)
         {
-
             foreach (GamePlayer player in gamePlayers)
             {
                 player.GamePieces = GamePlayerRepository.CreateGamePieces(player);
@@ -111,8 +88,8 @@ namespace RestApi.Repositories
             }
             else
             {
-                var x = currentPlayer.OrderInGame;
-                var nextPlayer = gamePlayers.Single(x => x.OrderInGame == x.OrderInGame + 1);
+               
+                var nextPlayer = gamePlayers.Single(x => x.OrderInGame == currentPlayer.OrderInGame + 1);
                 nextPlayer.IsPlayersTurn = true;
                 currentPlayer.IsPlayersTurn = false;
             }

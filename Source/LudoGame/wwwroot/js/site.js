@@ -15,12 +15,12 @@ async function getItems(id) {
     const data = await respons.json();
     console.log(data)
     paintBorad(data)
-
 }
 
 
 
 async function paintBorad(data) {
+    clearBoard();
     var redCount = 0;
     var blueCount = 0;
     var greenCount = 0;
@@ -33,21 +33,24 @@ async function paintBorad(data) {
         if (id === "0") {
 
             if (color === "red") {
-                redCount ++;
+                redCount++;
                 cell = document.getElementById(`${color}_${redCount}`);
             }
             if (color === "green") {
-                greenCount ++;
+                greenCount++;
                 cell = document.getElementById(`${color}_${greenCount}`);
             }
             if (color === "blue") {
-                blueCount ++;
+                blueCount++;
                 cell = document.getElementById(`${color}_${blueCount}`);
             }
             if (color === "yellow") {
-                yellowCount ++;
+                yellowCount++;
                 var cell = document.getElementById(`${color}_${yellowCount}`);
             }
+        }
+        else if (id > 54) {
+            continue;
         }
         else {
 
@@ -60,12 +63,16 @@ async function paintBorad(data) {
 
         const piece = document.createElement("button")
         piece.style.backgroundColor = data[i].color;
+        piece.style.border = "2px solid black"
         piece.style.height = "80% ";
         piece.style.width = "80% ";
 
         const tempGameBoardId = `${data[i].gameBoardId}`
         const tempGamePieceId = `${data[i].pieceId}`
         const tempGamePlayerId = `${data[i].gamePlayerId}`
+        piece
+            .classList
+            .add('pieces_onboard')
 
         piece.addEventListener('click', function () {
             movePiece(tempGameBoardId, tempGamePieceId, tempGamePlayerId)
@@ -74,10 +81,20 @@ async function paintBorad(data) {
         cell.appendChild(piece)
     }
 }
+function clearBoard() {
+    if (document.getElementsByClassName('pieces_onboard').length != 0) {
+        let i = 0;
+        do {
+            document.getElementsByClassName('pieces_onboard')[i].innerHTML = "";
+
+            i++
+        } while (i < document.getElementsByClassName('pieces_onboard').length)
+    }
+}
 
 
 async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
-   
+
     const respons = await fetch('https://localhost:44369/api/gameboard/move', {
         method: 'POST',
         headers: {
@@ -88,7 +105,7 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
             "gameBoardId": gameBoardId,
             "gamePieceId": gamePieceId,
             "gamePlayerId": gamePlayerId,
-            "diceRoll": "6"
+            "diceRoll": "5"
         })
 
     });
