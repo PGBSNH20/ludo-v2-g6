@@ -94,6 +94,7 @@ function clearBoard() {
 
 
 async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
+    var diceRoll = document.getElementById("message").innerText;
 
     const respons = await fetch('https://localhost:44369/api/gameboard/move', {
         method: 'POST',
@@ -105,13 +106,13 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
             "gameBoardId": gameBoardId,
             "gamePieceId": gamePieceId,
             "gamePlayerId": gamePlayerId,
-            "diceRoll": "5"
+            "diceRoll": diceRoll
         })
 
     });
     if (respons.ok) {
         var json = await respons.json()
-        document.getElementById("message").innerText = JSON.stringify(json)
+        document.getElementById("message").innerText = `It's now ${JSON.stringify(json)}s turn`
     }
     else {
         var json = await respons.json()
@@ -121,17 +122,9 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
 
 
 }
-//function setPieces() {
-//    var gamboardPosition = document.getElementById('4');
+function Dice() {
 
-//    gamboardPosition.style.backgroundColor = "red";
-//    gamboardPosition.style.border = "6px solid white";
+    var dice = Math.floor(Math.random() * 6) + 1;
+    document.getElementById("message").innerHTML = dice;
 
-//document.getElementById("randomjoke").innerText = tojson.value.joke;
-//}
-//function Dice() {
-
-//    var dice = Math.floor(Math.random() * 6) + 1;
-//    document.getElementById("dice").innerHTML = dice;
-
-//}
+}

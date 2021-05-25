@@ -15,35 +15,8 @@ namespace RestApi.Repositories
         {
         }
 
-        private static bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
-        {
-            int count = gamePiece.CurrentPosition;
-
-            if (gamePiece.CurrentPosition == 0)
-                count = gamePiece.StartingPosition;
-
-            var players = gameBoard.GamePlayer;
-
-            for (int i = 0; i < diceRoll; i++)
-            {
-                foreach (var p in players)
-                {
-                    
-                        foreach (var piece in p.GamePieces)
-                        {
-                            if (count == piece.CurrentPosition && piece.StartingPosition != gamePiece.StartingPosition)
-                                return false;
-                        }
-                }
-                count++;
-            }
-            return true;
-        }
         public async Task<bool> UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
         {
-            if (!IsCoastClear(diceRoll, gameBoard, gamePiece) && !gamePiece.IsInGoal)
-                return false;
-
             var updatedPiece = CalculateMovement(gamePiece, diceRoll);
 
             if (updatedPiece == null)
