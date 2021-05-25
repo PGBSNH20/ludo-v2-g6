@@ -18,16 +18,18 @@ namespace RestApi.Repositories
         private static bool IsCoastClear(int diceRoll, GameBoard gameBoard, GamePiece gamePiece)
         {
             int count = gamePiece.CurrentPosition;
-            var player = gameBoard.GamePlayer;
+            var players = gameBoard.GamePlayer;
             for (int i = 0; i < diceRoll; i++)
             {
+
                 count++;
-                foreach (var p in player)
+                foreach (var p in players)
                 {
                     foreach (var piece in p.GamePieces)
                     {
-                        if (count == piece.CurrentPosition && p.Color != p.Color)
-                            return false;
+                        if (piece.Id != gamePiece.Id)
+                            if (count == piece.CurrentPosition && p.GamePieces.Contains(gamePiece))
+                                return false;
                     }
                 }
             }
@@ -61,39 +63,49 @@ namespace RestApi.Repositories
             else
             {
                 if (gamePiece.CurrentPosition == 0 && (diceRoll == 1 || diceRoll == 6))
+                {
                     gamePiece.CurrentPosition = gamePiece.StartingPosition + (diceRoll - 1);
+                    gamePiece.StepsTaken = diceRoll - 1;
+                }
                 else if (gamePiece.CurrentPosition == 0)
                     return null;
                 else
                 {
-                    for (int i = 0; i < diceRoll; i++)
-                    {
-                        gamePiece.CurrentPosition++;
-                        if (gamePiece.CurrentPosition == gamePiece.StartingPosition && gamePiece.StepsTaken == 52)
-                            gamePiece.CurrentPosition = 54;
-                        if (gamePiece.CurrentPosition == 53 && gamePiece.StepsTaken < 52)
-                            gamePiece.CurrentPosition = 1;
-                    }
+                    gamePiece.CurrentPosition = CompleteLap(gamePiece, diceRoll);
                     gamePiece.StepsTaken += diceRoll;
                 }
             }
             return gamePiece;
         }
+        private static int CompleteLap(GamePiece gamePiece, int diceRoll)
+        {
+            var gp = gamePiece.CurrentPosition;
+            for (int i = 0; i < diceRoll; i++)
+            {
+                gp++;
+                if (gp == gamePiece.StartingPosition && gamePiece.StepsTaken == 52)
+                    gp = 54;
+                if (gp == 53 && gamePiece.StepsTaken < 52)
+                    gp = 1;
+            }
+            return gp;
+        }
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
         {
-            var player = gameBoard.GamePlayer;
+            var players = gameBoard.GamePlayer;
 
-            foreach (var p in player)
+            foreach (var p in players)
             {
-                foreach (var piece in p.GamePieces)
-                {
-                    if (piece.Id != gamePiece.Id)
-                        if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 52)
-                        {
-                            piece.CurrentPosition = 0;
-                            piece.StepsTaken = 0;
-                        }
-                }
+                if (!p.IsPlayersTurn)
+                    foreach (var piece in p.GamePieces)
+                    {
+                        if (piece.Id != gamePiece.Id)
+                            if (gamePiece.CurrentPosition == piece.CurrentPosition && gamePiece.StepsTaken < 53)
+                            {
+                                piece.CurrentPosition = 0;
+                                piece.StepsTaken = 0;
+                            }
+                    }
             }
             return gamePiece;
         }

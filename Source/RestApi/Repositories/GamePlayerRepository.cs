@@ -48,13 +48,13 @@ namespace RestApi.Repositories
         private static int GetStartPosition(GamePlayer player)
         {
             if (player.Color == Color.Red)
-                return 52;
-            else if (player.Color == Color.Green)
                 return 13;
-            else if (player.Color == Color.Yellow)
+            else if (player.Color == Color.Green)
                 return 26;
-            else
+            else if (player.Color == Color.Yellow)
                 return 39;
+            else
+                return 52;
         }
         public async Task<bool> ValidateGamePlayerAsync(Guid id)
         {

@@ -79,6 +79,7 @@ namespace RestApi.Repositories
 
         public async Task<GameBoard> CreateGameBoard(List<GamePlayer> gamePlayers)
         {
+            
             foreach (GamePlayer player in gamePlayers)
             {
                 player.GamePieces = GamePlayerRepository.CreateGamePieces(player);
