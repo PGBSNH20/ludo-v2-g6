@@ -24,16 +24,16 @@ namespace RestApi.Repositories
             //    .Where(x => x.GamePieces
             //    .Where(x => x.IsInGoal == true).Count() < 4))
             //    .ToListAsync();
-          
 
 
-            var gameboards = await _context.GameBoards.Include(x => x.GamePlayer).ThenInclude(x=>x.GamePieces).ToListAsync();
+
+            var gameboards = await _context.GameBoards.Include(x => x.GamePlayer).ThenInclude(x => x.GamePieces).ToListAsync();
 
             //var hej = gameboards.Select(x=>x.StartTime.Date).Where(x => x.GamePlayer
             //    .Where(x => x.GamePieces
             //    .Where(x => x.IsInGoal == true).Count() < 4)).ToList();
 
-          
+
             foreach (var gameBoard in gameboards)
             {
                 //Gets the names of all the players in the list
@@ -79,13 +79,13 @@ namespace RestApi.Repositories
 
         public async Task<GameBoard> CreateGameBoard(List<GamePlayer> gamePlayers)
         {
-            
+
             foreach (GamePlayer player in gamePlayers)
             {
                 player.GamePieces = GamePlayerRepository.CreateGamePieces(player);
             }
             DecideWhoStarts(gamePlayers);
-          return await Add(new GameBoard { GamePlayer = gamePlayers});
+            return await Add(new GameBoard { GamePlayer = gamePlayers });
         }
 
         //Decides who goes first(random)
@@ -99,18 +99,22 @@ namespace RestApi.Repositories
 
         public async Task<List<GamePlayer>> UpdatePlayerTurn(List<GamePlayer> gamePlayers)
         {
-            int count = 0;
-            for (int i = 0; i < gamePlayers.Count; i++)
+            var currentPlayer = gamePlayers.Single(x => x.IsPlayersTurn == true);
+
+            if ((gamePlayers.Count == 4 && currentPlayer.OrderInGame == 3)
+                || (gamePlayers.Count == 3 && currentPlayer.OrderInGame == 2)
+                || (gamePlayers.Count == 2 && currentPlayer.OrderInGame == 1))
             {
-                if (gamePlayers[i].IsPlayersTurn is true && count == 0)
-                {
-                    if (i == gamePlayers.Count - 1)
-                        gamePlayers[0].IsPlayersTurn = true;
-                    else
-                        gamePlayers[i+1].IsPlayersTurn = true;
-                    gamePlayers[i].IsPlayersTurn = false;
-                    count++;
-                }
+                var nextPlayer = gamePlayers.Single(x => x.OrderInGame == 0);
+                nextPlayer.IsPlayersTurn = true;
+                currentPlayer.IsPlayersTurn = false;
+            }
+            else
+            {
+                var x = currentPlayer.OrderInGame;
+                var nextPlayer = gamePlayers.Single(x => x.OrderInGame == x.OrderInGame + 1);
+                nextPlayer.IsPlayersTurn = true;
+                currentPlayer.IsPlayersTurn = false;
             }
             await Save();
             return gamePlayers;
@@ -131,7 +135,7 @@ namespace RestApi.Repositories
 
         public async Task EndCurrentGameAsync(GameBoard gameBoard)
         {
-            foreach(var player in gameBoard.GamePlayer)
+            foreach (var player in gameBoard.GamePlayer)
             {
                 if (FindWinner(player))
                 {
@@ -143,8 +147,8 @@ namespace RestApi.Repositories
 
         public GamePlayer AnnounceWinner(GameBoard gameBoard)
         {
-            if(!gameBoard.IsOnGoing)
-                foreach(var player in gameBoard.GamePlayer)
+            if (!gameBoard.IsOnGoing)
+                foreach (var player in gameBoard.GamePlayer)
                 {
                     if (player.GamePieces.Count == 4)
                         return player;

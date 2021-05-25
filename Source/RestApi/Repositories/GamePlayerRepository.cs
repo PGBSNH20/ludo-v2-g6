@@ -49,12 +49,12 @@ namespace RestApi.Repositories
         {
             if (player.Color == Color.Red)
                 return 13;
-            else if (player.Color == Color.Green)
+            if (player.Color == Color.Green)
                 return 26;
-            else if (player.Color == Color.Yellow)
+            if (player.Color == Color.Yellow)
                 return 39;
-            else
-                return 52;
+            
+            return 52;
         }
         public async Task<bool> ValidateGamePlayerAsync(Guid id)
         {

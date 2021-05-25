@@ -55,20 +55,38 @@ namespace LudoGame.Pages
                 if (gamePlayers.Count < 3)
                 {
                     if (i == 0)
+                    {
                         gamePlayers[i].Color = Color.Red;
+                        gamePlayers[i].OrderInGame = i;
+                    }
                     if (i == 1)
+                    {
                         gamePlayers[i].Color = Color.Yellow;
+                        gamePlayers[i].OrderInGame = i;
+                    }
                 }
                 else
                 {
                     if (i == 0)
+                    {
                         gamePlayers[i].Color = Color.Red;
+                        gamePlayers[i].OrderInGame = i;
+                    }
                     if (i == 1)
+                    {
                         gamePlayers[i].Color = Color.Green;
+                        gamePlayers[i].OrderInGame = i;
+                    }
                     if (i == 2)
+                    {
                         gamePlayers[i].Color = Color.Yellow;
+                        gamePlayers[i].OrderInGame = i;
+                    }
                     if (i == 3)
+                    {
                         gamePlayers[i].Color = Color.Blue;
+                        gamePlayers[i].OrderInGame = i;
+                    }
                 }
             }
         }

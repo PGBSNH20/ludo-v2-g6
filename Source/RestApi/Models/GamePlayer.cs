@@ -12,6 +12,7 @@ namespace RestApi.Models
         public string Name { get; set; }
         public List<GamePiece> GamePieces { get; set; }
         public Color Color { get; set; }
+        public int OrderInGame { get; set; }
         public bool IsPlayersTurn { get; set; } = false;
     }
 }
