@@ -58,7 +58,7 @@ namespace RestApi.Repositories
         {
             foreach (GamePlayer player in gamePlayers)
             {
-                player.GamePieces = GamePlayerRepository.CreateGamePieces(player);
+                player.GamePieces = GamePieceRepository.CreateGamePieces(player);
             }
             DecideWhoStarts(gamePlayers);
             return await Add(new GameBoard { GamePlayer = gamePlayers });

@@ -11,9 +11,7 @@ namespace RestApi.Repositories
 {
     public class GamePieceRepository : Repository, IGamePieceRepository
     {
-        public GamePieceRepository(LudoContext context) : base(context)
-        {
-        }
+        public GamePieceRepository(LudoContext context) : base(context) { }
 
         public async Task<bool> UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
         {
@@ -91,7 +89,6 @@ namespace RestApi.Repositories
         {
             if (gamePiece.CurrentPosition == 59)
                 gamePiece.IsInGoal = true;
-
             return gamePiece;
         }
 
@@ -99,7 +96,6 @@ namespace RestApi.Repositories
         {
             var gamePlayers = gameBoard.GamePlayer;
             return gamePlayers.SelectMany(piece => piece.GamePieces).FirstOrDefault(p => p.Id == id);
-
         }
 
         public async Task<List<GamePieceDTO>> GetGamePiecesDto(Guid gameBoardId)
@@ -129,10 +125,31 @@ namespace RestApi.Repositories
                     });
                 }
             }
-
-            //await Task.Delay(1);
             return gamePieceDtos;
-            //return (from player in gameBoard.GamePlayer from piece in player.GamePieces select new GamePieceDTO() {Color = player.Color.ToString(), CurrentPosition = piece.CurrentPosition}).ToList();
+        }
+
+        public static List<GamePiece> CreateGamePieces(GamePlayer player)
+        {
+            var startPosition = GetStartPosition(player);
+            var gamePieces = new List<GamePiece>();
+
+            for (int i = 0; i < 4; i++)
+            {
+                gamePieces.Add(new GamePiece() { Id = Guid.NewGuid(), StartingPosition = startPosition });
+            }
+
+            return gamePieces;
+        }
+        private static int GetStartPosition(GamePlayer player)
+        {
+            if (player.Color == Color.Red)
+                return 13;
+            if (player.Color == Color.Green)
+                return 26;
+            if (player.Color == Color.Yellow)
+                return 39;
+
+            return 52;
         }
     }
 }
