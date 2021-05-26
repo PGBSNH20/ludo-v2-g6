@@ -37,7 +37,7 @@ async function paintBorad(data) {
                 var cell = document.getElementById(`${color}_${yellowCount}`);
             }
         }
-        else if (id > 53) {
+        else if (id > 52) {
             cell = document.getElementById(`${color}_${id}`)
         }
         else {
