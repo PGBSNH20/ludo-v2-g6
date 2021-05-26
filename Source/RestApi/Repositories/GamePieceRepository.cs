@@ -31,7 +31,7 @@ namespace RestApi.Repositories
         {
             if ((gamePiece.StepsTaken + diceRoll) > 59)
             {
-                int stepsBack = (gamePiece.CurrentPosition + diceRoll) - 59;
+                int stepsBack = (gamePiece.StepsTaken + diceRoll) - 59;
                 gamePiece.CurrentPosition = 59 - stepsBack;
                 gamePiece.StepsTaken = gamePiece.CurrentPosition;
             }
@@ -39,8 +39,18 @@ namespace RestApi.Repositories
             {
                 if (gamePiece.CurrentPosition == 0 && (diceRoll == 1 || diceRoll == 6))
                 {
-                    gamePiece.CurrentPosition = gamePiece.StartingPosition + (diceRoll - 1);
-                    gamePiece.StepsTaken = diceRoll - 1;
+                    if (diceRoll == 6 && gamePiece.StartingPosition == 52)
+                    {
+                        gamePiece.CurrentPosition = 5;
+                        gamePiece.StepsTaken = 5;
+                    }
+                    else
+                    {
+                        gamePiece.CurrentPosition = gamePiece.StartingPosition + (diceRoll - 1);
+                        gamePiece.StepsTaken = diceRoll - 1;
+                    }
+
+
                 }
                 else if (gamePiece.CurrentPosition == 0)
                     return null;
@@ -54,16 +64,26 @@ namespace RestApi.Repositories
         }
         private static int CompleteLap(GamePiece gamePiece, int diceRoll)
         {
-            var gp = gamePiece.CurrentPosition;
-            for (int i = 0; i < diceRoll; i++)
+
+            for (int i = 1; i < diceRoll + 1; i++)
             {
-                gp++;
-                if (gp == gamePiece.StartingPosition && gamePiece.StepsTaken == 52)
-                    gp = 54;
-                if (gp == 53 && gamePiece.StepsTaken < 52)
-                    gp = 1;
+                if ((gamePiece.StepsTaken + i) == 53)
+                    gamePiece.CurrentPosition = 54;
+                else if (gamePiece.StepsTaken < 52 && gamePiece.CurrentPosition == 53)
+                    gamePiece.CurrentPosition = 1;
+                gamePiece.CurrentPosition++;
+                gamePiece.StepsTaken++;
             }
-            return gp;
+            return gamePiece.CurrentPosition;
+            
+            //for (int i = 0; i < diceRoll; i++)
+            //{
+            //    gp++;
+            //    steps++;
+            //    if (gp == gamePiece.StartingPosition && steps == 52)
+            //        gp = 54;
+            //    if (gp == 53 && gamePiece.StepsTaken < 52)
+            //        gp = 1;
         }
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
         {
