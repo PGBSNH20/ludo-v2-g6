@@ -32,7 +32,6 @@ namespace RestApi.Repositories
                     StartTime = gameBoard.StartTime,
                     Players = tempNames.ToList()
                 });
-
                 tempNames.Clear();
             }
             return gameBoardDto;
