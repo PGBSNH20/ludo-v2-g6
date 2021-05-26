@@ -87,7 +87,6 @@ namespace RestApi.Repositories
             }
             else
             {
-               
                 var nextPlayer = gamePlayers.Single(x => x.OrderInGame == currentPlayer.OrderInGame + 1);
                 nextPlayer.IsPlayersTurn = true;
                 currentPlayer.IsPlayersTurn = false;
