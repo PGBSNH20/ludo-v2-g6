@@ -28,9 +28,9 @@ namespace RestApi.Controllers
         [HttpGet("History")]
         public async Task<IActionResult> Get()
         {
-            //var result = await _gameBoardRepository.OngoingGamesAsync();
+            var result = await _gameBoardRepository.OngoingGamesAsync();
             await Task.Delay(1);
-            return Ok();
+            return Ok(result);
         }
         [HttpGet("Game")]
         public async Task<IActionResult> Get(Guid id)
@@ -41,20 +41,20 @@ namespace RestApi.Controllers
 
             return BadRequest("This game does not exist");
         }
-      
+
         [HttpPost("NewGame")]
         public async Task<IActionResult> Post(List<GamePlayer> gamePlayers)
         {
             if (gamePlayers.Count < 2)
                 return BadRequest("Can't be less then two players");
 
-            var gameboard =  await _gameBoardRepository.CreateGameBoard(gamePlayers);
+            var gameboard = await _gameBoardRepository.CreateGameBoard(gamePlayers);
 
             return Ok(gameboard);
         }
 
         [HttpPost("Move")]
-        public async Task<IActionResult> GetTest([FromBody]GetMoveRequest gmr)
+        public async Task<IActionResult> GetTest([FromBody] GetMoveRequest gmr)
         {
             if (!await _gamePlayerRepository.ValidateGamePlayerAsync(Guid.Parse(gmr.GamePlayerId)))
                 return BadRequest("This is not your piece!");
@@ -68,7 +68,9 @@ namespace RestApi.Controllers
 
             await _gameBoardRepository.EndCurrentGameAsync(gameBoard);
 
-            _gameBoardRepository.AnnounceWinner(gameBoard);
+            var winner = _gameBoardRepository.AnnounceWinner(gameBoard);
+            if (winner != null)
+                return Ok($"{winner.Name} has won the game!! GZ LOL");
 
             await _gameBoardRepository.UpdatePlayerTurn(gameBoard.GamePlayer);
             var isTurn = gameBoard.GamePlayer.Where(x => x.IsPlayersTurn == true).FirstOrDefault();
