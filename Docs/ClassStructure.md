@@ -56,7 +56,7 @@
 #### Program.cs
 #### Startup.cs
 
-# TestRestApi: Projekt för testing med Xunit, innehåller testklasser med stub för våra repon
+# TestRestApi: testing med Xunit
 * GameBoardRepositoryTest.cs: ärver av IGameBoardRepository
 * GamePieceRepositoryTest.cs: ärver av IGamePieceRepository
 * GamePlayerRepositoryTest.cs: ärver av IGamePlayerRepository
