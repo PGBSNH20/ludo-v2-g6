@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj": {}
+    "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj": {
+    "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj",
+        "projectUniqueName": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj",
         "projectName": "TestRestApi",
-        "projectPath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj",
-        "packagesPath": "C:\\Users\\Joaki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Joaki\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\obj\\",
+        "projectPath": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj",
+        "packagesPath": "C:\\Users\\Sandra\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Joaki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sandra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

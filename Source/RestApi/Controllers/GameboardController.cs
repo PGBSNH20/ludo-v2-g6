@@ -68,7 +68,9 @@ namespace RestApi.Controllers
 
             await _gameBoardRepository.EndCurrentGameAsync(gameBoard);
 
-            _gameBoardRepository.AnnounceWinner(gameBoard);
+           var winner = _gameBoardRepository.AnnounceWinner(gameBoard);
+            if (winner != null)
+                return Ok($"{winner.Name} has won the game!! GZ LOL");
 
             await _gameBoardRepository.UpdatePlayerTurn(gameBoard.GamePlayer);
             var isTurn = gameBoard.GamePlayer.Where(x => x.IsPlayersTurn == true).FirstOrDefault();

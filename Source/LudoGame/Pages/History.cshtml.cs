@@ -15,7 +15,7 @@ namespace LudoGame.Pages
         public async Task<IActionResult> OnGet()
         {
             string responseContent = "[]";
-            var baseURL = new Uri("https://localhost:5002/api/Gameboard/History");
+            var baseURL = new Uri("https://localhost:44369/api/Gameboard/History");
             var client = new HttpClient();
 
             HttpResponseMessage response = await client.GetAsync(baseURL.ToString());
