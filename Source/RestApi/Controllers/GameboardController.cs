@@ -28,7 +28,7 @@ namespace RestApi.Controllers
         [HttpGet("History")]
         public async Task<IActionResult> Get()
         {
-            var result = await _gameBoardRepository.OngoingGamesAsync();
+            var result = await _gameBoardRepository.GetAllGamesAsync();
             if (result != null)
             {
                 return Ok(result);
@@ -53,13 +53,13 @@ namespace RestApi.Controllers
             if (gamePlayers.Count < 2)
                 return BadRequest("Can't be less then two players");
 
-            var gameboard = await _gameBoardRepository.CreateGameBoard(gamePlayers);
+            var gameboard = await _gameBoardRepository.CreateGameBoardAsync(gamePlayers);
 
             return Ok(gameboard);
         }
 
         [HttpPost("Move")]
-        public async Task<IActionResult> GetTest([FromBody] GetMoveRequest gmr)
+        public async Task<IActionResult> Get([FromBody] GetMoveRequest gmr)
         {
             if (!await _gamePlayerRepository.ValidateGamePlayerAsync(Guid.Parse(gmr.GamePlayerId)))
                 return BadRequest("This is not your piece!");
@@ -67,7 +67,7 @@ namespace RestApi.Controllers
             var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(Guid.Parse(gmr.GameBoardId));
             var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, Guid.Parse(gmr.GamePieceId));
 
-            bool gp = await _gamePieceRepository.UpdatePosition(gameBoard, gamePiece, int.Parse(gmr.DiceRoll));
+            bool gp = await _gamePieceRepository.UpdatePositionAsync(gameBoard, gamePiece, int.Parse(gmr.DiceRoll));
             if (gp == false)
                 return BadRequest("You can't move this piece");
 
@@ -77,7 +77,7 @@ namespace RestApi.Controllers
             if (winner != null)
                 return Ok($"{winner.Name} has won the game!! GZ LOL");
 
-            await _gameBoardRepository.UpdatePlayerTurn(gameBoard.GamePlayer);
+            await _gameBoardRepository.UpdatePlayerTurnAsync(gameBoard.GamePlayer);
             var isTurn = gameBoard.GamePlayer.Where(x => x.IsPlayersTurn == true).FirstOrDefault();
             return Ok(isTurn.Name);
         }

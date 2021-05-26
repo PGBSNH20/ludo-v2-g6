@@ -13,7 +13,7 @@ namespace RestApi.Repositories
     {
         public GamePieceRepository(LudoContext context) : base(context) { }
 
-        public async Task<bool> UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
+        public async Task<bool> UpdatePositionAsync(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
         {
             var updatedPiece = CalculateMovement(gamePiece, diceRoll);
 
@@ -98,7 +98,7 @@ namespace RestApi.Repositories
             return gamePlayers.SelectMany(piece => piece.GamePieces).FirstOrDefault(p => p.Id == id);
         }
 
-        public async Task<List<GamePieceDTO>> GetGamePiecesDto(Guid gameBoardId)
+        public async Task<List<GamePieceDTO>> GetGamePiecesDtoAsync(Guid gameBoardId)
         {
             var gameBoardRepository = new GameBoardRepository(_context);
             var gamePlayerRepository = new GamePlayerRepository(_context);

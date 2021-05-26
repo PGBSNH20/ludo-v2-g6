@@ -10,7 +10,7 @@ namespace TestRestApi
 {
     class GamePieceRepositoryTest : IGamePieceRepository
     {
-        public Task<bool> UpdatePosition(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
+        public Task<bool> UpdatePositionAsync(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +30,7 @@ namespace TestRestApi
             throw new NotImplementedException();
         }
 
-        public Task<List<GamePieceDTO>> GetGamePiecesDto(Guid gameBoardId)
+        public Task<List<GamePieceDTO>> GetGamePiecesDtoAsync(Guid gameBoardId)
         {
             throw new NotImplementedException();
         }

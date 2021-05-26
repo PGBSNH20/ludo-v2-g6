@@ -25,7 +25,7 @@ namespace RestApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(Guid id)
         {
-            var result = await _gamePieceRepository.GetGamePiecesDto(id);
+            var result = await _gamePieceRepository.GetGamePiecesDtoAsync(id);
             if (result != null)
                 return Ok(result);
 

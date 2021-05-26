@@ -1,4 +1,4 @@
 ﻿Data to use for testing
 
-"Good" Guid: 5fcf2bb0-good-guid-92a4-0359ead79af4
-"Bad" Guid: 5fcf2bb0-baad-guid-92a4-0359ead79af4
+Guid _goodGuid = new Guid("5fcf2bb0-1111-1234-92a4-0359ead79af4");
+Guid _badGuid = new Guid("5fcf2bb0-2222-1234-92a4-0359ead79af4");

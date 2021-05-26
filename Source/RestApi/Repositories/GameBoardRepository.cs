@@ -13,7 +13,7 @@ namespace RestApi.Repositories
     {
         public GameBoardRepository(LudoContext context) : base(context) { }
 
-        public async Task<List<GameBoardDto>> OngoingGamesAsync()
+        public async Task<List<GameBoardDto>> GetAllGamesAsync()
         {
             var gameBoardDto = new List<GameBoardDto>();
             var tempNames = new List<string>();
@@ -55,7 +55,7 @@ namespace RestApi.Repositories
             return  await _context.GameBoards.Include(x => x.GamePlayer).ToListAsync();
         }
 
-        public async Task<GameBoard> CreateGameBoard(List<GamePlayer> gamePlayers)
+        public async Task<GameBoard> CreateGameBoardAsync(List<GamePlayer> gamePlayers)
         {
             foreach (GamePlayer player in gamePlayers)
             {
@@ -74,7 +74,7 @@ namespace RestApi.Repositories
             return gamePlayers[start];
         }
 
-        public async Task<List<GamePlayer>> UpdatePlayerTurn(List<GamePlayer> gamePlayers)
+        public async Task<List<GamePlayer>> UpdatePlayerTurnAsync(List<GamePlayer> gamePlayers)
         {
             var currentPlayer = gamePlayers.Single(x => x.IsPlayersTurn == true);
 
