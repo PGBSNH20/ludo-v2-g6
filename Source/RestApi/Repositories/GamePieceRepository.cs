@@ -31,11 +31,11 @@ namespace RestApi.Repositories
         }
         public GamePiece CalculateMovement(GamePiece gamePiece, int diceRoll)
         {
-            if ((gamePiece.StepsTaken + diceRoll) > 58)
+            if ((gamePiece.StepsTaken + diceRoll) > 59)
             {
-                int stepsBack = (gamePiece.StepsTaken + diceRoll) - 58;
-                gamePiece.StepsTaken = 58 - stepsBack;
-                gamePiece.CurrentPosition = gamePiece.StepsTaken;
+                int stepsBack = (gamePiece.CurrentPosition + diceRoll) - 59;
+                gamePiece.CurrentPosition = 59 - stepsBack;
+                gamePiece.StepsTaken = gamePiece.CurrentPosition;
             }
             else
             {
@@ -89,7 +89,7 @@ namespace RestApi.Repositories
 
         public GamePiece IsPieceInGoal(GamePiece gamePiece)
         {
-            if (gamePiece.StepsTaken == 58)
+            if (gamePiece.CurrentPosition == 59)
                 gamePiece.IsInGoal = true;
 
             return gamePiece;
