@@ -29,9 +29,13 @@ namespace RestApi.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await _gameBoardRepository.OngoingGamesAsync();
-            await Task.Delay(1);
-            return Ok(result);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
         }
+
         [HttpGet("Game")]
         public async Task<IActionResult> Get(Guid id)
         {

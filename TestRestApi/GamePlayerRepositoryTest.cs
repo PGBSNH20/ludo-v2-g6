@@ -10,16 +10,6 @@ namespace TestRestApi
 {
     class GamePlayerRepositoryTest : IGamePlayerRepository
     {
-        public Task<GamePlayer> GetAsync(Guid guid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetDiceRoll()
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<List<GamePiece>> GetGamePiecesAsync(Guid id)
         {
             throw new NotImplementedException();

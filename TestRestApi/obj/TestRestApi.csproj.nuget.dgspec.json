@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj": {}
+    "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj": {
+    "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj",
+        "projectUniqueName": "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj",
         "projectName": "RestApi",
-        "projectPath": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj",
-        "packagesPath": "C:\\Users\\Sandra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\Source\\RestApi\\obj\\",
+        "projectPath": "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj",
+        "packagesPath": "C:\\Users\\Sofie skola\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\Source\\RestApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Sandra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sofie skola\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,21 +89,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj": {
+    "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj",
+        "projectUniqueName": "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj",
         "projectName": "TestRestApi",
-        "projectPath": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj",
-        "packagesPath": "C:\\Users\\Sandra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\TestRestApi\\obj\\",
+        "projectPath": "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\TestRestApi\\TestRestApi.csproj",
+        "packagesPath": "C:\\Users\\Sofie skola\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\TestRestApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Sandra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sofie skola\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -117,8 +117,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj": {
-                "projectPath": "C:\\Users\\Sandra\\Documents\\GitHub\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj"
+              "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj": {
+                "projectPath": "C:\\Users\\Sofie skola\\source\\repos\\LudoG6V2\\ludo-v2-g6\\Source\\RestApi\\RestApi.csproj"
               }
             }
           }
@@ -169,7 +169,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
