@@ -1,26 +1,15 @@
 ﻿
+const url = 'https://localhost:44369/api/gamepiece?id=';
 
-
-
-
-
-
-//async function myFunction() {
-
-
-
-/*const url = 'https://localhost:44369/api/gamepiece?id=2ef39deb-41cf-422f-c9d3-08d91b59e9f3';*/
 async function getItems(id) {
-    const respons = await fetch(`https://localhost:44369/api/gamepiece?id=${id}`);
+    const respons = await fetch(url+id);
     const data = await respons.json();
     console.log(data)
     paintBorad(data)
 }
 
 
-
 async function paintBorad(data) {
-    clearBoard();
     var redCount = 0;
     var blueCount = 0;
     var greenCount = 0;
@@ -31,7 +20,6 @@ async function paintBorad(data) {
         const id = data[i].currentPosition;
         const color = `${data[i].color}`;
         if (id === "0") {
-
             if (color === "red") {
                 redCount++;
                 cell = document.getElementById(`${color}_${redCount}`);
@@ -49,11 +37,10 @@ async function paintBorad(data) {
                 var cell = document.getElementById(`${color}_${yellowCount}`);
             }
         }
-        else if (id > 54) {
-            continue;
+        else if (id > 53) {
+            cell = document.getElementById(`${color}_${id}`)
         }
         else {
-
             cell = document.getElementById(`${id}`);
         }
 
@@ -81,21 +68,9 @@ async function paintBorad(data) {
         cell.appendChild(piece)
     }
 }
-function clearBoard() {
-    if (document.getElementsByClassName('pieces_onboard').length != 0) {
-        let i = 0;
-        do {
-            document.getElementsByClassName('pieces_onboard')[i].innerHTML = "";
-
-            i++
-        } while (i < document.getElementsByClassName('pieces_onboard').length)
-    }
-}
-
 
 async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
     var diceRoll = document.getElementById("message").innerText;
-
     const respons = await fetch('https://localhost:44369/api/gameboard/move', {
         method: 'POST',
         headers: {
@@ -108,7 +83,6 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
             "gamePlayerId": gamePlayerId,
             "diceRoll": diceRoll
         })
-
     });
     if (respons.ok) {
         var json = await respons.json()
@@ -118,9 +92,6 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
         var json = await respons.json()
         document.getElementById("message").innerText = JSON.stringify(json)
     }
-
-
-
 }
 function Dice() {
 
