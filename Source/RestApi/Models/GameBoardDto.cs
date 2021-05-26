@@ -9,5 +9,6 @@ namespace RestApi.Models
     {
         public DateTime StartTime { get; set; }
         public List<string> Players { get; set; }
+        public string UriId { get; set; }
     }
 }
