@@ -34,6 +34,7 @@ namespace RestApi.Controllers
                 return Ok(result);
             }
 
+            return NotFound("No previous games saved");
         }
 
         [HttpGet("Game")]
