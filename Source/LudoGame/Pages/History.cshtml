@@ -15,7 +15,9 @@
 
         @foreach (var item in Model.GameBoardHistory)
         {
+            string url = $"https://localhost:44380/Forms/Player?id={item.UriId}";
             <p>Game started at @item.StartTime </p>
+            <a href="@url">Go to game</a>
             foreach (var player in item.Players)
             {
                 <p>@player</p>

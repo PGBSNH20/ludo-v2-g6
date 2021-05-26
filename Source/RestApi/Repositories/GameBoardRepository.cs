@@ -30,8 +30,9 @@ namespace RestApi.Repositories
                 gameBoardDto.Add(new GameBoardDto()
                 {
                     StartTime = gameBoard.StartTime,
+                    UriId = gameBoard.Id.ToString(),
                     Players = tempNames.ToList()
-                });
+                }) ;
                 tempNames.Clear();
             }
             return gameBoardDto;
