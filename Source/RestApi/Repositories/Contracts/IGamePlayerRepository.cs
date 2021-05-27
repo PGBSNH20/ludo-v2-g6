@@ -9,7 +9,6 @@ namespace RestApi.Repositories.Contracts
     public interface IGamePlayerRepository
     {
         Task<List<GamePiece>> GetGamePiecesAsync(Guid id);
-        Task<bool> ValidateGamePlayerAsync(Guid id);
-
+        Task<bool> IsGamePlayerValidAsync(Guid id);
     }
 }

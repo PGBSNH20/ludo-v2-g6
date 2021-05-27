@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RestApi.Models;
 using RestApi.Models.Requests;
+using RestApi.Repositories;
 using RestApi.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
@@ -61,11 +62,22 @@ namespace RestApi.Controllers
         [HttpPost("Move")]
         public async Task<IActionResult> Get([FromBody] GetMoveRequest gmr)
         {
-            if (!await _gamePlayerRepository.ValidateGamePlayerAsync(Guid.Parse(gmr.GamePlayerId)))
+            if (!await _gamePlayerRepository.IsGamePlayerValidAsync(Guid.Parse(gmr.GamePlayerId)))
                 return BadRequest("This is not your piece!");
 
             var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(Guid.Parse(gmr.GameBoardId));
             var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, Guid.Parse(gmr.GamePieceId));
+
+            bool condition = true;
+
+            if (int.Parse(gmr.DiceRoll) != 1 && int.Parse(gmr.DiceRoll) != 6)
+                condition = GamePlayerRepository.IsMoveOutPossible(gameBoard, Guid.Parse(gmr.GamePlayerId));
+
+
+            if (!condition) {
+                await _gameBoardRepository.UpdatePlayerTurnAsync(gameBoard.GamePlayer);
+                return BadRequest("You're not able to move any pieces.");
+            }
 
             bool gp = await _gamePieceRepository.UpdatePositionAsync(gameBoard, gamePiece, int.Parse(gmr.DiceRoll));
             if (gp == false)
@@ -79,7 +91,7 @@ namespace RestApi.Controllers
 
             await _gameBoardRepository.UpdatePlayerTurnAsync(gameBoard.GamePlayer);
             var isTurn = gameBoard.GamePlayer.Where(x => x.IsPlayersTurn == true).FirstOrDefault();
-            return Ok(isTurn.Name);
+            return Ok($"It is {isTurn.Name}'s turn to play");
         }
     }
 }

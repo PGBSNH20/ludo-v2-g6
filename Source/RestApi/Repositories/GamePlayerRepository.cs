@@ -21,12 +21,27 @@ namespace RestApi.Repositories
 
            return query.GamePieces.ToList();
         }
-        public async Task<bool> ValidateGamePlayerAsync(Guid id)
+        public async Task<bool> IsGamePlayerValidAsync(Guid id)
         {
             var result = await _context.GamePlayers.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (result.IsPlayersTurn)
                 return true;
             return false;
+        }
+        public static bool IsMoveOutPossible(GameBoard gameBoard, Guid id)
+        {
+            var currentPlayer = gameBoard.GamePlayer.Single(x => x.Id == id);
+
+            int count = 0;
+
+            foreach (var pieces in currentPlayer.GamePieces)
+            {
+                if (pieces.CurrentPosition == 0 || pieces.IsInGoal)
+                    count++;
+            }
+            if (count == 4)
+                return false;
+            return true;
         }
     }
 }

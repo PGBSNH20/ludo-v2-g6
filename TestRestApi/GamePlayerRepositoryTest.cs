@@ -17,7 +17,7 @@ namespace TestRestApi
             throw new NotImplementedException();
         }
 
-        public async Task<bool> ValidateGamePlayerAsync(Guid id)
+        public async Task<bool> IsGamePlayerValidAsync(Guid id)
         {
             await Task.Delay(1);
             if (id == _playerGuid1)

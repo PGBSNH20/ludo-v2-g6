@@ -89,7 +89,7 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
     });
     if (respons.ok) {
         var json = await respons.json()
-        document.getElementById("message").innerText = `It's now ${JSON.stringify(json)}s turn`
+        document.getElementById("message").innerText = JSON.stringify(json)
     }
     else {
         var json = await respons.json()
