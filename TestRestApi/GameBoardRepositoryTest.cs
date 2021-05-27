@@ -11,18 +11,17 @@ namespace TestRestApi
 {
     class GameBoardRepositoryTest : IGameBoardRepository
     {
-        private static readonly Guid _playerGuid1 = new Guid("5fcf2bb0-1111-1234-92a4-0359ead79af4");
-        private static readonly Guid _playerGuid2 = new Guid("5fcf2bb0-2222-1234-92a4-0359ead79af4");
-        private static readonly Guid _playerGuid3 = new Guid("5fcf2bb0-3333-1234-92a4-0359ead79af4");
+        private static readonly Guid _playerGuid1 = new("5fcf2bb0-1111-1234-92a4-0359ead79af4");
+        private static readonly Guid _playerGuid2 = new("5fcf2bb0-2222-1234-92a4-0359ead79af4");
+        private static readonly Guid _playerGuid3 = new("5fcf2bb0-3333-1234-92a4-0359ead79af4");
 
-        private static readonly Guid _boardGuid1 = new Guid("5fcf2bb0-4444-1234-92a4-0359ead79af4");
-        private static readonly Guid _boardGuid2 = new Guid("5fcf2bb0-5555-1234-92a4-0359ead79af4");
+        private static readonly Guid _boardGuid1 = new("5fcf2bb0-4444-1234-92a4-0359ead79af4");
+        private static readonly Guid _boardGuid2 = new("5fcf2bb0-5555-1234-92a4-0359ead79af4");
 
-        private GamePlayer gp1 = new GamePlayer() { Name = "Sandra", Id = _playerGuid1 };
-        private GamePlayer gp2 = new GamePlayer() { Name = "Randa", Id = _playerGuid2 };
-        private GamePlayer gp3 = new GamePlayer() { Name = "Joakim", Id = _playerGuid3 };
+        private GamePlayer gp1 = new() { Name = "Sandra", Id = _playerGuid1 };
+        private GamePlayer gp2 = new() { Name = "Randa", Id = _playerGuid2 };
 
-        private GameBoard game1 = new GameBoard() {Id = _boardGuid1 };
+        private GameBoard game1 = new() {Id = _boardGuid1 };
 
         public async Task<List<GameBoardDto>> GetAllGamesAsync()
         {
@@ -53,6 +52,7 @@ namespace TestRestApi
             if (gameBoardId == _boardGuid2)
             {
                 var game2 = new GameBoard() {Id = _boardGuid2, GamePlayer = gps2};
+                return game2;
             }
 
             return null;
@@ -102,7 +102,6 @@ namespace TestRestApi
 
         public GamePlayer AnnounceWinner(GameBoard gameBoard)
         {
-
             if (gameBoard.Id == _boardGuid2)
                 return gp2;
             return null;

@@ -10,10 +10,12 @@ namespace TestRestApi
 {
     class GamePieceRepositoryTest : IGamePieceRepository
     {
-        private static readonly Guid _boardGuid2 = new Guid("5fcf2bb0-5555-1234-92a4-0359ead79af4");
+        private static readonly Guid _playerGuid1 = new("5fcf2bb0-1111-1234-92a4-0359ead79af4");
+        private static readonly Guid _playerGuid2 = new("5fcf2bb0-2222-1234-92a4-0359ead79af4");
 
-        private static readonly Guid _pieceGuid1 = new Guid("5fcf2bb0-6666-1234-92a4-0359ead79af4");
-        private static readonly Guid _pieceGuid2 = new Guid("5fcf2bb0-7777-1234-92a4-0359ead79af4");
+        private static readonly Guid _boardGuid1 = new("5fcf2bb0-4444-1234-92a4-0359ead79af4");
+
+        private static readonly Guid _pieceGuid1 = new("5fcf2bb0-6666-1234-92a4-0359ead79af4");
 
         public async Task<bool> UpdatePositionAsync(GameBoard gameBoard, GamePiece gamePiece, int diceRoll)
         {
@@ -35,7 +37,7 @@ namespace TestRestApi
 
         public GamePiece GetGamePiece(GameBoard gameBoard, Guid id)
         {
-            return new GamePiece()
+            return new()
             {
                 CurrentPosition = 16,
                 Id = id,
@@ -48,33 +50,33 @@ namespace TestRestApi
         public async Task<List<GamePieceDTO>> GetGamePiecesDtoAsync(Guid gameBoardId)
         {
                await Task.Delay(1);
-               Guid gameBoardId2 = new Guid("ccd75291-7b7c-43f6-2e92-08d92034db52");
-                if (gameBoardId == gameBoardId2)
-                {
-                    var list = new List<GamePieceDTO>();
+               if (gameBoardId == _boardGuid1)
+               {
+                   var list = new List<GamePieceDTO>();
 
-                    list.Add(new GamePieceDTO
-                    {
-                        CurrentPosition = "21",
-                        Color = "red",
-                        PieceId = "",
-                        GameBoardId = "ccd75291-7b7c-43f6-2e92-08d92034db52",
-                        GamePlayerId = "7561c7b6-6521-4685-ea36-08d92034db65"
+                   list.Add(new GamePieceDTO
+                   {
+                       CurrentPosition = "21",
+                       Color = "red",
+                       PieceId = "",
+                       GameBoardId = _boardGuid1.ToString(),
+                       GamePlayerId = _playerGuid1.ToString()
 
-                    });
+                   });
 
-                list.Add(new GamePieceDTO
-                     {
-                         CurrentPosition = "42",
-                         Color = "red",
-                         PieceId = "",
-                         GameBoardId = "ccd75291-7b7c-43f6-2e92-08d92034db52",
-                         GamePlayerId = "7561c7b6-6521-4685-ea36-08d92034db65"
+                   list.Add(new GamePieceDTO
+                   {
+                       CurrentPosition = "42",
+                       Color = "red",
+                       PieceId = "",
+                       GameBoardId = _boardGuid1.ToString(),
+                       GamePlayerId = _playerGuid2.ToString()
 
-                     });
-                return list;
-                }
-                return null;
+                   });
+                   return list;
+               }
+
+               return null;
             }
         }
     }
