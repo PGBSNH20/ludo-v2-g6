@@ -7,8 +7,9 @@
     ViewData["Title"] = "Your on going Game";
 }
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="~/js/site.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+
 </head>
 <body>
     <div class="text-center">
@@ -32,8 +33,16 @@
                     </strong>
                 </p>
             }
-            <button type="button" onclick="Dice()">DICE</button>
-            <h4 id="message"></h4>
+            <button type="button" id="dice" onclick="Dice()">DICE</button>
+            <h4 id="diceRoll"></h4>
+            <p id="message"></p>
+
+        </div>
+
+        <div id="messagesList">
+            <div class="col-6">
+                
+            </div>
         </div>
 
 
@@ -91,10 +100,10 @@
 
             <div class="cells" style="top: 0;left:46.66%;" id="38"></div>
             <div class="cells yellow " style="top: 6.66%;left:46.66%;" id="yellow_54"></div>
-            <div class="cells yellow " style="top: 13.32%;left:46.66%;"id="yellow_55"></div>
-            <div class="cells yellow " style="top: 19.98%;left:46.66%;"id="yellow_56"></div>
-            <div class="cells yellow" style="top: 26.64%;left:46.66%;"id="yellow_57"></div>
-            <div class="cells yellow" style="top: 33.3%;left:46.66%;"id="yellow_58"></div>
+            <div class="cells yellow " style="top: 13.32%;left:46.66%;" id="yellow_55"></div>
+            <div class="cells yellow " style="top: 19.98%;left:46.66%;" id="yellow_56"></div>
+            <div class="cells yellow" style="top: 26.64%;left:46.66%;" id="yellow_57"></div>
+            <div class="cells yellow" style="top: 33.3%;left:46.66%;" id="yellow_58"></div>
 
             <div class="cells y-start" style="top: 0;left:53.32%;" id="39"></div>
             <div class="cells" style="top: 6.66%;left:53.32%;" id="40"></div>
@@ -135,8 +144,8 @@
             <div class="cells red" style="bottom: 6.66%;left:46.66%;" id="red_54"></div>
             <div class="cells red" style="bottom: 13.32%;left:46.66%;" id="red_55"></div>
             <div class="cells red" style="bottom: 19.98%;left:46.66%;" id="red_56"></div>
-            <div class="cells red" style="bottom: 26.64%;left:46.66%;"id="red_57"></div>
-            <div class="cells red" style="bottom: 33.3%;left:46.66%;"id="red_58"></div>
+            <div class="cells red" style="bottom: 26.64%;left:46.66%;" id="red_57"></div>
+            <div class="cells red" style="bottom: 33.3%;left:46.66%;" id="red_58"></div>
 
             <div class="cells r-start" style="bottom: 0;left:40%;" id="13"></div>
             <div class="cells" style="bottom: 6.66%;left:40%;" id="14"></div>
@@ -153,10 +162,10 @@
             <div class="cells" style="top: 53.32%;left:0;" id="24"></div>
 
             <div class="cells green" style="top: 46.66%;left: 33.3%" id="green_58"></div>
-            <div class="cells green" style="top: 46.66%;left:26.64%;"id="green_57"></div>
-            <div class="cells green" style="top: 46.66%;left:19.98%;"id="green_56"></div>
-            <div class="cells green" style="top: 46.66%;left:13.32%;"id="green_55"></div>
-            <div class="cells green" style="top: 46.66%;left:6.66%;"id="green_54"></div>
+            <div class="cells green" style="top: 46.66%;left:26.64%;" id="green_57"></div>
+            <div class="cells green" style="top: 46.66%;left:19.98%;" id="green_56"></div>
+            <div class="cells green" style="top: 46.66%;left:13.32%;" id="green_55"></div>
+            <div class="cells green" style="top: 46.66%;left:6.66%;" id="green_54"></div>
             <div class="cells" style="top: 46.66%;left:0;" id="25"></div>
         </div>
     </div>
