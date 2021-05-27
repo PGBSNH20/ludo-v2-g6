@@ -28,8 +28,8 @@ namespace TestRestApi
 
 
 
-        private GamePlayer gp1 = new GamePlayer() { Name = "Sandra", Id = _playerGuid1};
-        private GamePlayer gp2 = new GamePlayer() { Name = "Randa", Id = _playerGuid2};
+        private GamePlayer gp1 = new GamePlayer() { Name = "Sandra", Id = _playerGuid1 };
+        private GamePlayer gp2 = new GamePlayer() { Name = "Randa", Id = _playerGuid2 };
         private GamePlayer gp3 = new GamePlayer() { Name = "Joakim", Id = _playerGuid3 };
 
         // GameBoard Controller
@@ -47,7 +47,7 @@ namespace TestRestApi
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var result = await controller.Get(_playerGuid1);
-            var gb = ((OkObjectResult) result).Value as GameBoard;
+            var gb = ((OkObjectResult)result).Value as GameBoard;
             Assert.Equal(true, gb.IsOnGoing);
         }
 
@@ -59,12 +59,12 @@ namespace TestRestApi
 
             Assert.Equal("This game does not exist", ((BadRequestObjectResult)result).Value.ToString());
         }
-     
+
         [Fact]
         public async void PostNewGame_ThreePlayers_ExpectGameBoard()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
-            var gps = new List<GamePlayer> {gp1, gp2, gp3};
+            var gps = new List<GamePlayer> { gp1, gp2, gp3 };
 
             var result = await controller.Post(gps);
             var gb = ((OkObjectResult)result).Value as GameBoard;
@@ -75,7 +75,7 @@ namespace TestRestApi
         public async void PostNewGame_OnePlayer_ExpectBadRequest()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
-            var gps = new List<GamePlayer> {gp1};
+            var gps = new List<GamePlayer> { gp1 };
 
             var result = await controller.Post(gps);
             Assert.Equal("Can't be less then two players", ((BadRequestObjectResult)result).Value.ToString());
@@ -115,10 +115,31 @@ namespace TestRestApi
                 GamePieceId = _pieceGuid1.ToString(),
                 GamePlayerId = _playerGuid1.ToString()
             };
-           
+
             var result = await controller.Get(gmr);
             var gb = ((OkObjectResult)result).Value as string;
             Assert.Equal("Randa", gb);
         }
+
+        [Fact]
+        public async void GetGamePiecesDtoAsync_GoodGuid_ExpectOk()
+        {
+            var controller = new GamePieceController(_gamePieceRepository);
+            Guid gameBoardId2 = new Guid("ccd75291-7b7c-43f6-2e92-08d92034db52");
+
+            var result = await controller.Get(gameBoardId2);
+            Assert.NotNull((OkObjectResult)result);
+        }
+
+        [Fact]
+        public async void GetGamePiecesDtoAsync_BadGuid_ExpectBadRequest()
+        {
+            var controller = new GamePieceController(_gamePieceRepository);
+            Guid gameBoardId3 = new Guid("ccd75291-7b7c-43f6-2e92-08d920344452");
+
+            var result = await controller.Get(gameBoardId3);
+            Assert.Equal("Invalid Game ID", ((BadRequestObjectResult)result).Value.ToString());
+        }
     }
 }
+
