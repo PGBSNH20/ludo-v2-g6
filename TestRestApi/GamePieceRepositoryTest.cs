@@ -45,9 +45,38 @@ namespace TestRestApi
             };
         }
 
-        public Task<List<GamePieceDTO>> GetGamePiecesDtoAsync(Guid gameBoardId)
+        public async Task<List<GamePieceDTO>> GetGamePiecesDtoAsync(Guid gameBoardId)
         {
-            throw new NotImplementedException();
+               await Task.Delay(1);
+               Guid gameBoardId2 = new Guid("ccd75291-7b7c-43f6-2e92-08d92034db52");
+                if (gameBoardId == gameBoardId2)
+                {
+                    var list = new List<GamePieceDTO>();
+
+                    list.Add(new GamePieceDTO
+                    {
+                        CurrentPosition = "21",
+                        Color = "red",
+                        PieceId = "",
+                        GameBoardId = "ccd75291-7b7c-43f6-2e92-08d92034db52",
+                        GamePlayerId = "7561c7b6-6521-4685-ea36-08d92034db65"
+
+                    });
+
+                list.Add(new GamePieceDTO
+                     {
+                         CurrentPosition = "42",
+                         Color = "red",
+                         PieceId = "",
+                         GameBoardId = "ccd75291-7b7c-43f6-2e92-08d92034db52",
+                         GamePlayerId = "7561c7b6-6521-4685-ea36-08d92034db65"
+
+                     });
+                return list;
+                }
+                return null;
+            }
         }
     }
-}
+
+
