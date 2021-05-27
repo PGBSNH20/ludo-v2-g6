@@ -71,7 +71,7 @@ namespace RestApi.Controllers
             bool condition = true;
 
             if (int.Parse(gmr.DiceRoll) != 1 && int.Parse(gmr.DiceRoll) != 6)
-                condition = GamePlayerRepository.IsMoveOutPossible(gameBoard, Guid.Parse(gmr.GamePlayerId));
+                condition = _gamePlayerRepository.IsMoveOutPossible(gameBoard, Guid.Parse(gmr.GamePlayerId));
 
 
             if (!condition) {
