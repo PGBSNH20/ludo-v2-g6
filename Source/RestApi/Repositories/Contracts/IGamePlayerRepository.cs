@@ -10,5 +10,6 @@ namespace RestApi.Repositories.Contracts
     {
         Task<List<GamePiece>> GetGamePiecesAsync(Guid id);
         Task<bool> IsGamePlayerValidAsync(Guid id);
+        bool IsMoveOutPossible(GameBoard gameBoard, Guid id);
     }
 }

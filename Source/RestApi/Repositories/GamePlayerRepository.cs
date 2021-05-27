@@ -21,6 +21,7 @@ namespace RestApi.Repositories
 
            return query.GamePieces.ToList();
         }
+
         public async Task<bool> IsGamePlayerValidAsync(Guid id)
         {
             var result = await _context.GamePlayers.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -28,7 +29,8 @@ namespace RestApi.Repositories
                 return true;
             return false;
         }
-        public static bool IsMoveOutPossible(GameBoard gameBoard, Guid id)
+
+        public bool IsMoveOutPossible(GameBoard gameBoard, Guid id)
         {
             var currentPlayer = gameBoard.GamePlayer.Single(x => x.Id == id);
 

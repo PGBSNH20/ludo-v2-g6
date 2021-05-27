@@ -33,7 +33,7 @@ namespace TestRestApi
 
         // GameBoard Controller
         [Fact]
-        public async void GetGameHistory_GamesExist_ExpectDtos()
+        public async Task GetGameHistory_GamesExist_ExpectDtos()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var result = await controller.Get();
@@ -42,7 +42,7 @@ namespace TestRestApi
         }
 
         [Fact]
-        public async void GetGameBoard_GoodGuid_ExpectGameBoard()
+        public async Task GetGameBoard_GoodGuid_ExpectGameBoard()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var result = await controller.Get(_boardGuid1);
@@ -51,7 +51,7 @@ namespace TestRestApi
         }
 
         [Fact]
-        public async void GetGameBoard_BadGuid_ExpectBadRequestReturn()
+        public async Task GetGameBoard_BadGuid_ExpectBadRequestReturn()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var result = await controller.Get(_playerGuid2);
@@ -60,7 +60,7 @@ namespace TestRestApi
         }
 
         [Fact]
-        public async void PostNewGame_ThreePlayers_ExpectGameBoard()
+        public async Task PostNewGame_ThreePlayers_ExpectGameBoard()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var gps = new List<GamePlayer> { gp1, gp2, gp3 };
@@ -71,7 +71,7 @@ namespace TestRestApi
         }
 
         [Fact]
-        public async void PostNewGame_OnePlayer_ExpectBadRequest()
+        public async Task PostNewGame_OnePlayer_ExpectBadRequest()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var gps = new List<GamePlayer> { gp1 };
@@ -81,12 +81,12 @@ namespace TestRestApi
         }
       
         [Fact]
-        public async void Move_RegularMove_ExpectPlayerName()
+        public async Task Move_RegularMove_ExpectPlayerName()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var gmr = new GetMoveRequest()
             {
-                DiceRoll = "5",
+                DiceRoll = "1",
                 GameBoardId = _boardGuid1.ToString(),
                 GamePieceId = _pieceGuid1.ToString(),
                 GamePlayerId = _playerGuid1.ToString()
@@ -95,11 +95,11 @@ namespace TestRestApi
             var result = await controller.Get(gmr);
             var gb = ((OkObjectResult)result).Value as string;
 
-            Assert.Equal("Sandra", gb);
+            Assert.Equal("It is Sandra's turn to play", gb);
         }
 
         [Fact]
-        public async void Move_NotMyPiece_ExpectException()
+        public async Task Move_NotMyPiece_ExpectException()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var gmr = new GetMoveRequest()
@@ -111,36 +111,51 @@ namespace TestRestApi
             };
 
             var result = await controller.Get(gmr);
-            var gb = ((BadRequestObjectResult)result).Value as string;
 
             Assert.Equal("This is not your piece!", ((BadRequestObjectResult)result).Value.ToString());
         }
 
         [Fact]
-        public async void Move_NotMovablePiece_ExpectException()
+        public async Task Move_NoPieceToMove_ExpectException()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var gmr = new GetMoveRequest()
             {
                 DiceRoll = "5",
                 GameBoardId = _boardGuid1.ToString(),
+                GamePieceId = _pieceGuid1.ToString(),
+                GamePlayerId = _playerGuid1.ToString()
+            };
+
+            var result = await controller.Get(gmr);
+
+            Assert.Equal("You're not able to move any pieces.", ((BadRequestObjectResult)result).Value.ToString());
+        }
+
+        [Fact]
+        public async Task Move_NotMovablePiece_ExpectException()
+        {
+            var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
+            var gmr = new GetMoveRequest()
+            {
+                DiceRoll = "1",
+                GameBoardId = _boardGuid1.ToString(),
                 GamePieceId = _pieceGuid2.ToString(),
                 GamePlayerId = _playerGuid1.ToString()
             };
 
             var result = await controller.Get(gmr);
-            var gb = ((BadRequestObjectResult)result).Value as string;
 
             Assert.Equal("You can't move this piece", ((BadRequestObjectResult)result).Value.ToString());
         }
 
         [Fact]
-        public async void Move_WinningMove_ExpectAnnouncement()
+        public async Task Move_WinningMove_ExpectAnnouncement()
         {
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var gmr = new GetMoveRequest()
             {
-                DiceRoll = "5",
+                DiceRoll = "1",
                 GameBoardId = _boardGuid2.ToString(),
                 GamePieceId = _pieceGuid1.ToString(),
                 GamePlayerId = _playerGuid1.ToString()
