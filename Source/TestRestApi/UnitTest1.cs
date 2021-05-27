@@ -47,7 +47,7 @@ namespace TestRestApi
             var controller = new GameboardController(_gameBoardRepository, _gamePieceRepository, _gamePlayerRepository);
             var result = await controller.Get(_boardGuid1);
             var gb = ((OkObjectResult) result).Value as GameBoard;
-            Assert.Equal(true, gb.IsOnGoing);
+            Assert.True(gb.IsOnGoing);
         }
 
         [Fact]
