@@ -10,45 +10,22 @@ namespace TestRestApi
 {
     class GamePlayerRepositoryTest : IGamePlayerRepository
     {
+        private static readonly Guid _playerGuid1 = new Guid("5fcf2bb0-1111-1234-92a4-0359ead79af4");
+        private static readonly Guid _playerGuid2 = new Guid("5fcf2bb0-2222-1234-92a4-0359ead79af4");
+        private static readonly Guid _playerGuid3 = new Guid("5fcf2bb0-3333-1234-92a4-0359ead79af4");
+
         public Task<List<GamePiece>> GetGamePiecesAsync(Guid id)
         {
             throw new NotImplementedException();
         }
-        //[HttpPost("Move")]
-        //public async Task<IActionResult> Get([FromBody] GetMoveRequest gmr)
-        //{
-        //    if (!await _gamePlayerRepository.ValidateGamePlayerAsync(Guid.Parse(gmr.GamePlayerId)))
-        //        return BadRequest("This is not your piece!");
+        
 
-        //    var gameBoard = await _gameBoardRepository.GetCurrentGameBoardAsync(Guid.Parse(gmr.GameBoardId));
-        //    var gamePiece = _gamePieceRepository.GetGamePiece(gameBoard, Guid.Parse(gmr.GamePieceId));
-
-        //    bool gp = await _gamePieceRepository.UpdatePositionAsync(gameBoard, gamePiece, int.Parse(gmr.DiceRoll));
-        //    if (gp == false)
-        //        return BadRequest("You can't move this piece");
-
-        //    await _gameBoardRepository.EndCurrentGameAsync(gameBoard);
-
-        //    var winner = _gameBoardRepository.AnnounceWinner(gameBoard);
-        //    if (winner != null)
-        //        return Ok($"{winner.Name} has won the game!! GZ LOL");
-
-        //    await _gameBoardRepository.UpdatePlayerTurnAsync(gameBoard.GamePlayer);
-        //    var isTurn = gameBoard.GamePlayer.Where(x => x.IsPlayersTurn == true).FirstOrDefault();
-        //    return Ok(isTurn.Name);
-        //}
-
-        //public async Task<bool> ValidateGamePlayerAsync(Guid id)
-        //{
-        //    var result = await _context.GamePlayers.Where(x => x.Id == id).FirstOrDefaultAsync();
-        //    if (result.IsPlayersTurn)
-        //        return true;
-        //    return false;
-        //}
-        public async Task<bool> ValidateGamePlayerAsync(Guid id)
+       public async Task<bool> ValidateGamePlayerAsync(Guid id)
         {
-            await Task.Delay(1); 
-            throw new NotImplementedException();
+            await Task.Delay(1);
+            if (id == _playerGuid1)
+                return true;
+            return false;
         }
     }
 }

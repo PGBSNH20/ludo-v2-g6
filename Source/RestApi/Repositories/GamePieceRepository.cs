@@ -52,6 +52,7 @@ namespace RestApi.Repositories
             }
             return gamePiece;
         }
+
         private static int CompleteLap(GamePiece gamePiece, int diceRoll)
         {
             var gp = gamePiece.CurrentPosition;
@@ -65,6 +66,7 @@ namespace RestApi.Repositories
             }
             return gp;
         }
+
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)
         {
             var players = gameBoard.GamePlayer;
@@ -140,6 +142,7 @@ namespace RestApi.Repositories
 
             return gamePieces;
         }
+
         private static int GetStartPosition(GamePlayer player)
         {
             if (player.Color == Color.Red)
