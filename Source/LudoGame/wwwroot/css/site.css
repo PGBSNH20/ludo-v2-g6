@@ -73,3 +73,9 @@ body {
     display: flex;
     justify-content: left;
 }
+#players{
+    width: 160px;
+}
+#messagesList{
+    width: 140px
+}
