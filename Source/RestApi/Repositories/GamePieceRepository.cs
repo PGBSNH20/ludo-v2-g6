@@ -57,7 +57,7 @@ namespace RestApi.Repositories
                 else
                 {
                     gamePiece.CurrentPosition = CompleteLap(gamePiece, diceRoll);
-                    gamePiece.StepsTaken += diceRoll;
+
                 }
             }
             return gamePiece;
@@ -65,26 +65,16 @@ namespace RestApi.Repositories
 
         private static int CompleteLap(GamePiece gamePiece, int diceRoll)
         {
-
             for (int i = 1; i < diceRoll + 1; i++)
             {
-                if ((gamePiece.StepsTaken + i) == 53)
-                    gamePiece.CurrentPosition = 54;
-                else if (gamePiece.StepsTaken < 52 && gamePiece.CurrentPosition == 53)
-                    gamePiece.CurrentPosition = 1;
                 gamePiece.CurrentPosition++;
                 gamePiece.StepsTaken++;
+                if (gamePiece.StepsTaken < 53 && gamePiece.CurrentPosition == 53)
+                    gamePiece.CurrentPosition = 1;
+                else if (gamePiece.StepsTaken  == 52)
+                    gamePiece.CurrentPosition = 54;
             }
             return gamePiece.CurrentPosition;
-            
-            //for (int i = 0; i < diceRoll; i++)
-            //{
-            //    gp++;
-            //    steps++;
-            //    if (gp == gamePiece.StartingPosition && steps == 52)
-            //        gp = 54;
-            //    if (gp == 53 && gamePiece.StepsTaken < 52)
-            //        gp = 1;
         }
 
         public GamePiece SendToNest(GameBoard gameBoard, GamePiece gamePiece)

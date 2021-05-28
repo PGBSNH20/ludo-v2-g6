@@ -6,17 +6,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("dice").disabled = true;
 });
 
-//Disable send button until connection is established
-/*document.getElementById("sendButton").disabled = true;*/
 
-connection.on("ReceiveMessage", function (message) {
-    var p = document.createElement("p");
-    document.getElementById("messagesList").appendChild(p);
-    // We can assign user-supplied strings to an element's textContent because it
-    // is not interpreted as markup. If you're assigning in any other way, you 
-    // should be aware of possible script injection concerns.
-    p.textContent = `${message}`;
-    p.style.padding = "10px"
+connection.on("ReceiveMessage", async function (gameBoardId, gamePieceId, gamePlayerId) {
+    clearText()
+    await movePiece(gameBoardId, gamePieceId, gamePlayerId)
+    await getItems(gameBoardId);
+
 });
 
 connection.start().then(function () {
@@ -40,6 +35,9 @@ async function paintBorad(data) {
     var cell;
 
     for (var i = 0; i < data.length; i++) {
+        const tempGameBoardId = `${data[i].gameBoardId}`
+        const tempGamePieceId = `${data[i].pieceId}`
+        const tempGamePlayerId = `${data[i].gamePlayerId}`
         const id = data[i].currentPosition;
         const color = `${data[i].color}`;
         if (id === "0") {
@@ -57,7 +55,7 @@ async function paintBorad(data) {
             }
             if (color === "yellow") {
                 yellowCount++;
-                var cell = document.getElementById(`${color}_${yellowCount}`);
+                cell = document.getElementById(`${color}_${yellowCount}`);
             }
         }
         else if (id > 58) {
@@ -70,20 +68,11 @@ async function paintBorad(data) {
             cell = document.getElementById(`${id}`);
         }
 
-        cell.style.display = "flex";
-        cell.style.justifyContent = "center";
-        cell.style.alignItems = "center";
-
         const piece = document.createElement("button")
         piece.style.backgroundColor = data[i].color;
         piece.style.border = "2px solid black"
         piece.style.height = "80% ";
         piece.style.width = "80% ";
-
-        const tempGameBoardId = `${data[i].gameBoardId}`
-        const tempGamePieceId = `${data[i].pieceId}`
-        const tempGamePlayerId = `${data[i].gamePlayerId}`
-        
 
         piece
             .classList
@@ -91,18 +80,18 @@ async function paintBorad(data) {
 
         piece.addEventListener('click', function () {
 
-            movePiece(tempGameBoardId, tempGamePieceId, tempGamePlayerId)
-            connection.invoke("SendMessage", `${color} made their move, next pls!`).catch(function (err) {
+            connection.invoke("SendMessage", tempGameBoardId, tempGamePieceId, tempGamePlayerId).catch(function (err) {
                 return console.error(err.toString());
             });
             event.preventDefault();
-        });
 
+        });
         cell.appendChild(piece)
     }
 }
 
 async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
+
     var diceRoll = document.getElementById("diceRoll").innerText;
     const respons = await fetch('https://localhost:44369/api/gameboard/move', {
         method: 'POST',
@@ -120,6 +109,7 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
     if (respons.ok) {
         var json = await respons.json()
         document.getElementById("message").innerText = JSON.stringify(json)
+        return true;
     }
     else {
         var json = await respons.json()
@@ -127,10 +117,15 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
     }
 }
 function Dice() {
-
     var dice = Math.floor(Math.random() * 6) + 1;
     document.getElementById("diceRoll").innerHTML = dice;
+}
+function clearText() {
+    var element = document.getElementsByClassName("pieces_onboard");
 
+    while (element[0]) {
+        element[0].parentNode.removeChild(element[0]);
+    };
 }
 
 

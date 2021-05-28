@@ -8,9 +8,9 @@ namespace LudoGame.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(string message)
+        public async Task SendMessage(string gameBordId, string gamePieceId, string gamePlayerId )
         {
-            await Clients.All.SendAsync("ReceiveMessage", message);
+            await Clients.All.SendAsync("ReceiveMessage", gameBordId, gamePieceId, gamePlayerId);
         }
     }
 }
