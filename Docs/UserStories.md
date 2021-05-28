@@ -1,4 +1,4 @@
-###User stories:
+### User stories:
 
 * AS a user I can start a new game and return to it at a later point
 * AS a user I can roll a dice and base my next move on the result
@@ -15,7 +15,7 @@
 * AS a developer I want good class- and folder structure so I can easily navigate the application
 * AS a developer I expect lots of commits and descriptive messages on Github
 
-###User stories for extended development
+### User stories for extended development
 
 * AS a user I can log in to my account and view my game history
 * AS a user I can use my mail account to invite/challenge other players
