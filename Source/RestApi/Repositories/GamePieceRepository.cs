@@ -57,7 +57,6 @@ namespace RestApi.Repositories
                 else
                 {
                     gamePiece.CurrentPosition = CompleteLap(gamePiece, diceRoll);
-                    gamePiece.StepsTaken += diceRoll;
                 }
             }
             return gamePiece;

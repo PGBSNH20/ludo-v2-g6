@@ -57,7 +57,7 @@ async function paintBorad(data) {
             }
             if (color === "yellow") {
                 yellowCount++;
-                var cell = document.getElementById(`${color}_${yellowCount}`);
+                cell = document.getElementById(`${color}_${yellowCount}`);
             }
         }
         else if (id > 58) {

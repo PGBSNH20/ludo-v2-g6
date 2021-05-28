@@ -13,7 +13,6 @@ namespace TestRestApi
     {
         private static readonly Guid _playerGuid1 = new("5fcf2bb0-1111-1234-92a4-0359ead79af4");
         private static readonly Guid _playerGuid2 = new("5fcf2bb0-2222-1234-92a4-0359ead79af4");
-        private static readonly Guid _playerGuid3 = new("5fcf2bb0-3333-1234-92a4-0359ead79af4");
 
         private static readonly Guid _boardGuid1 = new("5fcf2bb0-4444-1234-92a4-0359ead79af4");
         private static readonly Guid _boardGuid2 = new("5fcf2bb0-5555-1234-92a4-0359ead79af4");
