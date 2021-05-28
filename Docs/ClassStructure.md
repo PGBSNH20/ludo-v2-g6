@@ -1,7 +1,7 @@
 
 ## docker-compose
 * .dockerignore
-* docker-compose.yml: Innehåller våra docker-compose properties
+* docker-compose.yml: contains docker-compose properties
 
 ## LudoGame: ASP.NET Core Web App
 ### wwwroot
@@ -19,7 +19,7 @@
 * ChatHub.cs
 ### Pages
 - **Forms\\**
-    - Player.cshtml: innehåller HTML för spelbrädan 
+    - Player.cshtml:
     - Response.cshtml.cs: 
 - **Shared\\**
   - _layout.cshtml
@@ -39,7 +39,7 @@
 
 ## RestApi: ASP.NET Core Web API
 ### Controllers : contains HTTP requests
-* GameBoardController.cs: contains get and post methods that return all available gameboards from the database, return a specific gameboard from the database, add/create a new gamaboard to database, update a gameboard, piecesposition, playerturn and winner to database
+* GameBoardController.cs: contains get and post methods that return all available gameboards from the database, return a specific gameboard from the database, add/create a new     gamaboard to database, update a gameboard, piecesposition, playerturn and winner to database
 * GamePieceController.cs: contains get method that return all pieces belonging to a specific gameboard
 ### Migrations EF Migrations
 ### Models: contains our classes 
