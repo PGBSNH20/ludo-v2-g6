@@ -6,3 +6,12 @@ https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/razor-pages-s
 
 ## Rules for Ludo Game
 https://www.spelregler.org/fia-med-knuff/
+
+## Cross-Origin requests (CORS)
+https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-5.0
+
+## SignalR
+https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-5.0
+
+## Routing in ASP.NER Core 
+https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0
