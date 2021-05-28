@@ -9,4 +9,4 @@
 
 ### Async functions
 
-![SignalRChart](\Images\SignalR.PNG)
+![SignalRChart](Images/SignalR.PNG)
