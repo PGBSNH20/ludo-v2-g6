@@ -13,14 +13,14 @@
   - **dist\\**
     - **browser\\**
       - signalr.js 
-* chat.js
+* chat.js: Håller frontend-funktioner. Javascript för att skapa upp och ersätta html samt signalR för att uppdatera.
 * site.js
 ### Hubs
 * ChatHub.cs
 ### Pages
 - **Forms\\**
-    - Player.cshtml:
-    - Response.cshtml.cs: 
+    - Player.cshtml: Håller spelbrädet
+    - Response.cshtml.cs:
 - **Shared\\**
   - _layout.cshtml
   - _loginPartial.cshtml
@@ -29,7 +29,7 @@
 * _ViewStart.cshtml
 * History.cshtml
   - History.cshtml.cs
-* Index.cshtml
+* Index.cshtml: Startsidan där användare kan starta ett nytt spel
   - Index.cshtml.cs
 #### appsettings.json
 #### libman.json
