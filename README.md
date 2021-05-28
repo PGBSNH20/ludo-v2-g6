@@ -4,7 +4,7 @@
 
 * [Initial plan](Docs/InitialPlan.md)
 * [User stories](Docs/UserStories.md)
-* [Database structure](Docs/DatabaseStructure/DatabaseImage.md)
+* [Database structure](Docs/DatabaseStructure/DbStructLudo2.png)
 * [Ludo Board](Docs/Images/ludoBoardWithIndexes.jpg) (with indexes)
 * [Class structure](Docs/ClassStructure.md)
 * [Api design](Docs/apiDesign.md)
