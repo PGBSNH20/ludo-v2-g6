@@ -4,11 +4,13 @@
 
 * [Initial plan](Docs/InitialPlan.md)
 * [User stories](Docs/UserStories.md)
-* [Database structure version 01](/Docs/DatabaseStructure/databaseStructure01.PNG)
+* [Database structure](\Docs\DatabaseStructure\DatabaseImage.md)
 * [Ludo Board](\Docs\Images\ludoBoardWithIndexes.jpg) (with indexes)
+* [Class structure](\Docs\ClassStructure.md)
 * [Api design](\Docs\apiDesign.md)
 * [Intermittents notes](\Docs\flow.md)
-
+* [Resources](\Docs\Material.md)
+* [SignalR documentation](\Docs\vg_async.md)
 
 ## How to get started
 
@@ -16,7 +18,7 @@ To use this application you need to:
 - Clone the repository to your local client. 
 - Download docker and run docker compose up to start a virtual environment for the database. 
 - Start up the project in Visual Studio APS.Net, rightclick on Solution -> Properties -> Multiple startup project -> Set start on RestApi & LudoGame -> Execute
->**OBS!! It's important that both project run on either IIS express or Kestrel, if one or the other in not matching, you will have problem with CORS [Read more about CORS here](https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-5.0)**
+>**OBS!! It's important that both project run on either IIS express or Kestrel, if one or the other is not matching, you will have problem with CORS [Read more about CORS here](https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-5.0)**
 - Choose names for the players
 - Submit
 - Start to play

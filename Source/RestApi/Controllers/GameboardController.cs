@@ -60,7 +60,7 @@ namespace RestApi.Controllers
         }
 
         [HttpPost("Move")]
-        public async Task<IActionResult> Get([FromBody] GetMoveRequest gmr)
+        public async Task<IActionResult> Post([FromBody] GetMoveRequest gmr)
         {
             if (!await _gamePlayerRepository.IsGamePlayerValidAsync(Guid.Parse(gmr.GamePlayerId)))
                 return BadRequest("This is not your piece!");
