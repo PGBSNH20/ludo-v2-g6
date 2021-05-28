@@ -9,4 +9,4 @@
 
 ### Async functions
 
-![SignalRChart](https://user-images.githubusercontent.com/70150296/119949250-fa967d00-bf99-11eb-80a9-c4379e9f9cb4.png)
+![SignalRChart](Images/SignalR.PNG)

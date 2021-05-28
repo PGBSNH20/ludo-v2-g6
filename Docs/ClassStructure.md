@@ -1,7 +1,7 @@
 
 ## docker-compose
 * .dockerignore
-* docker-compose.yml: Innehåller våra docker-compose properties
+* docker-compose.yml: contains docker-compose properties
 
 ## LudoGame: ASP.NET Core Web App
 ### wwwroot
@@ -13,14 +13,14 @@
   - **dist\\**
     - **browser\\**
       - signalr.js 
-* chat.js
+* chat.js: Contains frontend functions, JavaScript for modifying and adding html and SignalR for updates. 
 * site.js
 ### Hubs
 * ChatHub.cs
 ### Pages
 - **Forms\\**
-    - Player.cshtml: innehåller HTML för spelbrädan 
-    - Response.cshtml.cs: 
+    - Player.cshtml: Contains html for the gameboard
+    - Response.cshtml.cs:
 - **Shared\\**
   - _layout.cshtml
   - _loginPartial.cshtml
@@ -29,7 +29,7 @@
 * _ViewStart.cshtml
 * History.cshtml
   - History.cshtml.cs
-* Index.cshtml
+* Index.cshtml: Landingpage, takes user input to start a game.
   - Index.cshtml.cs
 #### appsettings.json
 #### libman.json
@@ -38,42 +38,42 @@
 
 
 ## RestApi: ASP.NET Core Web API
-### Controllers : innehåller HTTP requests
-* GameBoardController.cs: innehåller get och post metoder som hämtar alla sparade gameboards, hämtar ett visst gameboard genom ett gameboardId(Guid), skapar ett nytt spel, updaterar positionen på pjäserna, tur på spelare samt kollar för en vinnare. 
-* GamePieceController.cs : innehåller en get metod som hämtar alla pjäsar som tillhör ett gameboard genom att gameboardId(Guid)
+### Controllers : contains HTTP requests
+* GameBoardController.cs: contains get and post methods that return all available gameboards from the database, return a specific gameboard from the database, add/create a new     gamaboard to database, update a gameboard, piecesposition, playerturn and winner to database
+* GamePieceController.cs: contains get method that return all pieces belonging to a specific gameboard
 ### Migrations EF Migrations
-### Models: innehåller klasserna
+### Models: contains our classes 
 - **Requests\\**
-  - GetMoveRequest.cs
+  - GetMoveRequest.cs: class that returns strings instead of int when passing an object 
 * Color.cs
 * GameBoard.cs
-* GameBoardDTO.cs: nedskalad version av Gameboard utan känslig information (Guid)
+* GameBoardDTO.cs: contains data in a string format 
 * GamePiece.cs
-* GamePieceDTO.cs: nedskalad version av gamepiece utan känslig information (Guid)
+* GamePieceDTO.cs: contains the same GamePiececlass properties/data but in a string format 
 * GamePlayer.cs
-### Repositories: innehåller interfaces och repon för ett repository pattern
-- **Contracts\\** innehåller våra interfaces
+### Repositories: contains interfaces and repo to the repository pattern
+- **Contracts\\** contains our interfaces
    - IGameBoardRepository.cs
    - IGamePieceRepository.cs
    - IGamePlayerRepository.cs
    - IRepository.cs
-* GameBoardRepository.cs: innehåller metoder som används i GameBoardController(requests)
-* GamePieceRepository.cs: innehåller metoder som används i GamePieceController(requests)
-* GamePlayerRepository.cs: innehåller metoder som används i GameBoardController(requests)
-* Repository.cs: innehåller alla metoder som kommuniverar med databasen 
+* GameBoardRepository.cs: contains methods we use in GameBoardController(requests)
+* GamePieceRepository.cs: contains methods we use in GamePieceController(requests)
+* GamePlayerRepository.cs: contains methods we use in GameBoardController(requests)
+* Repository.cs: it contains all the methods that communicate with the database
 ### Services
-* LudoContext.cs: representerar tabbellerna i databasen  
+* LudoContext.cs: represents the tables in the database  
 #### appsettings.json
 #### Dockerfile.json
 #### Program.cs
 #### Startup.cs
 
 
-## TestRestApi: projekt för testing med Xunit
-* GameBoardRepositoryTest.cs: ärver av IGameBoardRepository
-* GamePieceRepositoryTest.cs: ärver av IGamePieceRepository
-* GamePlayerRepositoryTest.cs: ärver av IGamePlayerRepository
-* UnitTest.cs: Håller tester för metoder relaterade till requests
+## TestRestApi: project tests with Xunit
+* GameBoardRepositoryTest.cs: inherits from IGameBoardRepository
+* GamePieceRepositoryTest.cs: inherits from IGamePieceRepository
+* GamePlayerRepositoryTest.cs: inherits from IGamePlayerRepository
+* UnitTest.cs: contains tests for the methods related to the requests
 
 
 

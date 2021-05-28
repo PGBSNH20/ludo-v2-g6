@@ -92,7 +92,7 @@ namespace TestRestApi
                 GamePlayerId = _playerGuid1.ToString()
             };
            
-            var result = await controller.Get(gmr);
+            var result = await controller.Post(gmr);
             var gb = ((OkObjectResult)result).Value as string;
 
             Assert.Equal("It is Sandra's turn to play", gb);
@@ -110,7 +110,7 @@ namespace TestRestApi
                 GamePlayerId = _playerGuid2.ToString()
             };
 
-            var result = await controller.Get(gmr);
+            var result = await controller.Post(gmr);
 
             Assert.Equal("This is not your piece!", ((BadRequestObjectResult)result).Value.ToString());
         }
@@ -127,7 +127,7 @@ namespace TestRestApi
                 GamePlayerId = _playerGuid1.ToString()
             };
 
-            var result = await controller.Get(gmr);
+            var result = await controller.Post(gmr);
 
             Assert.Equal("You're not able to move any pieces.", ((BadRequestObjectResult)result).Value.ToString());
         }
@@ -144,7 +144,7 @@ namespace TestRestApi
                 GamePlayerId = _playerGuid1.ToString()
             };
 
-            var result = await controller.Get(gmr);
+            var result = await controller.Post(gmr);
 
             Assert.Equal("You can't move this piece", ((BadRequestObjectResult)result).Value.ToString());
         }
@@ -161,7 +161,7 @@ namespace TestRestApi
                 GamePlayerId = _playerGuid1.ToString()
             };
 
-            var result = await controller.Get(gmr);
+            var result = await controller.Post(gmr);
 
             Assert.Equal("Randa has won the game!! GZ LOL", ((OkObjectResult)result).Value.ToString());
         }

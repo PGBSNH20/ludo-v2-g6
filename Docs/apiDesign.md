@@ -1,12 +1,12 @@
-## Api structure
+## LudoApi/ Endpoints
 
-- Gameboard
-	- GET - (history) ) hämtar alla pågående och avslutade spel
-	- GET - (Game) hämtar ett gameboard/spel baserat på dess id(GUID)
-	- POST - (GameBoard) för att starta nytt spel
-	- POST - (Move) validerar en move, uppdaterar position på pjäserna, uppdaterar spelarentur och uppdaterat en vinare och ändra state på ett spel
+### GameBoardController 
+ - GET: Endpoint => /api/Gameboard/History
+ - GET(Guid id): Endpint => /api/Gameboard/Game
+ - POST(List<GamePlayer> gamePlayers): Endpoint => /api/Gameboard/NewGame
+ - POST ([FromBody] GetMoveRequest gmr): Endpoint => /api/Gameboard/Move
 
-
-- GamePiece
-	- GET - hämtar gamepieces (DTO) baserat gameId(Guid)
+### GameBoardController 
+- GET(Guid id): Endpoint => /api/GamePiece
+	
 	
