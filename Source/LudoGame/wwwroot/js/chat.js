@@ -6,19 +6,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("dice").disabled = true;
 });
 
-
-connection.on("ReceiveMessage", async function (gameBoardId, gamePieceId, gamePlayerId) {
-    clearText()
-    await movePiece(gameBoardId, gamePieceId, gamePlayerId)
-    await getItems(gameBoardId);
-
-});
-
 connection.start().then(function () {
     document.getElementById("dice").disabled = false;
 }).catch(function (err) {
     return console.error(err.toString());
 });
+
+connection.on("ReceiveMove", async function (gameBoardId, gamePieceId, gamePlayerId) {
+    clearText()
+    await movePiece(gameBoardId, gamePieceId, gamePlayerId)
+    await getItems(gameBoardId);
+});
+
 
 async function getItems(id) {
     const respons = await fetch(`https://localhost:44369/api/gamepiece?id=${id}`);
@@ -86,6 +85,7 @@ async function paintBorad(data) {
             event.preventDefault();
 
         });
+
         cell.appendChild(piece)
     }
 }
@@ -109,7 +109,6 @@ async function movePiece(gameBoardId, gamePieceId, gamePlayerId) {
     if (respons.ok) {
         var json = await respons.json()
         document.getElementById("message").innerText = JSON.stringify(json)
-        return true;
     }
     else {
         var json = await respons.json()

@@ -10,7 +10,8 @@ namespace LudoGame.Hubs
     {
         public async Task SendMessage(string gameBordId, string gamePieceId, string gamePlayerId )
         {
-            await Clients.All.SendAsync("ReceiveMessage", gameBordId, gamePieceId, gamePlayerId);
+            await Clients.All.SendAsync("ReceiveMove", gameBordId, gamePieceId, gamePlayerId);
         }
+      
     }
 }
