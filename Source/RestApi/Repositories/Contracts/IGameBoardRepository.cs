@@ -12,7 +12,6 @@ namespace RestApi.Repositories.Contracts
         Task<List<GameBoard>> Get();
         Task<GameBoard> GetCurrentGameBoardAsync(Guid gameBoardId);
         Task<GameBoard> CreateGameBoardAsync(List<GamePlayer> gamePlayers);
-        //GamePiece UpdatePositionAsync(GamePiece gamePiece, int diceRoll);
         Task<List<GamePlayer>> UpdatePlayerTurnAsync(List<GamePlayer> gamePlayers);
         bool FindWinner(GamePlayer gamePlayer);
         Task EndCurrentGameAsync(GameBoard gameBoard);

@@ -85,7 +85,7 @@ namespace RestApi.Services
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder//.ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))
+            optionsBuilder
                 .UseLoggerFactory(loggerFactory)
                 .EnableSensitiveDataLogging();
         }

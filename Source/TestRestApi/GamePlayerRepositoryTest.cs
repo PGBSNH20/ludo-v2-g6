@@ -29,21 +29,5 @@ namespace TestRestApi
         {
             return false;
         }
-
-        //public bool IsMoveOutPossible(GameBoard gameBoard, Guid id)
-        //{
-        //    var currentPlayer = gameBoard.GamePlayer.Single(x => x.Id == id);
-
-        //    int count = 0;
-
-        //    foreach (var pieces in currentPlayer.GamePieces)
-        //    {
-        //        if (pieces.CurrentPosition == 0 || pieces.IsInGoal)
-        //            count++;
-        //    }
-        //    if (count == 4)
-        //        return false;
-        //    return true;
-        //}
     }
 }
