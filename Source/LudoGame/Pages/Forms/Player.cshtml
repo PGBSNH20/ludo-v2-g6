@@ -23,11 +23,14 @@
         <div id="players">
 
             <h5>Welcome</h5>
+            <p id="whoStarts"><strong></strong></p>
             @foreach (var item in @Model.GamePlayer)
             {
                 if (item.IsPlayersTurn)
                 {
-                    <p>@item.Name starts  </p>
+                    <script>
+                        document.getElementById("whoStarts").innerText = `${@item.Name} starts`
+                    </script>
                 }
                 <p style="background-color:@item.Color">
                     <strong>
@@ -40,14 +43,6 @@
             <p id="message"></p>
 
         </div>
-
-        <div id="messagesList">
-            <div class="col-6">
-
-            </div>
-        </div>
-
-
         <div class="game">
             <div class="house green">
                 <div class="box">
