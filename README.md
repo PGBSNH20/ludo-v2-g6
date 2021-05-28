@@ -4,11 +4,10 @@
 
 * [Initial plan](Docs/InitialPlan.md)
 * [User stories](Docs/UserStories.md)
-* [Database structure](Docs/DatabaseStructure\DatabaseImage.md)
+* [Database structure](Docs/DatabaseStructure/DatabaseImage.md)
 * [Ludo Board](Docs/Images/ludoBoardWithIndexes.jpg) (with indexes)
 * [Class structure](Docs/ClassStructure.md)
 * [Api design](Docs/apiDesign.md)
-* [Intermittents notes](Docs/flow.md)
 * [Resources](Docs/Material.md)
 * [SignalR documentation](Docs/vg_async.md)
 
